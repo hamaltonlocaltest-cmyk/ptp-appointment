@@ -423,6 +423,32 @@
         </a>
     </li>
 
+    {{-- Appointments --}}
+    <span class="sidebar-heading">Appointments</span>
+
+    <li class="nav-item {{ request()->routeIs('admin.appointments.*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->routeIs('admin.appointments.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-calendar-check"></i>
+            <p>Appointments <i class="right fas fa-angle-left"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('admin.appointments.index') }}"
+                   class="nav-link {{ request()->routeIs('admin.appointments.index') || request()->routeIs('admin.appointments.show') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-list"></i>
+                    <p>All Appointments</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.appointments.create') }}"
+                   class="nav-link {{ request()->routeIs('admin.appointments.create') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-plus"></i>
+                    <p>Book Appointment</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+
     {{-- User Management --}}
     <span class="sidebar-heading">User Management</span>
 

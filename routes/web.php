@@ -14,11 +14,14 @@ use App\Http\Controllers\Admin\CounseleeController  as AdminCounseleeController;
 
 // Counselor Controllers
 use App\Http\Controllers\Counselor\DashboardController as CounselorDashboard;
+use App\Http\Controllers\Counselor\AppointmentController as CounselorAppointmentController;
 
 // Counselee Controllers
 use App\Http\Controllers\Counselee\DashboardController as CounseleeDashboard;
+use App\Http\Controllers\Counselee\AppointmentController as CounseleeAppointmentController;
 
 use App\Http\Controllers\Admin\CounselTypeController;
+use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +75,22 @@ Route::prefix('counselees')->name('counselees.')->group(function () {
     Route::post('/{counselee}/toggle', [AdminCounseleeController::class, 'toggleStatus'])->name('toggle');
 });
 
+        // Appointments
+        Route::prefix('appointments')->name('appointments.')->group(function () {
+            Route::get('/',                     [AdminAppointmentController::class, 'index'])->name('index');
+            Route::get('/create',               [AdminAppointmentController::class, 'create'])->name('create');
+            Route::post('/dates',               [AdminAppointmentController::class, 'getAvailableDates'])->name('dates');
+            Route::post('/slots',               [AdminAppointmentController::class, 'getAvailableSlots'])->name('slots');
+            Route::post('/',                    [AdminAppointmentController::class, 'store'])->name('store');
+            Route::get('/{appointment}',        [AdminAppointmentController::class, 'show'])->name('show');
+            Route::post('/{appointment}/cancel', [AdminAppointmentController::class, 'cancel'])->name('cancel');
+
+            Route::get('/{appointment}/reschedule',       [AdminAppointmentController::class, 'editReschedule'])->name('reschedule.edit');
+            Route::post('/{appointment}/reschedule/dates', [AdminAppointmentController::class, 'getRescheduleDates'])->name('reschedule.dates');
+            Route::post('/{appointment}/reschedule/slots', [AdminAppointmentController::class, 'getRescheduleSlots'])->name('reschedule.slots');
+            Route::post('/{appointment}/reschedule',       [AdminAppointmentController::class, 'reschedule'])->name('reschedule');
+        });
+
         Route::prefix('masters')->name('masters.')->group(function () {
             Route::prefix('counsel-types')->name('counsel-types.')->group(function () {
                 Route::get('/',                       [CounselTypeController::class, 'index'])->name('index');
@@ -104,6 +123,18 @@ Route::prefix('counselor')->name('counselor.')->group(function () {
     Route::middleware('counselor')->group(function () {
         Route::get('dashboard', [CounselorDashboard::class, 'index'])->name('dashboard');
         Route::post('logout',   [CounselorAuthController::class, 'logout'])->name('logout');
+
+        // Appointments
+        Route::prefix('appointments')->name('appointments.')->group(function () {
+            Route::get('/',                     [CounselorAppointmentController::class, 'index'])->name('index');
+            Route::post('/{appointment}/cancel', [CounselorAppointmentController::class, 'cancel'])->name('cancel');
+            Route::post('/{appointment}/complete', [CounselorAppointmentController::class, 'complete'])->name('complete');
+
+            Route::get('/{appointment}/reschedule',       [CounselorAppointmentController::class, 'editReschedule'])->name('reschedule.edit');
+            Route::post('/{appointment}/reschedule/dates', [CounselorAppointmentController::class, 'getRescheduleDates'])->name('reschedule.dates');
+            Route::post('/{appointment}/reschedule/slots', [CounselorAppointmentController::class, 'getRescheduleSlots'])->name('reschedule.slots');
+            Route::post('/{appointment}/reschedule',       [CounselorAppointmentController::class, 'reschedule'])->name('reschedule');
+        });
     });
 });
 
@@ -124,5 +155,20 @@ Route::prefix('counselee')->name('counselee.')->group(function () {
     Route::middleware('counselee')->group(function () {
         Route::get('dashboard', [CounseleeDashboard::class, 'index'])->name('dashboard');
         Route::post('logout',   [CounseleeAuthController::class, 'logout'])->name('logout');
+
+        // Appointments
+        Route::prefix('appointments')->name('appointments.')->group(function () {
+            Route::get('/',          [CounseleeAppointmentController::class, 'index'])->name('index');
+            Route::get('/book',      [CounseleeAppointmentController::class, 'create'])->name('create');
+            Route::post('/dates',    [CounseleeAppointmentController::class, 'getAvailableDates'])->name('dates');
+            Route::post('/slots',    [CounseleeAppointmentController::class, 'getAvailableSlots'])->name('slots');
+            Route::post('/preview',  [CounseleeAppointmentController::class, 'preview'])->name('preview');
+            Route::post('/',         [CounseleeAppointmentController::class, 'store'])->name('store');
+            Route::post('/{appointment}/cancel', [CounseleeAppointmentController::class, 'cancel'])->name('cancel');
+
+            Route::get('/{appointment}/reschedule',       [CounseleeAppointmentController::class, 'editReschedule'])->name('reschedule.edit');
+            Route::post('/{appointment}/reschedule/slots', [CounseleeAppointmentController::class, 'getRescheduleSlots'])->name('reschedule.slots');
+            Route::post('/{appointment}/reschedule',       [CounseleeAppointmentController::class, 'reschedule'])->name('reschedule');
+        });
     });
 });

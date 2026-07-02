@@ -170,7 +170,7 @@
                         </a>
                         <div style="display:flex; gap:8px;">
                             <button type="button"
-                                onclick="confirmDelete('{{ $counselType->name }}')"
+                                data-toggle="modal" data-target="#deleteModal"
                                 class="btn btn-danger"
                                 style="border-radius:7px; padding:9px 22px; font-size:13px; font-weight:600;">
                                 <i class="fas fa-trash mr-1"></i> Delete
@@ -191,6 +191,34 @@
                     @csrf @method('DELETE')
                 </form>
 
+            </div>
+
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content" style="border-radius:14px; border:none; overflow:hidden;">
+                        <div class="modal-body text-center" style="padding:32px 28px 20px;">
+                            <div style="width:64px; height:64px; border-radius:50%; background:#fdecea; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
+                                <i class="fas fa-trash-alt" style="font-size:24px; color:#c62828;"></i>
+                            </div>
+                            <h5 style="font-weight:700; color:#1a1a2e; margin-bottom:8px;">Delete Counsel Type?</h5>
+                            <p style="font-size:13.5px; color:#6b6b76; margin-bottom:0;">
+                                You're about to permanently remove
+                                <strong style="color:#1a1a2e;">{{ $counselType->name }}</strong>.
+                                This action cannot be undone.
+                            </p>
+                        </div>
+                        <div class="modal-footer" style="border-top:1px solid #f0f0f4; padding:16px 24px; display:flex; gap:10px;">
+                            <button type="button" class="btn btn-light flex-fill" data-dismiss="modal"
+                                    style="border-radius:8px; border:1px solid #e0e4ec; font-size:13px; font-weight:600; padding:9px;">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn flex-fill" onclick="document.getElementById('deleteForm').submit();"
+                                    style="background:#c62828; color:#fff; border-radius:8px; font-size:13px; font-weight:600; padding:9px;">
+                                <i class="fas fa-trash mr-1"></i> Yes, Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -255,10 +283,5 @@
         });
     });
 
-    function confirmDelete(name) {
-        if (confirm('Delete "' + name + '"?\nThis cannot be undone.')) {
-            document.getElementById('deleteForm').submit();
-        }
-    }
 </script>
 @endpush

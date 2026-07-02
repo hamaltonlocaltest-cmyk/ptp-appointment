@@ -7,12 +7,6 @@
 
 @section('content')
 
-<style>
-	.stat-card.bg-inactive{background: #ffe9e9; border: 1px solid #ffc2c2; border-left: 2px solid #dc2426;}
-	.stat-card.bg-inactive h3 {color: #dc2426;}
-	.stat-card.bg-inactive p{color: #dc2426;}
-</style>
-
 <div class="row mb-3">
     <div class="col-lg-4 col-6 mb-3">
         <div class="stat-card bg-counselee">
@@ -21,13 +15,13 @@
         </div>
     </div>
     <div class="col-lg-4 col-6 mb-3">
-        <div class="stat-card bg-counselor">
+        <div class="stat-card" style="background:linear-gradient(135deg,#1b5e20,#2e7d32);">
             <h3>{{ $counts['active'] }}</h3><p>Active</p>
             <i class="fas fa-check-circle stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-4 col-6 mb-3">
-        <div class="stat-card bg-inactive">
+        <div class="stat-card" style="background:linear-gradient(135deg,#b71c1c,#c62828);">
             <h3>{{ $counts['inactive'] }}</h3><p>Inactive</p>
             <i class="fas fa-times-circle stat-icon"></i>
         </div>
@@ -36,15 +30,54 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-        <span style="font-weight:600; flex:auto">
-            <i class="fas fa-users mr-2"></i> Counselee List
+        <span style="color:#1a237e; font-size:15px; font-weight:600;">
+            <i class="fas fa-users mr-2" style="color:#4a148c;"></i> Counselee List
         </span>
         <a href="{{ route('admin.counselees.create') }}"
-           class="btn btn-primary btn-sm">
+           class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:7px; padding:7px 18px; font-size:13px; font-weight:600;">
             <i class="fas fa-plus mr-1"></i> Add Counselee
         </a>
     </div>
     <div class="card-body">
+
+        <!--<form method="GET" action="{{ route('admin.counselees.index') }}" class="mb-4">
+            <div class="row align-items-end">
+                <div class="col-md-4 mb-2">
+                    <label class="form-label">Search</label>
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" name="search" class="form-control"
+                               placeholder="Name, email, phone..."
+                               value="{{ request('search') }}">
+                    </div>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-control">
+                        <option value="">All</option>
+                        <option value="active"   {{ request('status')=='active'   ?'selected':'' }}>Active</option>
+                        <option value="inactive" {{ request('status')=='inactive' ?'selected':'' }}>Inactive</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label class="form-label">Gender</label>
+                    <select name="gender" class="form-control">
+                        <option value="">All</option>
+                        <option value="male"   {{ request('gender')=='male'   ?'selected':'' }}>Male</option>
+                        <option value="female" {{ request('gender')=='female' ?'selected':'' }}>Female</option>
+                        <option value="other"  {{ request('gender')=='other'  ?'selected':'' }}>Other</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-2 d-flex" style="gap:8px;">
+                    <button type="submit" class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:7px; padding:8px 18px; font-size:13px;">
+                        <i class="fas fa-filter mr-1"></i> Filter
+                    </button>
+                    <a href="{{ route('admin.counselees.index') }}" class="btn btn-sm btn-light" style="border-radius:7px; padding:8px 18px; font-size:13px; border:1px solid #e0e4ec;">
+                        <i class="fas fa-redo mr-1"></i> Reset
+                    </a>
+                </div>
+            </div>
+        </form>-->
 
         <div class="table-responsive">
             <table id="counseleesTable" class="table table-hover">
@@ -57,7 +90,7 @@
                         <th>Birthdate</th>
                         <th>Status</th>
                         <th>Registered</th>
-                        <th class="text-center" width="140">Actions</th>
+                        <th class="text-center" width="120">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +108,7 @@
                             </div>
                         </div>
                     </td>
-                    <td style="font-size:13px;">{{ $c->telephone1 ?? $c->phone ?? '—' }}</td>
+                    <td style="font-size:13px;">{{ $c->phone }}</td>
                     <td>
                         <span style="background:#f3e5f5; color:#4a148c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:500; text-transform:capitalize;">
                             {{ $c->gender }}
@@ -94,27 +127,22 @@
                     <td style="font-size:12px; color:#aaa;">{{ $c->created_at->format('M d, Y') }}</td>
                     <td>
                         <div class="d-flex justify-content-center" style="gap:5px;">
-                            <a href="{{ route('admin.counselees.show', $c) }}"
-                               class="btn-action" title="View"
-                               style="background:#e3f2fd; color:#1565c0;">
-                                <i class="fas fa-eye"></i>
-                            </a>
                             <a href="{{ route('admin.counselees.edit', $c) }}"
                                class="btn-action btn-edit" title="Edit">
                                 <i class="fas fa-pen"></i>
                             </a>
                             <form action="{{ route('admin.counselees.toggle', $c) }}" method="POST">
-                                @csrf
+                                @csrf @method('PATCH')
                                 <button type="submit"
                                     class="btn-action {{ $c->status==='active' ? 'btn-toggle-active' : 'btn-toggle-inactive' }}"
                                     title="{{ $c->status==='active' ? 'Set Inactive' : 'Set Active' }}">
                                     <i class="fas {{ $c->status==='active' ? 'fa-toggle-on' : 'fa-toggle-off' }}"></i>
                                 </button>
                             </form>
-                            <form action="{{ route('admin.counselees.destroy', $c) }}" method="POST" id="delete-form-{{ $c->id }}">
+                            <form action="{{ route('admin.counselees.destroy', $c) }}" method="POST"
+                                  onsubmit="return confirmDelete('{{ $c->full_name }}')">
                                 @csrf @method('DELETE')
-                                <button type="button" class="btn-action btn-delete" title="Delete"
-                                        onclick="openDeleteModal('{{ $c->id }}', '{{ $c->full_name }}')">
+                                <button type="submit" class="btn-action btn-delete" title="Delete">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -137,37 +165,9 @@
             </table>
         </div>
 
+       
     </div>
 </div>
-
-<div class="modal fade" id="deleteCounseleeModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="border-radius:14px; border:none; overflow:hidden;">
-            <div class="modal-body text-center" style="padding:32px 28px 20px;">
-                <div style="width:64px; height:64px; border-radius:50%; background:#fdecea; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
-                    <i class="fas fa-trash-alt" style="font-size:24px; color:#c62828;"></i>
-                </div>
-                <h5 style="font-weight:700; color:#1a1a2e; margin-bottom:8px;">Delete Counselee?</h5>
-                <p style="font-size:13.5px; color:#6b6b76; margin-bottom:0;">
-                    You're about to permanently remove
-                    <strong id="deleteCounseleeName" style="color:#1a1a2e;"></strong>.
-                    This action cannot be undone and will also remove their appointment history.
-                </p>
-            </div>
-            <div class="modal-footer" style="border-top:1px solid #f0f0f4; padding:16px 24px; display:flex; gap:10px;">
-                <button type="button" class="btn btn-light flex-fill" data-dismiss="modal"
-                        style="border-radius:8px; border:1px solid #e0e4ec; font-size:13px; font-weight:600; padding:9px;">
-                    Cancel
-                </button>
-                <button type="button" id="confirmDeleteCounseleeBtn" class="btn flex-fill"
-                        style="background:#c62828; color:#fff; border-radius:8px; font-size:13px; font-weight:600; padding:9px;">
-                    <i class="fas fa-trash mr-1"></i> Yes, Delete
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @push('scripts')
@@ -188,22 +188,13 @@ $(document).ready(function () {
                 previous: '<i class="fas fa-angle-left"></i>',
             }
         },
-        columnDefs: [{ orderable: false, targets: [-1] }]
+        columnDefs: [
+            { orderable: false, targets: [-1] }
+        ]
     });
 });
-
-let pendingDeleteFormId = null;
-
-function openDeleteModal(id, name) {
-    pendingDeleteFormId = 'delete-form-' + id;
-    document.getElementById('deleteCounseleeName').textContent = name;
-    $('#deleteCounseleeModal').modal('show');
+function confirmDelete(name) {
+    return confirm('Are you sure you want to delete "' + name + '"?\nThis action cannot be undone.');
 }
-
-document.getElementById('confirmDeleteCounseleeBtn').addEventListener('click', function () {
-    if (pendingDeleteFormId) {
-        document.getElementById(pendingDeleteFormId).submit();
-    }
-});
 </script>
 @endpush

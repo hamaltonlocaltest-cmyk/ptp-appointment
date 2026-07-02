@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'P2P Counseling Appointment'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,9 +52,9 @@ return [
     |
     */
 
-     'url' => env('APP_URL', 'https://ptp.stageium.com/'),
+     'url' => env('APP_URL', 'http://localhost/p2p_appointment/'),
 
-    'asset_url' => env('ASSET_URL','https://ptp.stageium.com/public/'),
+    'asset_url' => env('ASSET_URL','http://localhost/p2p_appointment/public/'),
 
     /*
     |--------------------------------------------------------------------------

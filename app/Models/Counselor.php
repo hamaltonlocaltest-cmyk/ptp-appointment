@@ -60,4 +60,13 @@ class Counselor extends Authenticatable
     {
         return $this->hasMany(CounselorAvailability::class);
     }
+
+    // -----------------------------------------------------------------------
+    // Scopes
+    // -----------------------------------------------------------------------
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
 }

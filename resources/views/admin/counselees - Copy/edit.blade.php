@@ -8,38 +8,18 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-lg-12">
+    <div class="col-lg-10">
 
-        
-		<div class="edit-header mb-4">
-
-			<div class="d-flex align-items-center">
-
-				<div class="edit-icon">
-					<i class="bi bi-pencil-square"></i>
-				</div>
-
-				<div class="ml-3">
-					<div class="edit-label">Currently Editing</div>
-					<div class="edit-name">{{ $counselee->full_name }}</div>
-				</div>
-
-			</div>
-
-			@if($counselee->status === 'active')
-				<span class="status-pill status-active">
-					<i class="bi bi-check-circle-fill mr-1"></i>
-					Active
-				</span>
-			@else
-				<span class="status-pill status-inactive">
-					<i class="bi bi-x-circle-fill mr-1"></i>
-					Inactive
-				</span>
-			@endif
-
-		</div>
-		
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <span style="color:#1a237e; font-size:16px; font-weight:600;">
+                <i class="fas fa-user-edit mr-2" style="color:#4a148c;"></i> Edit: {{ $counselee->full_name }}
+            </span>
+            @if($counselee->status === 'active')
+                <span class="badge-active"><i class="fas fa-circle mr-1" style="font-size:7px;"></i>Active</span>
+            @else
+                <span class="badge-inactive"><i class="fas fa-circle mr-1" style="font-size:7px;"></i>Inactive</span>
+            @endif
+        </div>
 
         @if($errors->any())
         <div class="alert alert-danger">
@@ -57,8 +37,8 @@
 
             <div class="card mb-3">
                 <div class="card-header" style="background:#fff;">
-                    <span style="font-weight:600;">
-                        <i class="fas fa-user mr-2"></i> Personal Information
+                    <span style="color:#1a237e; font-size:15px; font-weight:600;">
+                        <i class="fas fa-user mr-2" style="color:#4a148c;"></i> Personal Information
                     </span>
                 </div>
                 <div class="card-body p-4">
@@ -191,10 +171,10 @@
 
             <div class="card mb-3">
                 <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-                    <span style="font-weight:600; flex: auto;">
-                        <i class="fas fa-child mr-2"></i> Children
+                    <span style="color:#1a237e; font-size:15px; font-weight:600;">
+                        <i class="fas fa-child mr-2" style="color:#4a148c;"></i> Children
                     </span>
-                    <button type="button" class="btn btn-sm btn-primary" id="addChild">
+                    <button type="button" class="btn btn-sm btn-success" id="addChild">
                         <i class="fas fa-plus mr-1"></i> Add Child
                     </button>
                 </div>
@@ -247,10 +227,10 @@
 
             <div class="card mb-3">
                 <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-                    <span style="font-weight:600; flex:auto;">
-                        <i class="fas fa-notes-medical mr-2"></i> Medical History
+                    <span style="color:#1a237e; font-size:15px; font-weight:600;">
+                        <i class="fas fa-notes-medical mr-2" style="color:#4a148c;"></i> Medical History
                     </span>
-                    <button type="button" class="btn btn-sm btn-primary" id="addMedical">
+                    <button type="button" class="btn btn-sm btn-success" id="addMedical">
                         <i class="fas fa-plus mr-1"></i> Add Entry
                     </button>
                 </div>
@@ -288,8 +268,8 @@
 
             <div class="card mb-3">
                 <div class="card-header" style="background:#fff;">
-                    <span style="font-weight:600;">
-                        <i class="fas fa-hand-holding-heart mr-2"></i> Areas Seeking Counselling
+                    <span style="color:#1a237e; font-size:15px; font-weight:600;">
+                        <i class="fas fa-hand-holding-heart mr-2" style="color:#4a148c;"></i> Areas Seeking Counselling
                     </span>
                 </div>
                 <div class="card-body">
@@ -319,8 +299,8 @@
 
             <div class="card mb-3">
                 <div class="card-header" style="background:#fff;">
-                    <span style="font-weight:600;">
-                        <i class="fas fa-share-alt mr-2"></i> Referral & Previous Counselling
+                    <span style="color:#1a237e; font-size:15px; font-weight:600;">
+                        <i class="fas fa-share-alt mr-2" style="color:#4a148c;"></i> Referral & Previous Counselling
                     </span>
                 </div>
                 <div class="card-body">
@@ -366,8 +346,8 @@
 
             <div class="card mb-3">
                 <div class="card-header" style="background:#fff;">
-                    <span style="font-weight:600;">
-                        <i class="fas fa-lock mr-2"></i> Change Password
+                    <span style="color:#1a237e; font-size:15px; font-weight:600;">
+                        <i class="fas fa-lock mr-2" style="color:#4a148c;"></i> Change Password
                     </span>
                     <small class="text-muted ml-2">— Leave blank to keep current password</small>
                 </div>
@@ -407,68 +387,32 @@
                 </div>
             </div>
 
-           <div class="action-buttons mb-4">
-
-				<a href="{{ route('admin.counselees.index') }}"
-				   class="btn btn-secondary action-btn">
-					<i class="fas fa-arrow-left mr-1"></i> Back
-				</a>
-
-				<div class="action-group">
-
-					<button type="submit" class="btn btn-primary action-btn">
-						<i class="fas fa-save mr-1"></i> Update Counselee
-					</button>
-
-					<form action="{{ route('admin.counselees.destroy', $counselee) }}"
-						  method="POST" id="deleteForm">
-
-						@csrf
-						@method('DELETE')
-
-						<button type="button" class="btn btn-danger action-btn" data-toggle="modal" data-target="#deleteModal">
-							<i class="fas fa-trash mr-1"></i> Delete Counselee
-						</button>
-
-					</form>
-
-				</div>
-
-			</div>
+            <div class="d-flex justify-content-between mb-4">
+                <a href="{{ route('admin.counselees.index') }}"
+                   class="btn btn-light" style="border-radius:7px; padding:9px 22px; border:1px solid #e0e4ec; font-size:13px;">
+                    <i class="fas fa-arrow-left mr-1"></i> Back 1
+                </a>
+                <button type="submit" class="btn"
+                        style="background:#4a148c; color:#fff; border-radius:7px; padding:9px 26px; font-size:13px; font-weight:600;">
+                    <i class="fas fa-save mr-1"></i> Update Counselee
+                </button>
+            </div>
 
         </form>
 
-
-
-
-    </div>
-</div>
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="border-radius:14px; border:none; overflow:hidden;">
-            <div class="modal-body text-center" style="padding:32px 28px 20px;">
-                <div style="width:64px; height:64px; border-radius:50%; background:#fdecea; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
-                    <i class="fas fa-trash-alt" style="font-size:24px; color:#c62828;"></i>
-                </div>
-                <h5 style="font-weight:700; color:#1a1a2e; margin-bottom:8px;">Delete Counselee?</h5>
-                <p style="font-size:13.5px; color:#6b6b76; margin-bottom:0;">
-                    You're about to permanently remove
-                    <strong style="color:#1a1a2e;">{{ $counselee->full_name }}</strong>.
-                    This action cannot be undone and will also remove their appointment history.
-                </p>
-            </div>
-            <div class="modal-footer" style="border-top:1px solid #f0f0f4; padding:16px 24px; display:flex; gap:10px;">
-                <button type="button" class="btn btn-light flex-fill" data-dismiss="modal"
-                        style="border-radius:8px; border:1px solid #e0e4ec; font-size:13px; font-weight:600; padding:9px;">
-                    Cancel
+        
+        <div class="text-right mb-4">
+            <form action="{{ route('admin.counselees.destroy', $counselee) }}" method="POST"
+                  onsubmit="return confirmDelete('{{ $counselee->full_name }}')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger"
+                        style="border-radius:7px; padding:9px 22px; font-size:13px; font-weight:600;">
+                    <i class="fas fa-trash mr-1"></i> Delete Counselee
                 </button>
-                <button type="button" class="btn flex-fill" onclick="document.getElementById('deleteForm').submit();"
-                        style="background:#c62828; color:#fff; border-radius:8px; font-size:13px; font-weight:600; padding:9px;">
-                    <i class="fas fa-trash mr-1"></i> Yes, Delete
-                </button>
-            </div>
+            </form>
         </div>
+
     </div>
 </div>
 @endsection
@@ -481,6 +425,9 @@ function togglePw(inputId, iconId) {
     el.type = el.type === 'password' ? 'text' : 'password';
     ic.classList.toggle('fa-eye');
     ic.classList.toggle('fa-eye-slash');
+}
+function confirmDelete(name) {
+    return confirm('Delete "' + name + '"?\nThis cannot be undone.');
 }
 
 document.querySelectorAll('[name="previous_counselling"]').forEach(r => {
