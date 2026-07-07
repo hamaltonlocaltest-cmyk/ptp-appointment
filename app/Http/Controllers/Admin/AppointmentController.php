@@ -22,9 +22,7 @@ class AppointmentController extends Controller
         private NotificationService $notifications,
     ) {}
 
-    // -----------------------------------------------------------------------
-    // Index
-    // -----------------------------------------------------------------------
+   
     public function index(Request $request)
     {
         $query = Appointment::with(['counselee', 'counselor', 'counselType'])
@@ -59,9 +57,7 @@ class AppointmentController extends Controller
         return view('admin.appointments.index', compact('appointments', 'counts'));
     }
 
-    // -----------------------------------------------------------------------
-    // Show
-    // -----------------------------------------------------------------------
+    
     public function show(Appointment $appointment)
     {
         $appointment->load(['counselee', 'counselor', 'counselType', 'reschedules.oldCounselor', 'reschedules.newCounselor']);

@@ -70,7 +70,7 @@
 
 <div id="availabilityPicker" data-grid-start="{{ $gridStartMinutes }}" data-slot-minutes="{{ $slotMinutes }}">
 
-    {{-- Toolbar: presets + copy-to-all --}}
+  
     <div class="avail-toolbar">
         <span style="font-size:12px; color:#777; font-weight:600; margin-right:4px;">Quick add:</span>
         <button type="button" class="avail-preset-btn" data-preset="09:00-17:00">9 AM – 5 PM</button>
@@ -82,7 +82,7 @@
         </button>
     </div>
 
-    {{-- Click-drag grid --}}
+
     <div class="avail-grid-wrap">
         <div class="avail-grid" id="availGrid">
             <div class="avail-grid-head time-col"></div>
@@ -105,7 +105,7 @@
         </div>
     </div>
 
-    {{-- Live text summary with removable pills (also serves as the only way to remove a slot) --}}
+    
     <div class="avail-summary" id="availSummary">
         @foreach($days as $day)
         <div class="avail-day-row" data-day-row="{{ $day }}">
@@ -117,7 +117,7 @@
         @endforeach
     </div>
 
-    {{-- Hidden inputs container — populated entirely by JS from the slots[] state --}}
+   
     <div id="availabilityHiddenInputs"></div>
 
     @error('availability')<div class="text-danger mt-2" style="font-size:13px;">{{ $message }}</div>@enderror
@@ -265,7 +265,7 @@
         render();
     });
 
-    // ── Click-drag selection on the grid ──────────────────────────────────
+   
     let dragging = false;
     let dragDay = null;
     let dragStartRow = null;

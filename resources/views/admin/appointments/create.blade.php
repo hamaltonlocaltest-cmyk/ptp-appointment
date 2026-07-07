@@ -29,7 +29,6 @@
     </div>
     @else
 
-    {{-- Progress Steps --}}
     <div class="d-flex align-items-center mb-4" id="progressSteps">
         @foreach(['Counsellee','Type','Date','Time','Confirm'] as $i => $label)
         <div class="d-flex align-items-center" style="flex:1;">
@@ -117,7 +116,7 @@
         <input type="hidden" name="end_time" id="hiddenEnd">
         <input type="hidden" name="counselor_id" id="hiddenCounselor">
 
-        {{-- STEP 1: Select Counsellee --}}
+       
         <div id="step1" class="section-card">
             <div class="section-header"><i class="fas fa-user mr-2"></i>Step 1 — Select Counsellee</div>
             <div class="section-body">
@@ -143,7 +142,7 @@
             </div>
         </div>
 
-        {{-- STEP 2: Choose Counselling Type --}}
+      
         <div id="step2" class="section-card" style="display:none;">
             <div class="section-header"><i class="fas fa-hand-holding-heart mr-2"></i>Step 2 — Counselling Area</div>
             <div class="section-body">
@@ -163,7 +162,7 @@
             </div>
         </div>
 
-        {{-- STEP 3: Pick Date --}}
+      
         <div id="step3" class="section-card" style="display:none;">
             <div class="section-header"><i class="fas fa-calendar-alt mr-2"></i>Step 3 — Pick a Date</div>
             <div class="section-body">
@@ -178,7 +177,7 @@
             </div>
         </div>
 
-        {{-- STEP 4: Pick Time --}}
+       
         <div id="step4" class="section-card" style="display:none;">
             <div class="section-header"><i class="fas fa-clock mr-2"></i>Step 4 — Pick a Time Slot</div>
             <div class="section-body">
@@ -199,7 +198,7 @@
             </div>
         </div>
 
-        {{-- STEP 5: Notes + Confirm --}}
+       
         <div id="step5" class="section-card" style="display:none;">
             <div class="section-header"><i class="fas fa-sticky-note mr-2"></i>Step 5 — Notes &amp; Confirm <span class="text-muted" style="font-weight:400;">(optional)</span></div>
             <div class="section-body">

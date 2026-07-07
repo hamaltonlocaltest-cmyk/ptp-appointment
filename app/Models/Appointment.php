@@ -55,6 +55,16 @@ class Appointment extends Model
         return $this->hasMany(AppointmentReschedule::class)->latest();
     }
 
+    public function feedback()
+    {
+        return $this->hasOne(AppointmentFeedback::class);
+    }
+
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class);
+    }
+
     // -----------------------------------------------------------------------
     // Accessors
     // -----------------------------------------------------------------------
@@ -82,6 +92,19 @@ class Appointment extends Model
         };
     }
 
+    // True once the session's scheduled end time has actually passed (not just
+    // the calendar date) and it's still confirmed — i.e. safe to mark completed.
+    public function getIsCompletableAttribute(): bool
+    {
+        if ($this->status !== 'confirmed') {
+            return false;
+        }
+
+        $endsAt = Carbon::parse($this->appointment_date->toDateString() . ' ' . $this->end_time);
+
+        return $endsAt->lte(now());
+    }
+
     // -----------------------------------------------------------------------
     // Scopes
     // -----------------------------------------------------------------------
@@ -102,10 +125,10 @@ class Appointment extends Model
         })->orderByDesc('appointment_date')->orderByDesc('start_time');
     }
 
-    // Confirmed appointments whose date has passed — eligible to be marked completed
+    // Confirmed appointments whose scheduled end time has passed — eligible to be marked completed
     public function scopeCompletable($query)
     {
         return $query->where('status', 'confirmed')
-                     ->where('appointment_date', '<=', now()->toDateString());
+                     ->whereRaw("TIMESTAMP(appointment_date, end_time) <= ?", [now()]);
     }
 }

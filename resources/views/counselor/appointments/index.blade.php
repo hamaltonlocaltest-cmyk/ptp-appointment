@@ -40,7 +40,7 @@
     .action-btn { border-radius:20px; font-size:12px; padding:5px 14px; }
     </style>
 
-    {{-- Upcoming --}}
+   
     <h6 style="font-weight:700; color:#1b5e20; margin-bottom:14px;">
         <i class="fas fa-clock mr-2"></i> Upcoming ({{ $upcoming->count() }})
     </h6>
@@ -48,7 +48,7 @@
     @forelse($upcoming as $appt)
     @php
         $statusColor = ['pending'=>'#FFC107','confirmed'=>'#009643','cancelled'=>'#dc3545','completed'=>'#17a2b8'][$appt->status] ?? '#ccc';
-        $completable = $appt->status === 'confirmed' && $appt->appointment_date->lte(today());
+        $completable = $appt->is_completable;
     @endphp
     <div class="appt-card d-flex">
         <div class="appt-left" style="background:{{ $statusColor }};"></div>
@@ -82,6 +82,9 @@
                 @endif
             </div>
             <div class="d-flex flex-wrap" style="gap:6px;">
+                <a href="{{ route('counselor.appointments.show', $appt) }}" class="btn btn-sm btn-outline-secondary action-btn">
+                    <i class="fas fa-eye mr-1"></i> View
+                </a>
                 @if($completable)
                 <form action="{{ route('counselor.appointments.complete', $appt) }}" method="POST" id="complete-form-{{ $appt->id }}">
                     @csrf
@@ -113,7 +116,7 @@
     </div>
     @endforelse
 
-    {{-- Past --}}
+    
     @if($past->count())
     <h6 style="font-weight:700; color:#555; margin-top:28px; margin-bottom:14px;">
         <i class="fas fa-history mr-2"></i> Past Appointments
@@ -127,8 +130,8 @@
             <div class="day">{{ $appt->appointment_date->format('d') }}</div>
             <div class="month">{{ $appt->appointment_date->format('M Y') }}</div>
         </div>
-        <div class="d-flex align-items-center p-3" style="flex:1;">
-            <div style="flex:1;">
+        <div class="d-flex align-items-center flex-wrap p-3" style="flex:1; gap:6px;">
+            <div style="flex:1; min-width:200px;">
                 <div class="d-flex align-items-center flex-wrap mb-1" style="gap:6px;">
                     <span style="font-weight:700; font-size:14px; color:#1a1a2e;">{{ $appt->counselType->name }}</span>
                     <span class="status-badge status-{{ $appt->status }}">{{ ucfirst($appt->status) }}</span>
@@ -139,6 +142,9 @@
                     <i class="fas fa-clock mr-1"></i> {{ $appt->formatted_time }}
                 </div>
             </div>
+            <a href="{{ route('counselor.appointments.show', $appt) }}" class="btn btn-sm btn-outline-secondary action-btn">
+                <i class="fas fa-eye mr-1"></i> View
+            </a>
         </div>
     </div>
     @endforeach
@@ -146,7 +152,7 @@
 
 </div>
 
-{{-- Cancel confirmation modal --}}
+
 <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border-radius:14px; border:none; overflow:hidden;">
@@ -187,7 +193,7 @@
     </div>
 </div>
 
-{{-- Mark completed confirmation modal --}}
+
 <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border-radius:14px; border:none; overflow:hidden;">

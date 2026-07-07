@@ -8,7 +8,7 @@
 @section('content')
 <div class="container py-4">
 
-    {{-- Page Header --}}
+ 
     <div class="d-flex align-items-center mb-4">
         <div>
             <h4 class="mb-0" style="color:#1a1a2e; font-weight:700;">Book an Appointment</h4>
@@ -40,7 +40,7 @@
 <div class="row">
 <div class="col-lg-8">
 
-    {{-- Progress Steps --}}
+   
     <div class="d-flex align-items-center mb-4" id="progressSteps">
         @foreach(['Choose Type','Pick Date','Pick Time','Confirm'] as $i => $label)
         <div class="d-flex align-items-center" style="flex:1;">
@@ -178,7 +178,7 @@
         <input type="hidden" name="end_time" id="hiddenEnd">
         <input type="hidden" name="counselor_id" id="hiddenCounselor">
 
-        {{-- STEP 1: Choose Counselling Type --}}
+        
         <div id="step1" class="section-card">
             <div class="section-header">
                 <span><i class="fas fa-hand-holding-heart mr-2" style="color:#D30404;"></i>Step 1 — What would you like counselling for?</span>
@@ -200,7 +200,7 @@
             </div>
         </div>
 
-        {{-- STEP 2: Pick Date --}}
+       
         <div id="step2" class="section-card" style="display:none;">
             <div class="section-header">
                 <span><i class="fas fa-calendar-alt mr-2" style="color:#D30404;"></i>Step 2 — Pick a Date</span>
@@ -221,7 +221,7 @@
             </div>
         </div>
 
-        {{-- STEP 3: Pick Time --}}
+       
         <div id="step3" class="section-card" style="display:none;">
             <div class="section-header">
                 <span><i class="fas fa-clock mr-2" style="color:#D30404;"></i>Step 3 — Pick a Time Slot</span>
@@ -238,7 +238,7 @@
                     <i class="fas fa-clock fa-2x mb-2" style="color:#ddd; display:block;"></i>
                     No available slots for this date.<br>Try choosing a different date.
                 </div>
-                {{-- Auto-matched counselor display --}}
+              
                 <div id="counselorInfo" class="mt-3" style="display:none;">
                     <div class="counselor-badge">
                         <i class="fas fa-user-tie"></i>
@@ -249,7 +249,7 @@
             </div>
         </div>
 
-        {{-- STEP 4: Notes --}}
+       
         <div id="step4" class="section-card" style="display:none;">
             <div class="section-header">
                 <span><i class="fas fa-sticky-note mr-2" style="color:#D30404;"></i>Step 4 — Any notes for your counselor? <span class="text-muted" style="font-weight:400;">(optional)</span></span>
@@ -292,7 +292,7 @@
     </form>
 </div>
 
-{{-- Sticky live summary (desktop only) --}}
+
 <div class="col-lg-4 d-none d-lg-block">
     <div class="summary-sidebar">
         <div class="summary-header"><i class="fas fa-clipboard-list mr-2"></i>Your Booking</div>
@@ -362,7 +362,7 @@ function updateStepClickability() {
     });
 }
 
-// ── Step navigation (view-only, does not clear data) ───────────────────────
+
 function goToStep(n) {
     if (n < 1 || n > state.maxStep) return;
     [1, 2, 3, 4].forEach(i => {
@@ -378,7 +378,7 @@ function goToStep(n) {
     document.getElementById('step' + n).scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ── Sidebar summary rows jump back to a step ────────────────────────────────
+
 document.querySelectorAll('.summary-row.jumpable').forEach(row => {
     const jump = () => goToStep(parseInt(row.dataset.jump, 10));
     row.addEventListener('click', jump);
@@ -410,7 +410,7 @@ function updateSidebar() {
     document.getElementById('sideCounselor').classList.toggle('muted', !state.counselorName);
 }
 
-// ── Step 1: type selection ─────────────────────────────────────────────────
+
 function selectType(card) {
     document.querySelectorAll('.type-card').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed', 'false'); });
     card.classList.add('selected');
@@ -483,7 +483,7 @@ function loadDates() {
     });
 }
 
-// ── Step 2: date selection ─────────────────────────────────────────────────
+
 function selectDate(btn, date) {
     document.querySelectorAll('.date-btn').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
     btn.classList.add('selected');
@@ -572,7 +572,7 @@ function loadSlots(date) {
     });
 }
 
-// ── Step 3: slot selection ─────────────────────────────────────────────────
+
 function selectSlot(btn, start, end, counselorId, counselorName, mode) {
     document.querySelectorAll('.slot-btn').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
     btn.classList.add('selected');
@@ -609,7 +609,7 @@ function fmtTime(t) {
     return `${h % 12 === 0 ? 12 : h % 12}:${m.toString().padStart(2,'0')} ${p}`;
 }
 
-// ── Notes character count ───────────────────────────────────────────────────
+
 const notesInput = document.getElementById('notesInput');
 if (notesInput) {
     notesInput.addEventListener('input', () => {
@@ -617,7 +617,7 @@ if (notesInput) {
     });
 }
 
-// ── Prevent double submission ───────────────────────────────────────────────
+
 const bookingForm = document.getElementById('bookingForm');
 if (bookingForm) {
     bookingForm.addEventListener('submit', function (e) {

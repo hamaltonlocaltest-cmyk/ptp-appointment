@@ -8,7 +8,7 @@
 
 @section('content')
 
-{{-- Stat Cards --}}
+
 <div class="row mb-3">
     <div class="col-lg-4 col-6 mb-3">
         <div class="stat-card bg-counselee">
@@ -45,7 +45,7 @@
     </div>
     <div class="card-body">
 
-        {{-- Filters --}}
+        
         <!--<form method="GET" action="{{ route('admin.masters.counsel-types.index') }}" class="mb-4">
             <div class="row align-items-end">
                 <div class="col-md-6 mb-2">
@@ -174,7 +174,7 @@
     </div>
 </div>
 
-{{-- Hidden delete form --}}
+
 <form id="deleteForm" method="POST" style="display:none;">
     @csrf @method('DELETE')
 </form>

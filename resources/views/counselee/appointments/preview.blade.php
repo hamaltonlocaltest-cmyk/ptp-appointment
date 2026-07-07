@@ -28,7 +28,7 @@
     <div class="card" style="border-radius:14px; border:none; box-shadow:0 4px 20px rgba(0,0,0,.08);">
         <div class="card-body p-4">
 
-            {{-- Counselor Info --}}
+     
             <div class="d-flex align-items-center mb-4 p-3"
                  style="background:#f3e9ff; border-radius:10px; border:1px solid #d4a8f0;">
                 <div class="mr-3" style="width:48px; height:48px; border-radius:50%; background:#4a148c;
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            {{-- Details Grid --}}
+       
             <div class="row" style="font-size:14px;">
                 <div class="col-6 mb-4">
                     <div class="text-muted" style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px;">
@@ -108,7 +108,6 @@
         </div>
     </div>
 
-    {{-- Action Buttons --}}
     <form action="{{ route('counselee.appointments.store') }}" method="POST" class="mt-4">
         @csrf
         <input type="hidden" name="counsel_type_id"  value="{{ $validated['counsel_type_id'] }}">

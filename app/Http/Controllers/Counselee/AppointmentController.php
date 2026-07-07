@@ -184,13 +184,29 @@ class AppointmentController extends Controller
             ->upcoming()
             ->get();
 
-        $past = Appointment::with(['counselor', 'counselType', 'reschedules'])
+        $past = Appointment::with(['counselor', 'counselType', 'reschedules', 'feedback'])
             ->where('counselee_id', $counselee->id)
             ->past()
             ->take(20)
             ->get();
 
         return view('counselee.appointments.index', compact('upcoming', 'past'));
+    }
+
+    // -----------------------------------------------------------------------
+    // Show — full appointment detail, including feedback status
+    // -----------------------------------------------------------------------
+    public function show(Appointment $appointment)
+    {
+        $counselee = Auth::guard('counselee')->user();
+
+        if ($appointment->counselee_id !== $counselee->id) {
+            abort(403);
+        }
+
+        $appointment->load(['counselor', 'counselType', 'reschedules', 'feedback', 'complaints']);
+
+        return view('counselee.appointments.show', compact('appointment'));
     }
 
     // -----------------------------------------------------------------------

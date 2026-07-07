@@ -484,7 +484,7 @@
 </head>
 <body>
 
-{{-- ===== NAVBAR ===== 
+
 <nav class="navbar">
     <a href="{{ url('/') }}" class="nav-brand">
        <img src="{{ asset('images/persontoperson-logo.png') }}" class="img-fluid" alt="Person to Person Logo">
@@ -503,7 +503,7 @@
         </a>
     </div>
 </nav>
---}}
+
 
 <style>
 	.navbar-brand img{
@@ -624,7 +624,7 @@
     </div>
 </nav>
 
-{{-- ===== HERO ===== --}}
+
 
 <style>
 	.hero-section {
@@ -877,7 +877,7 @@
                     and take the first step towards a healthier you.
                 </p>
 
-                <!-- Buttons -->
+             
                 <div class="hero-buttons d-flex flex-wrap gap-2 mb-5">
 
                     <a href="#" class="btn btn-success btn-lg px-4">
@@ -897,7 +897,7 @@
 
                 </div>
 
-                <!-- Statistics -->
+             
                 <div class="row g-3">
 
                     <div class="col-6 col-md-3">
@@ -980,7 +980,7 @@
     </div>
 </section>
 
-<!-- old banner -->
+
 <section class="hero d-none">
     <div class="hero-circles">
         <div class="hero-circle"></div>
@@ -1031,7 +1031,7 @@
     </div>
 </section>
 
-{{-- ===== PORTALS ===== --}}
+
 <section class="portals" id="portals">
     <div class="section-header">
         <div class="section-badge">Choose Your Portal</div>
@@ -1040,7 +1040,7 @@
     </div>
     <div class="portal-grid">
 
-        {{-- Counselor Card --}}
+     
         <div class="portal-card">
             <div class="portal-card-header counselor">
                 <div class="portal-icon"><i class="bi bi-person-fill"></i></div>
@@ -1079,7 +1079,7 @@
             </div>
         </div>
 
-        {{-- Counselee Card --}}
+       
         <div class="portal-card">
             <div class="portal-card-header counselee">
                 <div class="portal-icon"><i class="bi bi-heart-fill"></i></div>
@@ -1121,7 +1121,7 @@
     </div>
 </section>
 
-{{-- ===== HOW IT WORKS ===== --}}
+
 
 <style>
 	.step-icon{
@@ -1229,7 +1229,6 @@
 				
 </section>
 
-{{-- ===== COUNSEL TYPES ===== --}}
 <section class="counsel-types">
     <div class="section-header">
         <div class="section-badge">Our Services</div>
@@ -1300,7 +1299,7 @@
     </div>
 </section>
 
-{{-- ===== FEATURES ===== --}}
+
 <section class="features">
     <div class="section-header">
         <div class="section-badge">Why Choose Us</div>
@@ -1353,7 +1352,7 @@
     </div>
 </section>
 
-{{-- ===== CTA ===== --}}
+
 <section class="cta">
     <h2>Ready to Get Started?</h2>
     <p>Join hundreds of people already benefiting from professional counseling support on our platform.</p>
@@ -1367,7 +1366,7 @@
     </div>
 </section>
 
-{{-- ===== FOOTER ===== --}}
+
 <footer>
     <div class="footer-inner">
         <div class="footer-brand"><span>P2P</span> Appointment</div>
@@ -1384,7 +1383,7 @@
     </div>
 </footer>
 
-{{-- Smooth scroll for anchor links --}}
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>

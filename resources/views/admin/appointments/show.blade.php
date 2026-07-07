@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        {{-- Reschedule History --}}
+       
         @if($appointment->reschedules->count())
         <div class="card">
             <div class="card-header" style="background:#fff;">

@@ -33,7 +33,7 @@
                 </div>
                 @endif
 
-                {{-- Preview Banner --}}
+                
                 <div class="d-flex align-items-center p-3 mb-4"
                      id="previewBanner"
                      style="background:#e8eaf6; border-radius:10px; border:1.5px solid #c5cae9;">
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="row">
-                        {{-- Icon Picker --}}
+                        
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label class="form-label">Icon <span class="text-danger">*</span></label>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
 
-                        {{-- Color Picker --}}
+                       
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label class="form-label">Color <span class="text-danger">*</span></label>
@@ -145,7 +145,7 @@
                         <small class="text-muted">Lower numbers appear first in lists.</small>
                     </div>
 
-                    {{-- Quick Toggle --}}
+                   
                     <div class="d-flex align-items-center p-3 mb-3"
                          style="background:#f8f9fc; border-radius:8px; border:1px solid #e0e4ec;">
                         <div style="flex:1;">
@@ -183,7 +183,7 @@
                     </div>
                 </form>
 
-                {{-- Outside forms --}}
+               
                 <form id="toggleForm" action="{{ route('admin.masters.counsel-types.toggle', $counselType) }}" method="POST" style="display:none;">
                     @csrf @method('PATCH')
                 </form>

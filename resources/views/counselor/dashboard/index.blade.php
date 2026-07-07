@@ -7,7 +7,7 @@
 
 @section('content')
 
-{{-- Welcome Banner --}}
+
 <div class="card mb-4" style="background: linear-gradient(135deg, #1b5e20, #2e7d32); color:#fff; border-radius:12px;">
     <div class="card-body p-4">
         <div class="d-flex align-items-center flex-wrap">
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-{{-- Stat Cards --}}
+
 <div class="row mb-3">
     <div class="col-lg-4 col-6 mb-3">
         <a href="{{ route('counselor.appointments.index') }}" class="text-decoration-none">
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-{{-- Upcoming Appointments --}}
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
         <span style="color:#1b5e20; font-size:15px; font-weight:600;">

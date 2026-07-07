@@ -9,7 +9,7 @@
 
 @section('content')
 
-{{-- Stat Cards --}}
+
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
         <div class="stat-card bg-admin">
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-{{-- Quick Actions --}}
+
 <div class="row mb-3">
     <div class="col-12">
         <div class="card">
@@ -66,9 +66,9 @@
     </div>
 </div>
 
-{{-- Recent Tables --}}
+
 <div class="row">
-    {{-- Recent Counselors --}}
+   
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    {{-- Recent Counselees --}}
+   
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">

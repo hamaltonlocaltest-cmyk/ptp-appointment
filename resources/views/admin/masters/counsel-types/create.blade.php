@@ -31,7 +31,7 @@
                 <form id="createForm" action="{{ route('admin.masters.counsel-types.store') }}" method="POST">
                     @csrf
 
-                    {{-- Preview Banner --}}
+                   
                     <div class="d-flex align-items-center p-3 mb-4"
                          id="previewBanner"
                          style="background:#e8eaf6; border-radius:10px; border:1.5px solid #c5cae9;">
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="row">
-                        {{-- Icon Picker --}}
+                        
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label class="form-label">Icon <span class="text-danger">*</span></label>
@@ -103,7 +103,7 @@
                             </div>
                         </div>
 
-                        {{-- Color Picker --}}
+                       
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label class="form-label">Color <span class="text-danger">*</span></label>

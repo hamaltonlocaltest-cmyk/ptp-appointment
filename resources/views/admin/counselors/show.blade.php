@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        {{-- Weekly Availability --}}
+       
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
                 <span style=" font-size:14px; flex:auto">

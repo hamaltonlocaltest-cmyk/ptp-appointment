@@ -22,6 +22,18 @@ use App\Http\Controllers\Counselee\AppointmentController as CounseleeAppointment
 
 use App\Http\Controllers\Admin\CounselTypeController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
+use App\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
+use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
+use App\Http\Controllers\Admin\DonationController as AdminDonationController;
+
+// Counselor Controllers (Phase 4)
+use App\Http\Controllers\Counselor\ComplaintController as CounselorComplaintController;
+use App\Http\Controllers\Counselor\FeedbackController as CounselorFeedbackController;
+
+// Counselee Controllers (Phase 4)
+use App\Http\Controllers\Counselee\FeedbackController as CounseleeFeedbackController;
+use App\Http\Controllers\Counselee\ComplaintController as CounseleeComplaintController;
+use App\Http\Controllers\Counselee\DonationController as CounseleeDonationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +115,26 @@ Route::prefix('counselees')->name('counselees.')->group(function () {
             });
         });
 
+        // Complaints
+        Route::prefix('complaints')->name('complaints.')->group(function () {
+            Route::get('/',             [AdminComplaintController::class, 'index'])->name('index');
+            Route::get('/{complaint}',  [AdminComplaintController::class, 'show'])->name('show');
+            Route::put('/{complaint}',  [AdminComplaintController::class, 'update'])->name('update');
+        });
+
+        // Feedback
+        Route::prefix('feedback')->name('feedback.')->group(function () {
+            Route::get('/',            [AdminFeedbackController::class, 'index'])->name('index');
+            Route::get('/{feedback}',  [AdminFeedbackController::class, 'show'])->name('show');
+        });
+
+        // Donations
+        Route::prefix('donations')->name('donations.')->group(function () {
+            Route::get('/',                       [AdminDonationController::class, 'index'])->name('index');
+            Route::get('/{donation}',             [AdminDonationController::class, 'show'])->name('show');
+            Route::post('/{donation}/complete',   [AdminDonationController::class, 'markCompleted'])->name('complete');
+        });
+
     });
 });
 
@@ -127,6 +159,8 @@ Route::prefix('counselor')->name('counselor.')->group(function () {
         // Appointments
         Route::prefix('appointments')->name('appointments.')->group(function () {
             Route::get('/',                     [CounselorAppointmentController::class, 'index'])->name('index');
+            Route::get('/{appointment}',        [CounselorAppointmentController::class, 'show'])->name('show');
+            Route::put('/{appointment}/notes',  [CounselorAppointmentController::class, 'updateNotes'])->name('notes.update');
             Route::post('/{appointment}/cancel', [CounselorAppointmentController::class, 'cancel'])->name('cancel');
             Route::post('/{appointment}/complete', [CounselorAppointmentController::class, 'complete'])->name('complete');
 
@@ -134,6 +168,18 @@ Route::prefix('counselor')->name('counselor.')->group(function () {
             Route::post('/{appointment}/reschedule/dates', [CounselorAppointmentController::class, 'getRescheduleDates'])->name('reschedule.dates');
             Route::post('/{appointment}/reschedule/slots', [CounselorAppointmentController::class, 'getRescheduleSlots'])->name('reschedule.slots');
             Route::post('/{appointment}/reschedule',       [CounselorAppointmentController::class, 'reschedule'])->name('reschedule');
+        });
+
+        // Feedback — read-only, feedback left on this counselor's own sessions
+        Route::prefix('feedback')->name('feedback.')->group(function () {
+            Route::get('/', [CounselorFeedbackController::class, 'index'])->name('index');
+        });
+
+        // Complaints — file a complaint, and view complaints filed about this counselor
+        Route::prefix('complaints')->name('complaints.')->group(function () {
+            Route::get('/',       [CounselorComplaintController::class, 'index'])->name('index');
+            Route::get('/create', [CounselorComplaintController::class, 'create'])->name('create');
+            Route::post('/',      [CounselorComplaintController::class, 'store'])->name('store');
         });
     });
 });
@@ -164,11 +210,39 @@ Route::prefix('counselee')->name('counselee.')->group(function () {
             Route::post('/slots',    [CounseleeAppointmentController::class, 'getAvailableSlots'])->name('slots');
             Route::post('/preview',  [CounseleeAppointmentController::class, 'preview'])->name('preview');
             Route::post('/',         [CounseleeAppointmentController::class, 'store'])->name('store');
+            Route::get('/{appointment}',         [CounseleeAppointmentController::class, 'show'])->name('show');
             Route::post('/{appointment}/cancel', [CounseleeAppointmentController::class, 'cancel'])->name('cancel');
 
             Route::get('/{appointment}/reschedule',       [CounseleeAppointmentController::class, 'editReschedule'])->name('reschedule.edit');
             Route::post('/{appointment}/reschedule/slots', [CounseleeAppointmentController::class, 'getRescheduleSlots'])->name('reschedule.slots');
             Route::post('/{appointment}/reschedule',       [CounseleeAppointmentController::class, 'reschedule'])->name('reschedule');
+
+            // Feedback for a completed session
+            Route::prefix('/{appointment}/feedback')->name('feedback.')->group(function () {
+                Route::get('/',  [CounseleeFeedbackController::class, 'create'])->name('create');
+                Route::post('/', [CounseleeFeedbackController::class, 'store'])->name('store');
+            });
         });
+
+        // Complaints
+        Route::prefix('complaints')->name('complaints.')->group(function () {
+            Route::get('/',       [CounseleeComplaintController::class, 'index'])->name('index');
+            Route::get('/create', [CounseleeComplaintController::class, 'create'])->name('create');
+            Route::post('/',      [CounseleeComplaintController::class, 'store'])->name('store');
+        });
+
+        // Feedback — list of all feedback this counselee has submitted
+        Route::prefix('feedback')->name('feedback.')->group(function () {
+            Route::get('/', [CounseleeFeedbackController::class, 'index'])->name('index');
+        });
+    });
+
+    // Donations — intentionally public (guest donations allowed), kept under the
+    // 'counselee.' route name group for naming consistency with the rest of Phase 4.
+    Route::prefix('donations')->name('donations.')->group(function () {
+        Route::get('/',           [CounseleeDonationController::class, 'create'])->name('create');
+        Route::post('/',          [CounseleeDonationController::class, 'store'])->name('store');
+        Route::get('/callback',   [CounseleeDonationController::class, 'callback'])->name('callback');
+        Route::post('/webhook',   [CounseleeDonationController::class, 'webhook'])->name('webhook');
     });
 });

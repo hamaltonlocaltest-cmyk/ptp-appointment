@@ -1,13 +1,8 @@
-{{--
-=====================================================================
-REPLACE your sidebar nav <ul> inside resources/views/admin/layouts/app.blade.php
-with this updated version that includes the Masters section
-=====================================================================
---}}
+
 
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-    {{-- Dashboard --}}
+   
     <li class="nav-item">
         <a href="{{ route('admin.dashboard') }}"
            class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
@@ -16,12 +11,10 @@ with this updated version that includes the Masters section
         </a>
     </li>
 
-    {{-- ======================== --}}
-    {{-- USER MANAGEMENT          --}}
-    {{-- ======================== --}}
+    
     <span class="sidebar-heading">User Management</span>
 
-    {{-- Counselors --}}
+    
     <li class="nav-item {{ request()->routeIs('admin.counselors.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->routeIs('admin.counselors.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-md"></i>
@@ -52,7 +45,7 @@ with this updated version that includes the Masters section
         </ul>
     </li>
 
-    {{-- Counselees --}}
+    
     <li class="nav-item {{ request()->routeIs('admin.counselees.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->routeIs('admin.counselees.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
@@ -83,12 +76,10 @@ with this updated version that includes the Masters section
         </ul>
     </li>
 
-    {{-- ======================== --}}
-    {{-- MASTERS                  --}}
-    {{-- ======================== --}}
+    
     <span class="sidebar-heading">Masters</span>
 
-    {{-- Counsel Types --}}
+    
     <li class="nav-item {{ request()->routeIs('admin.masters.counsel-types.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->routeIs('admin.masters.counsel-types.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-comments"></i>
@@ -112,9 +103,34 @@ with this updated version that includes the Masters section
         </ul>
     </li>
 
-    {{-- ======================== --}}
-    {{-- SYSTEM                   --}}
-    {{-- ======================== --}}
+    
+    <span class="sidebar-heading">Community Engagement</span>
+
+    <li class="nav-item">
+        <a href="{{ route('admin.complaints.index') }}"
+           class="nav-link {{ request()->routeIs('admin.complaints.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-exclamation-circle"></i>
+            <p>Complaints</p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ route('admin.feedback.index') }}"
+           class="nav-link {{ request()->routeIs('admin.feedback.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-comment-dots"></i>
+            <p>Feedback</p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ route('admin.donations.index') }}"
+           class="nav-link {{ request()->routeIs('admin.donations.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-hand-holding-heart"></i>
+            <p>Donations</p>
+        </a>
+    </li>
+
+   
     <span class="sidebar-heading">System</span>
 
     <li class="nav-item">

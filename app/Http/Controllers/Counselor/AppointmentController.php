@@ -43,6 +43,42 @@ class AppointmentController extends Controller
     }
 
     // -----------------------------------------------------------------------
+    // Show — full appointment detail, including editable counselor notes
+    // -----------------------------------------------------------------------
+    public function show(Appointment $appointment)
+    {
+        $counselor = Auth::guard('counselor')->user();
+
+        if ($appointment->counselor_id !== $counselor->id) {
+            abort(403);
+        }
+
+        $appointment->load(['counselee', 'counselType', 'reschedules', 'feedback', 'complaints']);
+
+        return view('counselor.appointments.show', compact('appointment'));
+    }
+
+    // -----------------------------------------------------------------------
+    // Update the counselor's post-session notes for an appointment
+    // -----------------------------------------------------------------------
+    public function updateNotes(Request $request, Appointment $appointment)
+    {
+        $counselor = Auth::guard('counselor')->user();
+
+        if ($appointment->counselor_id !== $counselor->id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'counselor_notes' => 'nullable|string|max:2000',
+        ]);
+
+        $appointment->update(['counselor_notes' => $validated['counselor_notes'] ?? null]);
+
+        return back()->with('success', 'Session notes saved.');
+    }
+
+    // -----------------------------------------------------------------------
     // Cancel
     // -----------------------------------------------------------------------
     public function cancel(Appointment $appointment)
@@ -79,8 +115,8 @@ class AppointmentController extends Controller
             abort(403);
         }
 
-        if ($appointment->status !== 'confirmed') {
-            return back()->withErrors(['error' => 'Only confirmed appointments can be marked as completed.']);
+        if (!$appointment->is_completable) {
+            return back()->withErrors(['error' => 'This appointment can only be marked completed once its scheduled time has passed.']);
         }
 
         $appointment->update([

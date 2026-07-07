@@ -53,8 +53,13 @@ body { font-family:Arial,sans-serif; background:#f4f4f4; margin:0; padding:0; }
         <p>We hope the session was helpful. You're welcome to book a follow-up appointment at any time.</p>
 
         <div class="btn-wrap">
-            <a href="{{ route('counselee.appointments.index') }}" class="btn">View My Appointments</a>
+            <a href="{{ route('counselee.appointments.feedback.create', $appointment) }}" class="btn">&#9733; Leave Feedback</a>
         </div>
+        <p style="text-align:center; margin-top:-10px;">
+            <a href="{{ route('counselee.appointments.index') }}" style="color:#1b5e20; font-size:13px; font-weight:600; text-decoration:none;">
+                View My Appointments
+            </a>
+        </p>
 
         <p>Warm regards,<br><strong>P2P Counselling Team</strong></p>
     </div>

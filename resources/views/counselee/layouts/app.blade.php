@@ -129,6 +129,30 @@
                             <p>My Appointments</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('counselee.feedback.index') }}"
+                           class="nav-link {{ request()->routeIs('counselee.feedback.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-star"></i>
+                            <p>My Feedback</p>
+                        </a>
+                    </li>
+
+                    <span class="sidebar-heading">Support</span>
+
+                    <li class="nav-item">
+                        <a href="{{ route('counselee.complaints.index') }}"
+                           class="nav-link {{ request()->routeIs('counselee.complaints.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-exclamation-circle"></i>
+                            <p>Complaints</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('counselee.donations.create') }}"
+                           class="nav-link {{ request()->routeIs('counselee.donations.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-hand-holding-heart"></i>
+                            <p>Donate</p>
+                        </a>
+                    </li>
 
                 </ul>
             </nav>

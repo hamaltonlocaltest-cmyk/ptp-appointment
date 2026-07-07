@@ -10,7 +10,7 @@
 <div class="row">
 <div class="col-lg-8">
 
-    {{-- Current appointment summary --}}
+   
     <div class="card mb-4" style="border-radius:12px; border:1px solid #e0e4ec;">
         <div class="card-body">
             <div class="d-flex align-items-center justify-content-between flex-wrap">

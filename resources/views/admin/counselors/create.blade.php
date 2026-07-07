@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    {{-- Areas of Expertise — dynamic from counsel_types --}}
+                    
                     <div class="form-group mb-2">
                         <label class="form-label">Areas of Expertise <span class="text-danger">*</span></label>
                         <div class="row">

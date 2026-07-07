@@ -31,7 +31,7 @@
 .status-completed { background:#d1ecf1; color:#0c5460; }
 </style>
 
-{{-- Welcome Banner --}}
+
 <div class="card" style="background: linear-gradient(135deg, #4a148c, #6a1b9a); color:#fff; border-radius:12px;">
     <div class="card-body p-4">
         <div class="d-flex align-items-center flex-wrap" style="gap:16px;">
@@ -67,7 +67,7 @@
     </div>
 </div>
 
-{{-- Stat Cards --}}
+
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
         <div class="stat-card" style="background:linear-gradient(135deg,#4a148c,#6a1b9a);">
@@ -101,7 +101,7 @@
 
 <div class="row">
 
-    {{-- Quick Actions --}}
+   
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
@@ -131,7 +131,7 @@
             </div>
         </div>
 
-        {{-- Counselling Areas --}}
+       
         @if($counselee->counselTypes->isNotEmpty())
         <div class="card">
             <div class="card-header">
@@ -150,7 +150,7 @@
         @endif
     </div>
 
-    {{-- Recent Appointments --}}
+   
     <div class="col-md-8">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
@@ -210,7 +210,7 @@
             </div>
         </div>
 
-        {{-- Upcoming next appointment highlight --}}
+       
         @if($nextAppointment)
         <div class="card" style="border-left:4px solid #D30404;">
             <div class="card-body p-3">

@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'instamojo' => [
+        'key'           => env('INSTAMOJO_API_KEY'),
+        'token'         => env('INSTAMOJO_AUTH_TOKEN'),
+        'mode'          => env('INSTAMOJO_MODE', 'test'), // 'test' or 'live'
+        'webhook_salt'  => env('INSTAMOJO_WEBHOOK_SALT'),
+    ],
+
 ];

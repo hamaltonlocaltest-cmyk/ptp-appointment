@@ -359,7 +359,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-    {{-- ===== NAVBAR ===== --}}
+   
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -391,13 +391,13 @@
         </ul>
     </nav>
 
-    {{-- ===== SIDEBAR ===== --}}
+   
     <aside class="main-sidebar elevation-0">
         <a href="{{ route('admin.dashboard') }}" class="brand-link">
             <img src="{{ asset('images/persontoperson-logo.png') }}" class="img-fluid" alt="Person to Person Appointment">
         </a>
         <div class="sidebar">
-            {{-- User Panel --}}
+            
             <div class="user-panel d-flex align-items-center">
                 <div class="image">
                     <div class="avatar-circle" style="background:#fff; color:#3949ab; width:34px; height:34px; font-size:13px;">
@@ -410,11 +410,11 @@
                 </div>
             </div>
 
-            {{-- Navigation --}}
+            
             <nav class="mt-2 pb-3">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-    {{-- Dashboard --}}
+   
     <li class="nav-item">
         <a href="{{ route('admin.dashboard') }}"
            class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
@@ -423,7 +423,7 @@
         </a>
     </li>
 	
-	{{-- Appointments --}}
+	
     <span class="sidebar-heading">Appointments</span>
 
     <li class="nav-item {{ request()->routeIs('admin.appointments.*') ? 'menu-open' : '' }}">
@@ -449,10 +449,10 @@
         </ul>
     </li>
 
-    {{-- User Management --}}
+    
     <span class="sidebar-heading">User Management</span>
 
-    {{-- Counselors --}}
+    
     <li class="nav-item {{ request()->routeIs('admin.counselors.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->routeIs('admin.counselors.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-md"></i>
@@ -483,7 +483,7 @@
         </ul>
     </li>
 
-    {{-- Counselees --}}
+    
     <li class="nav-item {{ request()->routeIs('admin.counselees.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->routeIs('admin.counselees.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
@@ -514,10 +514,10 @@
         </ul>
     </li>
 
-    {{-- Masters --}}
+   
     <span class="sidebar-heading">Masters</span>
 
-    {{-- Counsel Types --}}
+    
     <li class="nav-item {{ request()->routeIs('admin.masters.counsel-types.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->routeIs('admin.masters.counsel-types.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-comments"></i>
@@ -541,7 +541,42 @@
         </ul>
     </li>
 
-    {{-- System --}}
+    
+    <span class="sidebar-heading">Community Engagement</span>
+
+    <li class="nav-item">
+        <a href="{{ route('admin.complaints.index') }}"
+           class="nav-link {{ request()->routeIs('admin.complaints.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-exclamation-circle"></i>
+            <p>Complaints</p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ route('admin.feedback.index') }}"
+           class="nav-link {{ request()->routeIs('admin.feedback.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-comment-dots"></i>
+            <p>Feedback</p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ route('admin.donations.index') }}"
+           class="nav-link {{ request()->routeIs('admin.donations.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-hand-holding-heart"></i>
+            <p>Donations</p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ route('counselee.donations.create') }}"
+           class="nav-link {{ request()->routeIs('counselee.donations.create') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-heart"></i>
+            <p>Make a Donation</p>
+        </a>
+    </li>
+
+    
     <span class="sidebar-heading">System</span>
 
     <li class="nav-item">
@@ -563,7 +598,7 @@
         </div>
     </aside>
 
-    {{-- ===== CONTENT WRAPPER ===== --}}
+    
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -588,7 +623,7 @@
         <div class="content">
             <div class="container-fluid">
 
-                {{-- Flash Messages --}}
+                
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show">
                         <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
@@ -613,7 +648,7 @@
         </div>
     </div>
 
-    {{-- ===== FOOTER ===== --}}
+   
     <footer class="main-footer text-center">
         &copy; {{ date('Y') }} <strong>P2P Appointment System</strong>. All rights reserved.
     </footer>

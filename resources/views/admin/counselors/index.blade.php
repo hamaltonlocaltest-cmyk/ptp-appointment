@@ -7,7 +7,7 @@
 
 @section('content')
 
-{{-- Stat Cards --}}
+
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
         <div class="stat-card bg-counselee" >
@@ -47,7 +47,7 @@
     </div>
     <div class="card-body">
 
-        {{-- Filters --}}
+        
       <!--  <form method="GET" action="{{ route('admin.counselors.index') }}" class="mb-4">
             <div class="row align-items-end">
                 <div class="col-md-5 mb-2">
@@ -131,12 +131,12 @@
                                style="background:#e3f2fd; color:#1565c0;">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            {{-- Edit --}}
+                           
                             <a href="{{ route('admin.counselors.edit', $c) }}"
                                class="btn-action btn-edit" title="Edit">
                                 <i class="fas fa-pen"></i>
                             </a>
-                            {{-- Toggle Status --}}
+                          
                             <form action="{{ route('admin.counselors.toggle', $c) }}" method="POST">
                                 @csrf @method('PATCH')
                                 <button type="submit"

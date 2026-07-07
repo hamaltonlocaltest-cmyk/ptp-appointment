@@ -7,7 +7,7 @@
 
 @section('content')
 
-{{-- Stat Cards --}}
+
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
         <div class="stat-card bg-counselee">

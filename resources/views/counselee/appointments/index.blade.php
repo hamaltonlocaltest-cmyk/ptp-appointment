@@ -51,7 +51,7 @@
     .action-btn { border-radius:20px; font-size:12px; padding:5px 14px; }
     </style>
 
-    {{-- Upcoming --}}
+   
     <h6 style="font-weight:700; color:#1a237e; margin-bottom:14px;">
         <i class="fas fa-clock mr-2"></i> Upcoming ({{ $upcoming->count() }})
     </h6>
@@ -89,8 +89,11 @@
                 </div>
                 @endif
             </div>
-            @if(in_array($appt->status, ['pending','confirmed']))
             <div class="d-flex flex-wrap" style="gap:6px;">
+                <a href="{{ route('counselee.appointments.show', $appt) }}" class="btn btn-sm btn-outline-secondary action-btn">
+                    <i class="fas fa-eye mr-1"></i> View
+                </a>
+                @if(in_array($appt->status, ['pending','confirmed']))
                 <a href="{{ route('counselee.appointments.reschedule.edit', $appt) }}" class="btn btn-sm btn-outline-primary action-btn">
                     <i class="fas fa-calendar-alt mr-1"></i> Reschedule
                 </a>
@@ -101,8 +104,8 @@
                         <i class="fas fa-times mr-1"></i> Cancel
                     </button>
                 </form>
+                @endif
             </div>
-            @endif
         </div>
     </div>
     @empty
@@ -116,7 +119,7 @@
     </div>
     @endforelse
 
-    {{-- Past --}}
+ 
     @if($past->count())
     <h6 style="font-weight:700; color:#555; margin-top:28px; margin-bottom:14px;">
         <i class="fas fa-history mr-2"></i> Past Appointments
@@ -130,8 +133,8 @@
             <div class="day">{{ $appt->appointment_date->format('d') }}</div>
             <div class="month">{{ $appt->appointment_date->format('M Y') }}</div>
         </div>
-        <div class="d-flex align-items-center p-3" style="flex:1;">
-            <div style="flex:1;">
+        <div class="d-flex align-items-center flex-wrap p-3" style="flex:1; gap:4px;">
+            <div style="flex:1; min-width:200px;">
                 <div class="d-flex align-items-center flex-wrap mb-1" style="gap:6px;">
                     <span style="font-weight:700; font-size:14px; color:#1a1a2e;">{{ $appt->counselType->name }}</span>
                     <span class="status-badge status-{{ $appt->status }}">{{ ucfirst($appt->status) }}</span>
@@ -141,6 +144,23 @@
                     &nbsp;·&nbsp;
                     <i class="fas fa-clock mr-1"></i> {{ $appt->formatted_time }}
                 </div>
+            </div>
+            <div class="d-flex align-items-center flex-wrap" style="gap:6px;">
+                @if($appt->status === 'completed')
+                    @if($appt->feedback)
+                    <span style="font-size:12px; color:#f9a825; font-weight:600;">
+                        <i class="fas fa-star"></i> You rated {{ $appt->feedback->rating }}/5
+                    </span>
+                    @else
+                    <a href="{{ route('counselee.appointments.feedback.create', $appt) }}"
+                       class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:20px; font-size:12px; padding:5px 14px;">
+                        <i class="fas fa-star mr-1"></i> Leave Feedback
+                    </a>
+                    @endif
+                @endif
+                <a href="{{ route('counselee.appointments.show', $appt) }}" class="btn btn-sm btn-outline-secondary action-btn">
+                    <i class="fas fa-eye mr-1"></i> View
+                </a>
             </div>
         </div>
     </div>

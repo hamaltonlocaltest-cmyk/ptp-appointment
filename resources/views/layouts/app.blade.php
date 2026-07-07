@@ -85,7 +85,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-    {{-- Navbar --}}
+    
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -110,7 +110,7 @@
         </ul>
     </nav>
 
-    {{-- Sidebar --}}
+   
     <aside class="main-sidebar elevation-1">
         <a href="{{ route('admin.dashboard') }}" class="brand-link">
             <span class="brand-text"><b>P2P</b> Appointment</span>
@@ -153,7 +153,7 @@
         </div>
     </aside>
 
-    {{-- Content --}}
+   
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
