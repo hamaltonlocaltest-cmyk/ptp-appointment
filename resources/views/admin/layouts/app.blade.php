@@ -422,8 +422,8 @@
             <p>Dashboard</p>
         </a>
     </li>
-
-    {{-- Appointments --}}
+	
+	{{-- Appointments --}}
     <span class="sidebar-heading">Appointments</span>
 
     <li class="nav-item {{ request()->routeIs('admin.appointments.*') ? 'menu-open' : '' }}">

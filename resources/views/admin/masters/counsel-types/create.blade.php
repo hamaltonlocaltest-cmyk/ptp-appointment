@@ -9,10 +9,10 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-header" style="background:#fff;">
-                <span style="color:#1a237e; font-size:15px; font-weight:600;">
+                <span style="font-weight:600;">
                     <i class="fas fa-plus-circle mr-2" style="color:#1a237e;"></i> New Counsel Type
                 </span>
             </div>
@@ -138,11 +138,11 @@
 
                     <div class="d-flex justify-content-between mt-2">
                         <a href="{{ route('admin.masters.counsel-types.index') }}"
-                           class="btn btn-light" style="border-radius:7px; padding:9px 22px; border:1px solid #e0e4ec; font-size:13px;">
+                           class="btn btn-secondary action-btn" style="">
                             <i class="fas fa-arrow-left mr-1"></i> Back
                         </a>
-                        <button type="submit" class="btn"
-                                style="background:#1a237e; color:#fff; border-radius:7px; padding:9px 26px; font-size:13px; font-weight:600;">
+                        <button type="submit" class="btn btn-primary action-btn"
+                                style="font-weight:600;">
                             <i class="fas fa-save mr-1"></i> Save Counsel Type
                         </button>
                     </div>

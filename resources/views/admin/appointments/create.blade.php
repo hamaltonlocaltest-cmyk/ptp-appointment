@@ -9,7 +9,7 @@
 @section('content')
 
 <div class="row">
-<div class="col-lg-9">
+<div class="col-lg-12">
 
     <p class="text-muted mb-4" style="font-size:13px;">
         Book an appointment on behalf of a counsellee. A counselor will be automatically matched based on availability.

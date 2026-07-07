@@ -9,11 +9,11 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <a href="{{ route('admin.counselors.index') }}" class="btn btn-sm btn-light" style="border-radius:7px; border:1px solid #e0e4ec;">
+    <a href="{{ route('admin.counselors.index') }}" class="btn btn-secondary action-btn mb-3 mb-sm-0" style="">
         <i class="fas fa-arrow-left mr-1"></i> Back to List
     </a>
     <div>
-        <a href="{{ route('admin.counselors.edit', $counselor) }}" class="btn btn-sm" style="background:#1a237e; color:#fff; border-radius:7px; padding:7px 18px;">
+        <a href="{{ route('admin.counselors.edit', $counselor) }}" class="btn btn-primary action-btn mb-3 mb-sm-0" style="">
             <i class="fas fa-pen mr-1"></i> Edit
         </a>
     </div>
@@ -57,8 +57,8 @@
     <div class="col-lg-8">
         <div class="card mb-3">
             <div class="card-header" style="background:#fff;">
-                <span style="color:#1a237e; font-weight:600; font-size:14px;">
-                    <i class="fas fa-info-circle mr-2" style="color:#1b5e20;"></i>Professional Details
+                <span style="font-size:14px;">
+                    <i class="fas fa-info-circle mr-2"></i>Professional Details
                 </span>
             </div>
             <div class="card-body">
@@ -83,13 +83,13 @@
 
         <div class="card mb-3">
             <div class="card-header" style="background:#fff;">
-                <span style="color:#1a237e; font-weight:600; font-size:14px;">
-                    <i class="fas fa-tags mr-2" style="color:#1b5e20;"></i>Areas of Expertise
+                <span style="font-size:14px;">
+                    <i class="fas fa-tags mr-2" ></i>Areas of Expertise
                 </span>
             </div>
             <div class="card-body">
                 @forelse($counselor->counselTypes as $type)
-                    <span style="background:#e8eaf6; color:#1a237e; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:500; display:inline-block; margin:0 6px 6px 0;">
+                    <span style="background:#e5f6f6; color:#0f5b5c; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:500; display:inline-block; margin:0 6px 6px 0;">
                         {{ $type->name }}
                     </span>
                 @empty
@@ -101,10 +101,10 @@
         {{-- Weekly Availability --}}
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-                <span style="color:#1a237e; font-weight:600; font-size:14px;">
-                    <i class="fas fa-calendar-alt mr-2" style="color:#1b5e20;"></i>Weekly Availability
+                <span style=" font-size:14px; flex:auto">
+                    <i class="fas fa-calendar-alt mr-2"></i>Weekly Availability
                 </span>
-                <span style="font-size:12px; color:#9e9e9e;">
+                <span style="font-size:12px;">
                     {{ $counselor->availabilities->count() }} slot{{ $counselor->availabilities->count() === 1 ? '' : 's' }} configured
                 </span>
             </div>
@@ -126,7 +126,7 @@
                             @if($slots && $slots->count())
                                 <div style="display:flex; flex-direction:column; gap:6px;">
                                     @foreach($slots->sortBy('start_time') as $slot)
-                                        <div style="background:#e8eaf6; color:#1a237e; font-size:12px; font-weight:500; padding:6px 10px; border-radius:7px; display:flex; align-items:center;">
+                                        <div style="background:#e5f6f6; color:#0f5b5c; font-size:12px; font-weight:500; padding:6px 10px; border-radius:7px; display:flex; align-items:center;">
                                             <i class="fas fa-clock" style="font-size:10px; margin-right:6px; color:#5c6bc0;"></i>
                                             {{ \Carbon\Carbon::parse($slot->start_time)->format('h:i A') }}
                                             <span class="mx-1">&ndash;</span>

@@ -9,11 +9,11 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-                <span style="color:#1a237e; font-size:15px; font-weight:600;">
-                    <i class="fas fa-edit mr-2" style="color:#1a237e;"></i> Edit: {{ $counselType->name }}
+                <span style="font-weight:600; flex:auto">
+                    <i class="fas fa-edit mr-2"></i> Edit: {{ $counselType->name }}
                 </span>
                 @if($counselType->status === 'active')
                     <span class="badge-active"><i class="fas fa-circle mr-1" style="font-size:7px;"></i>Active</span>
@@ -165,18 +165,18 @@
 
                     <div class="d-flex justify-content-between mt-2">
                         <a href="{{ route('admin.masters.counsel-types.index') }}"
-                           class="btn btn-light" style="border-radius:7px; padding:9px 22px; border:1px solid #e0e4ec; font-size:13px;">
+                           class="btn btn-secondary action-btn " style="font-weight:600;">
                             <i class="fas fa-arrow-left mr-1"></i> Back
                         </a>
                         <div style="display:flex; gap:8px;">
                             <button type="button"
                                 data-toggle="modal" data-target="#deleteModal"
-                                class="btn btn-danger"
-                                style="border-radius:7px; padding:9px 22px; font-size:13px; font-weight:600;">
+                                class="btn btn-danger action-btn "
+                                style="font-weight:600;">
                                 <i class="fas fa-trash mr-1"></i> Delete
                             </button>
-                            <button type="submit" form="editForm" class="btn"
-                                    style="background:#1a237e; color:#fff; border-radius:7px; padding:9px 26px; font-size:13px; font-weight:600;">
+                            <button type="submit" form="editForm" class="btn btn-primary action-btn"
+                                    style="font-weight:600;">
                                 <i class="fas fa-save mr-1"></i> Update
                             </button>
                         </div>

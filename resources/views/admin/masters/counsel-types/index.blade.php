@@ -11,21 +11,21 @@
 {{-- Stat Cards --}}
 <div class="row mb-3">
     <div class="col-lg-4 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1a237e,#3949ab);">
+        <div class="stat-card bg-counselee">
             <h3>{{ $counts['total'] }}</h3>
             <p>Total Types</p>
             <i class="fas fa-list stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-4 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1b5e20,#2e7d32);">
+        <div class="stat-card bg-counselor">
             <h3>{{ $counts['active'] }}</h3>
             <p>Active</p>
             <i class="fas fa-check-circle stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-4 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#b71c1c,#c62828);">
+        <div class="stat-card bg-inactive">
             <h3>{{ $counts['inactive'] }}</h3>
             <p>Inactive</p>
             <i class="fas fa-times-circle stat-icon"></i>
@@ -35,11 +35,11 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-        <span style="color:#1a237e; font-size:15px; font-weight:600;">
-            <i class="fas fa-comments mr-2" style="color:#1a237e;"></i> Counsel Type List
+        <span style="font-weight:600; flex:auto;">
+            <i class="fas fa-comments mr-2"></i> Counsel Type List
         </span>
         <a href="{{ route('admin.masters.counsel-types.create') }}"
-           class="btn btn-sm" style="background:#1a237e; color:#fff; border-radius:7px; padding:7px 18px; font-size:13px; font-weight:600;">
+           class="btn btn-primary btn-sm">
             <i class="fas fa-plus mr-1"></i> Add Counsel Type
         </a>
     </div>
