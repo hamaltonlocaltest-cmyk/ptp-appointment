@@ -362,6 +362,7 @@
 
         /* ===== HOW IT WORKS ===== */
         .how-it-works { padding: 80px 5%; background: #fff; }
+		
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -397,6 +398,13 @@
             max-width: 1000px;
             margin: 0 auto;
         }
+		/* Mobile: 2 columns */
+			@media (max-width: 576px) {
+				.types-grid {
+					grid-template-columns: repeat(2, 1fr);
+					gap: 12px;
+				}
+			}
         .type-card {
             background: #fff;
             border-radius: 14px;
@@ -480,29 +488,14 @@
             .hero-stat-divider { display: none; }
             .portal-grid { grid-template-columns: 1fr; }
         }
+		
+		
+		
     </style>
 </head>
 <body>
 
 
-<nav class="navbar">
-    <a href="{{ url('/') }}" class="nav-brand">
-       <img src="{{ asset('images/persontoperson-logo.png') }}" class="img-fluid" alt="Person to Person Logo">
-    </a>
-    <div class="nav-links">
-        <a href="#portals" class="nav-link-ghost nav-links">Portals</a>
-        <a href="#how-it-works" class="nav-link-ghost nav-links">How It Works</a>
-        <a href="{{ route('counselor.login') }}" class="nav-links nav-btn-counselor">
-            <i class="bi bi-person-workspace"></i> Counselor
-        </a>
-        <a href="{{ route('counselee.login') }}" class="nav-links nav-btn-counselee">
-            <i class="bi bi-person-heart"></i> Counselee
-        </a>
-        <a href="{{ route('admin.login') }}" class="nav-links nav-btn-admin">
-            <i class="bi bi-key"></i> Admin
-        </a>
-    </div>
-</nav>
 
 
 <style>
@@ -1161,6 +1154,15 @@
     justify-content:center;
     box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
+
+@media only screen and (max-width: 767px) {
+			.how-it-works{padding: 80px 2%}
+			.steps-grid{grid-template-columns: repeat(2, 1fr);}
+			.step-card{padding: 20px 16px 0;}
+			.step-icon{width: 60px; height: 60px; font-size: 24px;}
+			.step-number{top: 0; right: 0; width: 20px; height: 20px; font-size: 12px;}
+			.features-grid{grid-template-columns: repeat(2, 1fr); gap: 16px;}
+		}
 
 </style>
 

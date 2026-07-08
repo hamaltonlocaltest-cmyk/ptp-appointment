@@ -40,27 +40,27 @@
         </div>
     </div>
 </div>
-
+<style>	.quick-action-header{    display:flex;    align-items:center;    justify-content:space-between;    gap:15px;    flex-wrap:wrap;}.quick-action-title{    font-weight:600;    font-size:16px;}.qbtn-wrap{    display:flex;    flex-wrap:wrap;    gap:10px;    justify-content:flex-end;}.qa-btn{    border-radius:20px;    padding:6px 16px;    font-size:12px;    font-weight:600;    white-space:nowrap;}.qa-green{    background:#e8f5e9;    color:#1b5e20;    border:1px solid #c8e6c9;}.qa-purple{    background:#f3e5f5;    color:#4a148c;    border:1px solid #e1bee7;}.qa-orange{    background:#fff3e0;    color:#e65100;    border:1px solid #ffe0b2;}@media (max-width: 767.98px){    .quick-action-header{        flex-direction:column;        align-items:flex-start;    }    .qbtn-wrap{        width:100%;        justify-content:flex-start;    }    .qa-btn{        flex:1 1 calc(50% - 10px);        text-align:center;        min-width:140px;    }}</style>
 
 <div class="row mb-3">
     <div class="col-12">
         <div class="card">
-            <div class="card-body py-3">
-                <span style="font-size:13px; font-weight:600; color:#1a237e; margin-right:16px;">
+            <div class="card-body py-3 quick-action-header">
+                <span style="font-weight:600; flex:auto">
                     <i class="fas fa-bolt mr-1"></i> Quick Actions
-                </span>
-                <a href="{{ route('admin.counselors.create') }}" class="btn btn-sm mr-2"
-                   style="background:#e8f5e9; color:#1b5e20; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #c8e6c9;">
-                    <i class="fas fa-plus mr-1"></i> Add Counselor
-                </a>
-                <a href="{{ route('admin.counselees.create') }}" class="btn btn-sm mr-2"
-                   style="background:#f3e5f5; color:#4a148c; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #e1bee7;">
-                    <i class="fas fa-plus mr-1"></i> Add Counselee
-                </a>
-                <a href="{{ route('admin.counselors.index', ['status' => 'pending']) }}" class="btn btn-sm"
-                   style="background:#fff3e0; color:#e65100; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #ffe0b2;">
-                    <i class="fas fa-clock mr-1"></i> View Pending Approvals
-                </a>
+                </span>								<div class="qbtn-wrap">
+					<a href="{{ route('admin.counselors.create') }}" class="btn btn-sm mr-2"
+					   style="background:#e8f5e9; color:#1b5e20; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #c8e6c9;">
+						<i class="fas fa-plus mr-1"></i> Add Counselor
+					</a>
+					<a href="{{ route('admin.counselees.create') }}" class="btn btn-sm mr-2"
+					   style="background:#f3e5f5; color:#4a148c; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #e1bee7;">
+						<i class="fas fa-plus mr-1"></i> Add Counselee
+					</a>
+					<a href="{{ route('admin.counselors.index', ['status' => 'pending']) }}" class="btn btn-sm"
+					   style="background:#fff3e0; color:#e65100; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #ffe0b2;">
+						<i class="fas fa-clock mr-1"></i> View Pending Approvals
+					</a>				</div>
             </div>
         </div>
     </div>
@@ -71,17 +71,9 @@
    
     <div class="col-md-6 mb-3">
         <div class="card h-100">
-            <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-                <span style="color:#1a237e; font-weight:600; font-size:14px;">
-                    <i class="fas fa-user-md mr-2" style="color:#1b5e20;"></i> Recent Counselors
-                </span>
-                <a href="{{ route('admin.counselors.index') }}"
-                   style="font-size:12px; color:#3949ab; text-decoration:none;">
-                    View All <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-            <div class="card-body p-0">
-                <table class="table table-hover mb-0">
+           						<style>				.recent-header{					background:#fff;					display:flex;					align-items:center;					justify-content:space-between;					gap:10px;					padding:15px 20px;				}				.recent-title{					font-weight:600;					display:flex;					align-items:center;				}				.recent-title i{					color:#1b5e20;				}				.view-all-link{					font-size:12px;					color:#3949ab;					text-decoration:none;					white-space:nowrap;					font-weight:500;				}				.view-all-link:hover{					text-decoration:none;				}				.recent-title{flex: 0 0 60%;}				.view-all-link{flex: 0 0 40%; text-align: end;}				@media (max-width:767px){					.recent-header{						/*flex-direction:column;						align-items:flex-start;*/					}															.view-all-link{						width:100%;						text-align:right;						margin-top:5px;					}				}			</style>						<div class="card-header recent-header">				<span class="recent-title">					<i class="fas fa-user-md mr-2"></i>					Recent Counselors				</span>				<a href="{{ route('admin.counselors.index') }}" class="view-all-link">					View All <i class="fas fa-arrow-right ml-1"></i>				</a>			</div>
+            <div class="card-body p-0">				<div class="table-responsive">
+					<table class="table table-hover mb-0">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -124,7 +116,7 @@
                         </tr>
                         @endforelse
                     </tbody>
-                </table>
+                </table>				</div>
             </div>
         </div>
     </div>
@@ -132,16 +124,8 @@
    
     <div class="col-md-6 mb-3">
         <div class="card h-100">
-            <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-                <span style="color:#1a237e; font-weight:600; font-size:14px;">
-                    <i class="fas fa-users mr-2" style="color:#4a148c;"></i> Recent Counselees
-                </span>
-                <a href="{{ route('admin.counselees.index') }}"
-                   style="font-size:12px; color:#3949ab; text-decoration:none;">
-                    View All <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-            <div class="card-body p-0">
+          			<div class="card-header recent-header">				<span class="recent-title">					<i class="fas fa-user-md mr-2"></i>					Recent Counselees				</span>				<a href="{{ route('admin.counselees.index') }}" class="view-all-link">					View All <i class="fas fa-arrow-right ml-1"></i>				</a>			</div>
+            <div class="card-body p-0">								<div class="table-responsive">				
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
@@ -183,7 +167,7 @@
                         </tr>
                         @endforelse
                     </tbody>
-                </table>
+                </table>								</div>
             </div>
         </div>
     </div>

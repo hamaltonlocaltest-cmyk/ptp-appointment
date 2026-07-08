@@ -79,7 +79,7 @@
             </div>
         </form>-->
 
-        <div class="table-responsive">
+        <div class="">
            <table id="counselorsTable" class="table table-hover align-middle">
                 <thead>
                     <tr>

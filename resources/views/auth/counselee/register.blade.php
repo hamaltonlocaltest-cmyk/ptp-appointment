@@ -67,7 +67,7 @@
 
             <h3 class="text-center mb-4">Counselee Registration</h3>
 
-           
+            {{-- Server-side errors --}}
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul class="mb-0">
@@ -78,7 +78,7 @@
             </div>
             @endif
 
-           
+            {{-- Success flash --}}
             @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -91,7 +91,7 @@
 
                 <div class="bs-stepper" id="myStepper">
 
-                   
+                    {{-- ── STEPPER HEADER ─────────────────────────────────── --}}
                     <div class="bs-stepper-header" role="tablist">
 
                         <div class="step" data-target="#register-part-one">
@@ -121,19 +121,19 @@
                             </button>
                         </div>
 
-                    </div>
+                    </div>{{-- /.bs-stepper-header --}}
 
-                   
+                    {{-- ── STEPPER CONTENT ─────────────────────────────────── --}}
                     <div class="bs-stepper-content">
 
-                       
+                        {{-- ===== STEP 1 : Personal Information ===== --}}
                         <div id="register-part-one" class="content"
                              role="tabpanel" aria-labelledby="register-part-one-trigger">
 
                             <div class="section-title">Personal Information</div>
 
                             <div class="row">
-                               
+                                {{-- Title --}}
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Title</label>
@@ -145,7 +145,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+                                {{-- First Name --}}
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>First Name <span class="required">*</span></label>
@@ -155,7 +155,7 @@
                                         <div class="invalid-feedback" id="err-first_name">First name is required.</div>
                                     </div>
                                 </div>
-                               
+                                {{-- Last Name --}}
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Last Name <span class="required">*</span></label>
@@ -167,7 +167,7 @@
                                 </div>
                             </div>
 
-                            
+                            {{-- Address --}}
                             <div class="form-group">
                                 <label>Address</label>
                                 <textarea name="address" rows="3" class="form-control">{{ old('address') }}</textarea>
@@ -188,7 +188,7 @@
                                                value="{{ old('telephone2') }}">
                                     </div>
                                 </div>
-                              
+                                {{-- Email --}}
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Email <span class="required">*</span></label>
@@ -264,14 +264,14 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>{{-- /#register-part-one --}}
 
 
-                       
+                        {{-- ===== STEP 2 : Children / Medical / Seek Help ===== --}}
                         <div id="register-part-two" class="content"
                              role="tabpanel" aria-labelledby="register-part-two-trigger">
 
-                           
+                            {{-- Children --}}
                             <div class="card card-outline card-primary mt-4">
                                 <div class="card-header">
                                     <h3 class="card-title">Children</h3>
@@ -311,7 +311,7 @@
                                 </div>
                             </div>
 
-                          
+                            {{-- Medical History --}}
                             <div class="card card-outline card-info mt-4">
                                 <div class="card-header">
                                     <h3 class="card-title">Medical History</h3>
@@ -343,7 +343,7 @@
                                 </div>
                             </div>
 
-                          
+                            {{-- Counselling Areas --}}
                             <div class="card card-outline card-danger mt-4">
                                 <div class="card-header">
                                     <h3 class="card-title">Areas I Want to Seek Help / Counsel In</h3>
@@ -395,14 +395,14 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>{{-- /#register-part-two --}}
 
 
-                       
+                        {{-- ===== STEP 3 : Referral / Previous Counselling ===== --}}
                         <div id="register-part-three" class="content"
                              role="tabpanel" aria-labelledby="register-part-three-trigger">
 
-                            
+                            {{-- Referral --}}
                             <div class="card card-outline card-info mt-4">
                                 <div class="card-header">
                                     <h3 class="card-title">Referral</h3>
@@ -421,7 +421,7 @@
                                 </div>
                             </div>
 
-                         
+                            {{-- Previous Counselling --}}
                             <div class="card card-outline card-warning mt-4">
                                 <div class="card-header">
                                     <h3 class="card-title">Previous Counselling</h3>
@@ -459,10 +459,10 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>{{-- /#register-part-three --}}
 
-                    </div>
-                </div>
+                    </div>{{-- /.bs-stepper-content --}}
+                </div>{{-- /.bs-stepper --}}
 
             </form>
 
@@ -484,7 +484,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/js/bs-stepper.min.js"></script>
 
 <script>
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Stepper initialisation  (linear: true = must pass validation to advance)
+// ─────────────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
 
     window.stepper = new Stepper(document.querySelector('.bs-stepper'), {
@@ -506,7 +508,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────────────────────────────
 function setError(id, show) {
     const el  = document.getElementById(id);
     const err = document.getElementById('err-' + id);
@@ -529,7 +533,9 @@ function isValidEmail(val) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
 }
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Step 1 validation
+// ─────────────────────────────────────────────────────────────────────────────
 document.getElementById('step1Next').addEventListener('click', function () {
 
     let valid = true;
@@ -574,7 +580,9 @@ document.getElementById('step1Next').addEventListener('click', function () {
     }
 });
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Step 2 : no required fields – just advance / go back
+// ─────────────────────────────────────────────────────────────────────────────
 document.getElementById('step2Next').addEventListener('click', function () {
     stepper.next();
 });
@@ -582,12 +590,16 @@ document.getElementById('step2Prev').addEventListener('click', function () {
     stepper.previous();
 });
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Step 3 : back button
+// ─────────────────────────────────────────────────────────────────────────────
 document.getElementById('step3Prev').addEventListener('click', function () {
     stepper.previous();
 });
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Show / hide previous counselling details textarea
+// ─────────────────────────────────────────────────────────────────────────────
 document.querySelectorAll('[name="previous_counselling"]').forEach(function (radio) {
     radio.addEventListener('change', function () {
         document.getElementById('prevDetailsWrapper').style.display =
@@ -595,7 +607,9 @@ document.querySelectorAll('[name="previous_counselling"]').forEach(function (rad
     });
 });
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Dynamic Children rows
+// ─────────────────────────────────────────────────────────────────────────────
 let childIndex = 1;
 
 document.getElementById('addChild').addEventListener('click', function () {
@@ -623,7 +637,9 @@ document.getElementById('childrenTable').addEventListener('click', function (e) 
     if (btn) btn.closest('tr').remove();
 });
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Dynamic Medical History rows
+// ─────────────────────────────────────────────────────────────────────────────
 let medicalIndex = 1;
 
 document.getElementById('addMedical').addEventListener('click', function () {
@@ -644,7 +660,9 @@ document.getElementById('medicalTable').addEventListener('click', function (e) {
     if (btn) btn.closest('tr').remove();
 });
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Clear inline error on input change
+// ─────────────────────────────────────────────────────────────────────────────
 ['first_name','last_name','email','password','password_confirmation'].forEach(function (id) {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', function () { setError(id, false); });

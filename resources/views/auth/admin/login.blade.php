@@ -112,6 +112,13 @@
         }				.portal-link.btn1 {  background: #00B24F;  color: #fff;  border-color: #00B24F;  font-size: 16px;  font-weight: 600;}.portal-link.btn1:hover{background: #D30404; border-color:#D30404; color:#fff;}.portal-link.btn2 {  background: #D30404;  color: #fff;  border-color: #D30404;  font-size: 16px;  font-weight: 600;}.portal-link.btn2:hover{background: #00B24F; border-color:#00B24F; color:#fff;}
         .portal-link:hover { border-color: #1a237e; color: #1a237e; text-decoration: none; }
         .powered { text-align: center;  margin-top: 20px;  font-size: 13px;  color: #fff;}
+		@media (max-width: 576px) {
+		  .login-box, .register-box {
+			margin-top: .5rem;
+			width: auto !important;
+		  }
+		  .logo-wrap{max-width:220px;}
+		}
     </style>
 </head>
 <body class="hold-transition login-page">
