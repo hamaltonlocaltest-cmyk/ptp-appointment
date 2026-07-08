@@ -59,7 +59,7 @@
         <div class="d-flex align-items-center flex-wrap p-3" style="flex:1; gap:4px;">
             <div style="flex:1; min-width:220px;">
                 <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-                    <span style="font-weight:700; font-size:15px; color:#1a1a2e;">{{ $appt->counselType->name }}</span>
+                    <span style="font-weight:700; font-size:15px; color:#1a1a2e;">{{ $appt->counselType->name ?? 'Unknown Type' }}</span>
                     <span class="status-badge status-{{ $appt->status }}">{{ ucfirst($appt->status) }}</span>
                     @if($appt->reschedules->count())
                     <span class="reschedule-tag"><i class="fas fa-history mr-1"></i>Rescheduled</span>
@@ -67,7 +67,7 @@
                 </div>
                 <div style="font-size:13px; color:#555;">
                     <i class="fas fa-user mr-1" style="color:#1b5e20;"></i>
-                    {{ $appt->counselee->full_name }}
+                    {{ $appt->counselee->full_name ?? 'Deleted Counsellee' }}
                     &nbsp;·&nbsp;
                     <i class="fas fa-clock mr-1" style="color:#1b5e20;"></i>
                     {{ $appt->formatted_time }}
@@ -89,7 +89,7 @@
                 <form action="{{ route('counselor.appointments.complete', $appt) }}" method="POST" id="complete-form-{{ $appt->id }}">
                     @csrf
                     <button type="button" class="btn btn-sm btn-outline-info action-btn"
-                            onclick="openCompleteModal('{{ $appt->id }}', '{{ $appt->counselType->name }}', '{{ $appt->counselee->full_name }}')">
+                            onclick="openCompleteModal('{{ $appt->id }}', '{{ $appt->counselType->name ?? 'Unknown Type' }}', '{{ $appt->counselee->full_name ?? 'Deleted Counsellee' }}')">
                         <i class="fas fa-check-double mr-1"></i> Mark Completed
                     </button>
                 </form>
@@ -101,7 +101,7 @@
                 <form action="{{ route('counselor.appointments.cancel', $appt) }}" method="POST" id="cancel-form-{{ $appt->id }}">
                     @csrf
                     <button type="button" class="btn btn-sm btn-outline-danger action-btn"
-                            onclick="openCancelModal('{{ $appt->id }}', '{{ $appt->counselType->name }}', '{{ $appt->appointment_date->format('l, M j, Y') }}', '{{ $appt->formatted_time }}')">
+                            onclick="openCancelModal('{{ $appt->id }}', '{{ $appt->counselType->name ?? 'Unknown Type' }}', '{{ $appt->appointment_date->format('l, M j, Y') }}', '{{ $appt->formatted_time }}')">
                         <i class="fas fa-times mr-1"></i> Cancel
                     </button>
                 </form>
@@ -133,11 +133,11 @@
         <div class="d-flex align-items-center flex-wrap p-3" style="flex:1; gap:6px;">
             <div style="flex:1; min-width:200px;">
                 <div class="d-flex align-items-center flex-wrap mb-1" style="gap:6px;">
-                    <span style="font-weight:700; font-size:14px; color:#1a1a2e;">{{ $appt->counselType->name }}</span>
+                    <span style="font-weight:700; font-size:14px; color:#1a1a2e;">{{ $appt->counselType->name ?? 'Unknown Type' }}</span>
                     <span class="status-badge status-{{ $appt->status }}">{{ ucfirst($appt->status) }}</span>
                 </div>
                 <div style="font-size:12px; color:#777;">
-                    <i class="fas fa-user mr-1"></i> {{ $appt->counselee->full_name }}
+                    <i class="fas fa-user mr-1"></i> {{ $appt->counselee->full_name ?? 'Deleted Counsellee' }}
                     &nbsp;·&nbsp;
                     <i class="fas fa-clock mr-1"></i> {{ $appt->formatted_time }}
                 </div>

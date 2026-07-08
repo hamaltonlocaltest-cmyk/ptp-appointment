@@ -306,12 +306,13 @@ function loadDates() {
     fetch(ROUTES.dates, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': ROUTES.csrf },
-        body: JSON.stringify({ counsel_type_id: state.typeId }),
+        body: JSON.stringify({ counsel_type_id: state.typeId, counselee_id: state.counseleeId }),
     })
     .then(r => r.json())
     .then(data => {
         document.getElementById('dateLoading').style.display = 'none';
         if (!data.dates || data.dates.length === 0) {
+            document.getElementById('noDateMsg').textContent = data.message || 'No available dates found for this counselling area.';
             document.getElementById('noDateMsg').style.display = '';
             return;
         }
@@ -363,6 +364,7 @@ function loadSlots(date) {
     .then(data => {
         document.getElementById('slotLoading').style.display = 'none';
         if (!data.slots || data.slots.length === 0) {
+            document.getElementById('noSlotMsg').textContent = data.message || 'No available slots for this date.';
             document.getElementById('noSlotMsg').style.display = '';
             return;
         }

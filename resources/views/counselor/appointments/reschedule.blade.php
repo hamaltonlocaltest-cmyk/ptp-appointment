@@ -152,6 +152,7 @@ function loadDates() {
     .then(data => {
         document.getElementById('dateLoading').style.display = 'none';
         if (!data.dates || data.dates.length === 0) {
+            if (data.message) document.getElementById('noDateMsg').textContent = data.message;
             document.getElementById('noDateMsg').style.display = '';
             return;
         }
@@ -199,6 +200,7 @@ function loadSlots(date) {
     .then(data => {
         document.getElementById('slotLoading').style.display = 'none';
         if (!data.slots || data.slots.length === 0) {
+            if (data.message) document.getElementById('noSlotMsg').textContent = data.message;
             document.getElementById('noSlotMsg').style.display = '';
             return;
         }

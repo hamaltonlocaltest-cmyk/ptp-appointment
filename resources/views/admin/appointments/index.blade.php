@@ -106,14 +106,14 @@
                 <tr>
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
-                        <div style="font-weight:600; color:#1a1a2e;">{{ $a->counselee->full_name }}</div>
-                        <div style="font-size:12px; color:#9e9e9e;">{{ $a->counselee->email }}</div>
+                        <div style="font-weight:600; color:#1a1a2e;">{{ $a->counselee->full_name ?? 'Deleted Counsellee' }}</div>
+                        <div style="font-size:12px; color:#9e9e9e;">{{ $a->counselee->email ?? '—' }}</div>
                     </td>
                     <td>
-                        <div style="font-weight:600; color:#1a1a2e;">{{ $a->counselor->full_name }}</div>
-                        <div style="font-size:12px; color:#9e9e9e;">{{ $a->counselor->email }}</div>
+                        <div style="font-weight:600; color:#1a1a2e;">{{ $a->counselor->full_name ?? 'Deleted Counselor' }}</div>
+                        <div style="font-size:12px; color:#9e9e9e;">{{ $a->counselor->email ?? '—' }}</div>
                     </td>
-                    <td style="font-size:13px;">{{ $a->counselType->name }}</td>
+                    <td style="font-size:13px;">{{ $a->counselType->name ?? '—' }}</td>
                     <td style="font-size:13px;">
                         {{ $a->appointment_date->format('M d, Y') }}<br>
                         <span style="color:#9e9e9e; font-size:12px;">{{ $a->formatted_time }}</span>

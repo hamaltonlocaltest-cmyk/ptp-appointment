@@ -43,7 +43,7 @@
         <div class="card mb-3">
             <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
                 <span style="color:#1f8582; font-weight:600; font-size:14px;">
-                    <i class="fas fa-calendar-check mr-2"></i>{{ $appointment->counselType->name }}
+                    <i class="fas fa-calendar-check mr-2"></i>{{ $appointment->counselType->name ?? 'Unknown Type' }}
                 </span>
                 @php $badge = ['pending'=>'badge-pending','confirmed'=>'badge-active','cancelled'=>'badge-inactive','completed'=>'badge-active'][$appointment->status] ?? 'badge-pending'; @endphp
                 <span class="{{ $badge }}"><i class="fas fa-circle mr-1" style="font-size:7px;"></i>{{ ucfirst($appointment->status) }}</span>
@@ -135,6 +135,7 @@
                 </span>
             </div>
             <div class="card-body">
+                @if($appointment->counselee)
                 <div class="d-flex align-items-center mb-2">
                     <div class="avatar-circle mr-3" style="background:#{{ substr(md5($appointment->counselee->email),0,6) }};">
                         {{ strtoupper(substr($appointment->counselee->first_name,0,1)) }}
@@ -147,6 +148,9 @@
                 <a href="{{ route('admin.counselees.show', $appointment->counselee) }}" style="font-size:12px; font-weight:600; color:#1f8582;">
                     View Profile <i class="fas fa-arrow-right ml-1"></i>
                 </a>
+                @else
+                <p class="text-muted mb-0" style="font-size:13px;"><i class="fas fa-exclamation-triangle mr-1"></i> This counsellee record no longer exists.</p>
+                @endif
             </div>
         </div>
 
@@ -157,6 +161,7 @@
                 </span>
             </div>
             <div class="card-body">
+                @if($appointment->counselor)
                 <div class="d-flex align-items-center mb-2">
                     <div class="avatar-circle mr-3" style="background:#{{ substr(md5($appointment->counselor->email),0,6) }};">
                         {{ strtoupper(substr($appointment->counselor->first_name,0,1)) }}
@@ -169,6 +174,9 @@
                 <a href="{{ route('admin.counselors.show', $appointment->counselor) }}" style="font-size:12px; font-weight:600; color:#1f8582;">
                     View Profile <i class="fas fa-arrow-right ml-1"></i>
                 </a>
+                @else
+                <p class="text-muted mb-0" style="font-size:13px;"><i class="fas fa-exclamation-triangle mr-1"></i> This counselor record no longer exists.</p>
+                @endif
             </div>
         </div>
     </div>

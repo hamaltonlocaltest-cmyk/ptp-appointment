@@ -34,11 +34,11 @@
             <div class="d-flex align-items-center justify-content-between flex-wrap" style="gap:10px;">
                 <div class="d-flex align-items-center" style="gap:14px;">
                     <div class="avatar-circle" style="width:52px; height:52px; font-size:20px; background:#1b5e20;">
-                        {{ strtoupper(substr($appointment->counselee->first_name, 0, 1)) }}
+                        {{ $appointment->counselee ? strtoupper(substr($appointment->counselee->first_name, 0, 1)) : '?' }}
                     </div>
                     <div>
-                        <div style="font-weight:700; font-size:17px; color:#1a1a2e;">{{ $appointment->counselee->full_name }}</div>
-                        <div style="font-size:13px; color:#777;">{{ $appointment->counselType->name }}</div>
+                        <div style="font-weight:700; font-size:17px; color:#1a1a2e;">{{ $appointment->counselee->full_name ?? 'Deleted Counsellee' }}</div>
+                        <div style="font-size:13px; color:#777;">{{ $appointment->counselType->name ?? 'Unknown Type' }}</div>
                     </div>
                 </div>
                 <span class="status-badge" style="background:{{ $statusColor }}22; color:{{ $statusColor }}; padding:5px 16px; font-size:13px; font-weight:700; border-radius:20px;">
@@ -145,12 +145,16 @@
                     <span style="font-weight:600;"><i class="fas fa-user mr-2" style="color:#1b5e20;"></i> Counselee Contact</span>
                 </div>
                 <div class="card-body p-4">
+                    @if($appointment->counselee)
                     <div class="mb-2"><i class="fas fa-envelope mr-2" style="color:#9e9e9e;"></i> {{ $appointment->counselee->email }}</div>
                     @if($appointment->counselee->telephone1)
                     <div class="mb-2"><i class="fas fa-phone mr-2" style="color:#9e9e9e;"></i> {{ $appointment->counselee->telephone1 }}</div>
                     @endif
                     @if($appointment->counselee->gender)
                     <div class="mb-2"><i class="fas fa-venus-mars mr-2" style="color:#9e9e9e;"></i> {{ ucfirst($appointment->counselee->gender) }}</div>
+                    @endif
+                    @else
+                    <p class="text-muted mb-0" style="font-size:13px;">This counsellee's record no longer exists.</p>
                     @endif
                 </div>
             </div>

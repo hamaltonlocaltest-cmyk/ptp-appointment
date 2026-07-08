@@ -198,6 +198,7 @@ function loadSlots(date) {
     .then(data => {
         document.getElementById('slotLoading').style.display = 'none';
         if (!data.slots || data.slots.length === 0) {
+            document.getElementById('noSlotMsg').textContent = data.message || 'No available slots for this date. Try another date.';
             document.getElementById('noSlotMsg').style.display = '';
             return;
         }

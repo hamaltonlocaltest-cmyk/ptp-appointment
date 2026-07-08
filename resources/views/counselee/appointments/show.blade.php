@@ -34,11 +34,11 @@
                 <div class="d-flex align-items-center" style="gap:14px;">
                     <div style="width:52px; height:52px; border-radius:50%; background:#4a148c; display:flex; align-items:center;
                          justify-content:center; color:#fff; font-size:20px; font-weight:700; flex-shrink:0;">
-                        {{ strtoupper(substr($appointment->counselor->first_name, 0, 1)) }}
+                        {{ $appointment->counselor ? strtoupper(substr($appointment->counselor->first_name, 0, 1)) : '?' }}
                     </div>
                     <div>
-                        <div style="font-weight:700; font-size:17px; color:#1a1a2e;">{{ $appointment->counselor->full_name }}</div>
-                        <div style="font-size:13px; color:#777;">{{ $appointment->counselType->name }}</div>
+                        <div style="font-weight:700; font-size:17px; color:#1a1a2e;">{{ $appointment->counselor->full_name ?? 'Unassigned Counselor' }}</div>
+                        <div style="font-size:13px; color:#777;">{{ $appointment->counselType->name ?? 'Unknown Type' }}</div>
                     </div>
                 </div>
                 <span style="background:{{ $statusColor }}22; color:{{ $statusColor }}; padding:5px 16px; font-size:13px; font-weight:700; border-radius:20px;">
@@ -141,6 +141,7 @@
                     <span style="font-weight:600;"><i class="fas fa-user-tie mr-2" style="color:#4a148c;"></i> Your Counselor</span>
                 </div>
                 <div class="card-body p-4">
+                    @if($appointment->counselor)
                     <div style="font-weight:700; color:#4a148c; font-size:15px;">{{ $appointment->counselor->full_name }}</div>
                     @if($appointment->counselor->specialization)
                     <div style="font-size:12px; color:#7b1fa2; margin-top:2px;">{{ $appointment->counselor->specialization }}</div>
@@ -149,6 +150,9 @@
                         @if($appointment->counselor->experience_years){{ $appointment->counselor->experience_years }} yrs experience @endif
                         @if($appointment->counselor->languages) &middot; {{ $appointment->counselor->languages }} @endif
                     </div>
+                    @else
+                    <p class="text-muted mb-0" style="font-size:13px;">This counselor's record no longer exists.</p>
+                    @endif
                 </div>
             </div>
 

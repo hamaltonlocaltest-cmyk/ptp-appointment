@@ -447,7 +447,10 @@ function loadDates() {
     .then(data => {
         document.getElementById('dateLoading').style.display = 'none';
         if (!data.dates || data.dates.length === 0) {
-            document.getElementById('noDateMsg').innerHTML = '<i class="fas fa-calendar-times fa-2x mb-2" style="color:#ddd; display:block;"></i>No available dates found for this counselling type.<br>Please check back later.';
+            const text = data.message
+                ? data.message
+                : 'No available dates found for this counselling type.<br>Please check back later.';
+            document.getElementById('noDateMsg').innerHTML = '<i class="fas fa-calendar-times fa-2x mb-2" style="color:#ddd; display:block;"></i>' + text;
             document.getElementById('noDateMsg').style.display = '';
             return;
         }
@@ -518,7 +521,10 @@ function loadSlots(date) {
     .then(data => {
         document.getElementById('slotLoading').style.display = 'none';
         if (!data.slots || data.slots.length === 0) {
-            document.getElementById('noSlotMsg').innerHTML = '<i class="fas fa-clock fa-2x mb-2" style="color:#ddd; display:block;"></i>No available slots for this date.<br>Try choosing a different date.';
+            const text = data.message
+                ? data.message
+                : 'No available slots for this date.<br>Try choosing a different date.';
+            document.getElementById('noSlotMsg').innerHTML = '<i class="fas fa-clock fa-2x mb-2" style="color:#ddd; display:block;"></i>' + text;
             document.getElementById('noSlotMsg').style.display = '';
             return;
         }
