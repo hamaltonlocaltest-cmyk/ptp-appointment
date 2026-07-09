@@ -445,7 +445,7 @@ document.getElementById('countrySelect').addEventListener('change', function () 
     stateSelect.innerHTML = '<option value="">Select State</option>';
     citySelect.innerHTML  = '<option value="">Select City</option>';
     if (!this.value) return;
-    fetch(`/locations/states/${this.value}`)
+    fetch('{{ url("locations/states") }}/' + this.value)
         .then(r => r.json())
         .then(data => {
             data.states.forEach(s => stateSelect.insertAdjacentHTML('beforeend', `<option value="${s.id}">${s.name}</option>`));
@@ -456,7 +456,7 @@ document.getElementById('stateSelect').addEventListener('change', function () {
     const citySelect = document.getElementById('citySelect');
     citySelect.innerHTML = '<option value="">Select City</option>';
     if (!this.value) return;
-    fetch(`/locations/cities/${this.value}`)
+    fetch('{{ url("locations/cities") }}/' + this.value)
         .then(r => r.json())
         .then(data => {
             data.cities.forEach(c => citySelect.insertAdjacentHTML('beforeend', `<option value="${c.id}">${c.name}</option>`));
