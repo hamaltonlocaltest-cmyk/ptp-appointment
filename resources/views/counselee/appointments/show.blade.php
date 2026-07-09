@@ -142,7 +142,10 @@
                 </div>
                 <div class="card-body p-4">
                     @if($appointment->counselor)
-                    <div style="font-weight:700; color:#4a148c; font-size:15px;">{{ $appointment->counselor->full_name }}</div>
+                    <div style="font-weight:700; color:#4a148c; font-size:15px;">
+                        {{ $appointment->counselor->full_name }}
+                        @if($appointment->counselor->status === 'deleted')<span class="badge-inactive ml-1" style="font-size:9px;">Deleted</span>@endif
+                    </div>
                     @if($appointment->counselor->specialization)
                     <div style="font-size:12px; color:#7b1fa2; margin-top:2px;">{{ $appointment->counselor->specialization }}</div>
                     @endif

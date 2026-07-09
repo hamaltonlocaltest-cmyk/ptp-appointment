@@ -8,10 +8,10 @@
 @section('content')
 
 
-<div class="card mb-4" style="background: linear-gradient(135deg, #1b5e20, #2e7d32); color:#fff; border-radius:12px;">
+<div class="card mb-4">
     <div class="card-body p-4">
         <div class="d-flex align-items-center flex-wrap">
-            <div class="avatar-circle mr-3" style="background:rgba(255,255,255,0.2); width:56px; height:56px; font-size:22px;">
+            <div class="avatar-circle mr-3" style="background:#0f5b5c; width:56px; height:56px; font-size:22px;">
                 {{ strtoupper(substr($counselor->first_name, 0, 1)) }}
             </div>
             <div>
@@ -37,7 +37,7 @@
 <div class="row mb-3">
     <div class="col-lg-4 col-6 mb-3">
         <a href="{{ route('counselor.appointments.index') }}" class="text-decoration-none">
-        <div class="stat-card" style="border-radius:12px; padding:22px 20px; color:#fff; position:relative; overflow:hidden; background:linear-gradient(135deg,#1b5e20,#2e7d32);">
+        <div class="stat-card bg-admin">
             <h3 style="font-size:34px; font-weight:700; margin:0 0 4px;">{{ $stats['total'] }}</h3>
             <p style="font-size:13px; margin:0; opacity:0.85;">Total Appointments</p>
             <i class="fas fa-calendar-check" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:52px; opacity:0.12;"></i>
@@ -46,7 +46,7 @@
     </div>
     <div class="col-lg-4 col-6 mb-3">
         <a href="{{ route('counselor.appointments.index') }}" class="text-decoration-none">
-        <div class="stat-card" style="border-radius:12px; padding:22px 20px; color:#fff; position:relative; overflow:hidden; background:linear-gradient(135deg,#e65100,#f57c00);">
+        <div class="stat-card bg-pending">
             <h3 style="font-size:34px; font-weight:700; margin:0 0 4px;">{{ $stats['confirmed'] }}</h3>
             <p style="font-size:13px; margin:0; opacity:0.85;">Confirmed</p>
             <i class="fas fa-check-circle" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:52px; opacity:0.12;"></i>
@@ -55,7 +55,7 @@
     </div>
     <div class="col-lg-4 col-6 mb-3">
         <a href="{{ route('counselor.appointments.index') }}" class="text-decoration-none">
-        <div class="stat-card" style="border-radius:12px; padding:22px 20px; color:#fff; position:relative; overflow:hidden; background:linear-gradient(135deg,#1565c0,#1976d2);">
+        <div class="stat-card bg-counselee">
             <h3 style="font-size:34px; font-weight:700; margin:0 0 4px;">{{ $stats['completed'] }}</h3>
             <p style="font-size:13px; margin:0; opacity:0.85;">Completed Sessions</p>
             <i class="fas fa-check-double" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:52px; opacity:0.12;"></i>
@@ -66,12 +66,15 @@
 
 
 <div class="card">
-    <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-        <span style="color:#1b5e20; font-size:15px; font-weight:600;">
+    <div class="card-header recent-header">
+        <span class="recent-title">
             <i class="fas fa-calendar-alt mr-2"></i> Upcoming Appointments
         </span>
-        <a href="{{ route('counselor.appointments.index') }}" style="font-size:12px; font-weight:600; color:#1b5e20;">View All <i class="fas fa-arrow-right ml-1"></i></a>
+        <a class="view-all-link" href="{{ route('counselor.appointments.index') }}">View All <i class="fas fa-arrow-right ml-1"></i></a>
     </div>
+	
+	
+	
     <div class="card-body p-0">
         @forelse($upcoming as $appt)
         <div class="d-flex align-items-center flex-wrap px-4 py-3" style="border-bottom:1px solid #f0f2f5;">

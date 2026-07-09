@@ -76,6 +76,7 @@
                 <div style="font-size:13px; color:#555;">
                     <i class="fas fa-user-tie mr-1" style="color:#4a148c;"></i>
                     {{ $appt->counselor->full_name ?? 'Unassigned Counselor' }}
+                    @if($appt->counselor?->status === 'deleted')<span class="badge-inactive ml-1" style="font-size:9px;">Deleted</span>@endif
                     &nbsp;·&nbsp;
                     <i class="fas fa-clock mr-1" style="color:#D30404;"></i>
                     {{ $appt->formatted_time }}

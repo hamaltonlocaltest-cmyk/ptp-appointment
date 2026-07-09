@@ -37,7 +37,10 @@
                         {{ $appointment->counselee ? strtoupper(substr($appointment->counselee->first_name, 0, 1)) : '?' }}
                     </div>
                     <div>
-                        <div style="font-weight:700; font-size:17px; color:#1a1a2e;">{{ $appointment->counselee->full_name ?? 'Deleted Counsellee' }}</div>
+                        <div style="font-weight:700; font-size:17px; color:#1a1a2e;">
+                            {{ $appointment->counselee->full_name ?? 'Deleted Counsellee' }}
+                            @if($appointment->counselee?->status === 'deleted')<span class="badge-inactive ml-1" style="font-size:9px;">Deleted</span>@endif
+                        </div>
                         <div style="font-size:13px; color:#777;">{{ $appointment->counselType->name ?? 'Unknown Type' }}</div>
                     </div>
                 </div>

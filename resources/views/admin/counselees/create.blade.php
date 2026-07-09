@@ -73,6 +73,48 @@
                     </div>
 
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Country <span class="text-danger">*</span></label>
+                                <select name="country_id" id="countrySelect"
+                                        class="form-control @error('country_id') is-invalid @enderror" required>
+                                    <option value="">Select Country</option>
+                                    @foreach($countries as $country)
+                                    <option value="{{ $country->id }}" {{ old('country_id', $defaultCountry?->id) == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('country_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">State <span class="text-danger">*</span></label>
+                                <select name="state_id" id="stateSelect"
+                                        class="form-control @error('state_id') is-invalid @enderror" required>
+                                    <option value="">Select State</option>
+                                    @foreach($states as $state)
+                                    <option value="{{ $state->id }}" {{ old('state_id', $defaultState?->id) == $state->id ? 'selected' : '' }}>{{ $state->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('state_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">City <span class="text-danger">*</span></label>
+                                <select name="city_id" id="citySelect"
+                                        class="form-control @error('city_id') is-invalid @enderror" required>
+                                    <option value="">Select City</option>
+                                    @foreach($cities as $city)
+                                    <option value="{{ $city->id }}" {{ old('city_id', $defaultCity?->id) == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('city_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-3">
                             <div class="form-group mb-3">
                                 <label class="form-label">Telephone 1</label>
@@ -418,6 +460,31 @@ document.getElementById('addMedical').addEventListener('click', function () {
 });
 document.getElementById('medicalTable').addEventListener('click', e => {
     if (e.target.closest('.removeMedical')) e.target.closest('tr').remove();
+});
+
+// Country -> State -> City cascading dropdowns
+document.getElementById('countrySelect').addEventListener('change', function () {
+    const stateSelect = document.getElementById('stateSelect');
+    const citySelect  = document.getElementById('citySelect');
+    stateSelect.innerHTML = '<option value="">Select State</option>';
+    citySelect.innerHTML  = '<option value="">Select City</option>';
+    if (!this.value) return;
+    fetch(`/locations/states/${this.value}`)
+        .then(r => r.json())
+        .then(data => {
+            data.states.forEach(s => stateSelect.insertAdjacentHTML('beforeend', `<option value="${s.id}">${s.name}</option>`));
+        });
+});
+
+document.getElementById('stateSelect').addEventListener('change', function () {
+    const citySelect = document.getElementById('citySelect');
+    citySelect.innerHTML = '<option value="">Select City</option>';
+    if (!this.value) return;
+    fetch(`/locations/cities/${this.value}`)
+        .then(r => r.json())
+        .then(data => {
+            data.cities.forEach(c => citySelect.insertAdjacentHTML('beforeend', `<option value="${c.id}">${c.name}</option>`));
+        });
 });
 </script>
 @endpush

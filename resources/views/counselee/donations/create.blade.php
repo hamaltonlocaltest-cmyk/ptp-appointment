@@ -11,7 +11,7 @@
 <div class="col-lg-6">
 
     <div class="text-center mb-4">
-        <div style="font-size:48px; color:#1b5e20; margin-bottom:12px;">
+        <div style="font-size:48px; color:#1f8582; margin-bottom:12px;">
             <i class="fas fa-heart"></i>
         </div>
         <h4 style="font-weight:700; color:#1a1a2e;">Support P2P Counselling</h4>
@@ -67,7 +67,7 @@
 
                 <div class="mt-4">
                     <button type="submit" class="btn btn-block"
-                            style="background:#1b5e20; color:#fff; border-radius:7px; padding:12px 30px; font-weight:700; font-size:15px;">
+                            style="background:#1f8582; color:#fff; border-radius:7px; padding:12px 30px; font-weight:700; font-size:15px;">
                         <i class="fas fa-lock mr-2"></i> Proceed to Secure Payment
                     </button>
                 </div>
@@ -86,9 +86,9 @@
 .amount-grid { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
 .amount-btn {
     padding:10px 18px; border:2px solid #e0e4ec; border-radius:8px; cursor:pointer;
-    font-size:14px; font-weight:700; color:#1b5e20; background:#fff; transition:.2s;
+    font-size:14px; font-weight:700; color:#1f8582; background:#fff; transition:.2s;
 }
-.amount-btn:hover, .amount-btn.selected { border-color:#1b5e20; background:#e8f5e9; }
+.amount-btn:hover, .amount-btn.selected { border-color:#1f8582; background:#e8f5e9; }
 </style>
 @endsection
 

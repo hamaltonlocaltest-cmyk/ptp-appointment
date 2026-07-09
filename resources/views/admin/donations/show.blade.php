@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-<div class="col-lg-8">
+<div class="col-lg-12">
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -63,7 +63,7 @@
     </div>
 
     <div class="d-flex justify-content-between">
-        <a href="{{ route('admin.donations.index') }}" class="btn btn-light" style="border:1px solid #e0e4ec;">
+        <a href="{{ route('admin.donations.index') }}" class="btn btn-secondary action-btn" style="border:1px solid #e0e4ec;">
             <i class="fas fa-arrow-left mr-1"></i> Back
         </a>
         @if($donation->status === 'pending')

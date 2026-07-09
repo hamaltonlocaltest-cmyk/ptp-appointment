@@ -10,25 +10,25 @@
 
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1b5e20,#2e7d32);">
+        <div class="stat-card bg-counselor">
             <h3>&#8377;{{ number_format((float) $counts['total_received'], 0) }}</h3><p>Total Received</p>
             <i class="fas fa-hand-holding-heart stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1a237e,#3949ab);">
+        <div class="stat-card bg-counselee">
             <h3>{{ $counts['total'] }}</h3><p>Total Donations</p>
             <i class="fas fa-heart stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#e65100,#f57c00);">
+        <div class="stat-card bg-pending">
             <h3>{{ $counts['pending'] }}</h3><p>Pending</p>
             <i class="fas fa-hourglass-half stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#b71c1c,#c62828);">
+        <div class="stat-card bg-inactive">
             <h3>{{ $counts['failed'] }}</h3><p>Failed</p>
             <i class="fas fa-times-circle stat-icon"></i>
         </div>
@@ -43,7 +43,7 @@
     </div>
     <div class="card-body">
 
-        <div class="table-responsive">
+        <div class="">
             <table id="donationsTable" class="table table-hover">
                 <thead>
                     <tr>
@@ -151,6 +151,7 @@
 $(document).ready(function () {
     $('#donationsTable').DataTable({
         responsive: true,
+		autoWidth:false,
         pageLength: 10,
         lengthMenu: [5, 10, 25, 50, 100],
         order: [[5, 'desc']],

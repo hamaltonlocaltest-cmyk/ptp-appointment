@@ -17,6 +17,9 @@ class Counselor extends Authenticatable
         'email',
         'phone',
         'address',
+        'country_id',
+        'state_id',
+        'city_id',
         'specialization',
         'experience_years',
         'mode',
@@ -59,6 +62,21 @@ class Counselor extends Authenticatable
     public function availabilities()
     {
         return $this->hasMany(CounselorAvailability::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     // -----------------------------------------------------------------------

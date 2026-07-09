@@ -46,7 +46,7 @@
     </div>
     <div class="card-body">
 
-        <div class="table-responsive">
+        <div class="">
             <table id="counseleesTable" class="table table-hover">
                 <thead>
                     <tr>
@@ -175,6 +175,7 @@
 $(document).ready(function () {
     $('#counseleesTable').DataTable({
         responsive: true,
+		autoWidth:false,
         pageLength: 10,
         lengthMenu: [5, 10, 25, 50, 100],
         language: {

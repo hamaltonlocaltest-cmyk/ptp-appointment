@@ -8,6 +8,9 @@ use App\Models\Counselee;
 use App\Models\CounseleeChild;
 use App\Models\CounseleeMedicalHistory;
 use App\Models\CounselType;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +36,16 @@ class CounseleeAuthController extends Controller
         ]);
 
         if (Auth::guard('counselee')->attempt($request->only('email', 'password'))) {
+            if (Auth::guard('counselee')->user()->status === 'deleted') {
+                Auth::guard('counselee')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->withErrors([
+                    'email' => 'This account has been deleted. Please contact the administrator.',
+                ])->withInput($request->only('email'));
+            }
+
             $request->session()->regenerate();
             return redirect()->route('counselee.dashboard');
         }
@@ -50,7 +63,35 @@ class CounseleeAuthController extends Controller
 
         $counselTypes = CounselType::active()->ordered()->get();
 
-        return view('auth.counselee.register', compact('counselTypes'));
+        [$countries, $states, $cities, $defaultCountry, $defaultState, $defaultCity] = $this->defaultLocationData();
+
+        return view('auth.counselee.register', compact(
+            'counselTypes', 'countries', 'states', 'cities',
+            'defaultCountry', 'defaultState', 'defaultCity'
+        ));
+    }
+
+    // Loads dropdown data + India/Telangana/Hyderabad defaults, shared by the register view.
+    private function defaultLocationData(): array
+    {
+        $countries = Country::active()->orderBy('name')->get(['id', 'name']);
+
+        $defaultCountry = Country::where('code', 'IN')->first();
+        $defaultState   = $defaultCountry
+            ? State::where('country_id', $defaultCountry->id)->where('name', 'Telangana')->first()
+            : null;
+        $defaultCity    = $defaultState
+            ? City::where('state_id', $defaultState->id)->where('name', 'Hyderabad')->first()
+            : null;
+
+        $states = $defaultCountry
+            ? State::where('country_id', $defaultCountry->id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+        $cities = $defaultState
+            ? City::where('state_id', $defaultState->id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+
+        return [$countries, $states, $cities, $defaultCountry, $defaultState, $defaultCity];
     }
 
     public function register(Request $request)
@@ -72,6 +113,9 @@ class CounseleeAuthController extends Controller
             'birthdate'      => 'nullable|date|before:today',
             'gender'         => 'nullable|in:Male,Female,Other',
             'marital_status' => 'nullable|in:Single,Married,Divorced,Widowed',
+            'country_id'     => 'required|integer|exists:countries,id',
+            'state_id'       => 'required|integer|exists:states,id',
+            'city_id'        => 'required|integer|exists:cities,id',
 
             // Step 2 - Children
             'children'           => 'nullable|array',
@@ -124,6 +168,9 @@ class CounseleeAuthController extends Controller
                 'birthdate'                    => $request->birthdate,
                 'gender'                       => $request->gender,
                 'marital_status'               => $request->marital_status,
+                'country_id'                   => $request->country_id,
+                'state_id'                     => $request->state_id,
+                'city_id'                      => $request->city_id,
                 'referral'                     => $request->referral,
                 'previous_counselling'         => $request->previous_counselling,
                 'previous_counselling_details' => $request->previous_counselling_details,

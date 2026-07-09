@@ -10,25 +10,25 @@
 
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1a237e,#3949ab);">
+        <div class="stat-card bg-counselee">
             <h3>{{ $counts['total'] }}</h3><p>Total Complaints</p>
             <i class="fas fa-exclamation-circle stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#e65100,#f57c00);">
+        <div class="stat-card bg-pending">
             <h3>{{ $counts['open'] + $counts['in_review'] }}</h3><p>Needs Review</p>
             <i class="fas fa-clock stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1b5e20,#2e7d32);">
+        <div class="stat-card bg-active">
             <h3>{{ $counts['resolved'] }}</h3><p>Resolved</p>
             <i class="fas fa-check-circle stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#616161,#757575);">
+        <div class="stat-card bg-closed">
             <h3>{{ $counts['closed'] }}</h3><p>Closed</p>
             <i class="fas fa-box-archive stat-icon"></i>
         </div>
@@ -43,7 +43,7 @@
     </div>
     <div class="card-body">
 
-        <div class="table-responsive">
+        <div class="">
             <table id="complaintsTable" class="table table-hover">
                 <thead>
                     <tr>
@@ -109,6 +109,7 @@
 $(document).ready(function () {
     $('#complaintsTable').DataTable({
         responsive: true,
+		autoWidth:false,
         pageLength: 10,
         lengthMenu: [5, 10, 25, 50, 100],
         order: [[5, 'desc']],

@@ -82,9 +82,25 @@ class AppointmentController extends Controller
     // -----------------------------------------------------------------------
     public function getAvailableDates(Request $request)
     {
-        $request->validate(['counsel_type_id' => 'required|integer|exists:counsel_types,id']);
+        $request->validate([
+            'counsel_type_id' => 'required|integer|exists:counsel_types,id',
+            'counselee_id'    => 'nullable|integer|exists:counselees,id',
+        ]);
 
-        return response()->json(['dates' => $this->slots->availableDates((int) $request->counsel_type_id)]);
+        $typeId = (int) $request->counsel_type_id;
+        $cityId = $request->filled('counselee_id')
+            ? Counselee::find($request->counselee_id)?->city_id
+            : null;
+
+        $dates = $this->slots->availableDates($typeId, $cityId);
+
+        $response = ['dates' => $dates];
+
+        if (empty($dates) && $this->cityIsTheBlocker($typeId, $cityId)) {
+            $response['message'] = 'No counselors are available in this counsellee\'s city for in-person sessions. Try a different counselling area, or look for online sessions.';
+        }
+
+        return response()->json($response);
     }
 
     // -----------------------------------------------------------------------
@@ -98,13 +114,36 @@ class AppointmentController extends Controller
             'counselee_id'    => 'required|integer|exists:counselees,id',
         ]);
 
+        $typeId    = (int) $request->counsel_type_id;
+        $counselee = Counselee::find($request->counselee_id);
+
         $slots = $this->slots->availableSlots(
-            (int) $request->counsel_type_id,
+            $typeId,
             $request->date,
-            (int) $request->counselee_id
+            (int) $request->counselee_id,
+            null,
+            $counselee?->city_id
         );
 
-        return response()->json(['slots' => $slots]);
+        $response = ['slots' => $slots];
+
+        if (empty($slots) && $this->cityIsTheBlocker($typeId, $counselee?->city_id)) {
+            $response['message'] = 'No counselors are available in this counsellee\'s city for in-person sessions. Try a different date, or look for online sessions.';
+        }
+
+        return response()->json($response);
+    }
+
+    // True when counselors exist for this type in general, but none of them
+    // can be matched once we restrict to the given city.
+    private function cityIsTheBlocker(int $counselTypeId, ?int $cityId): bool
+    {
+        if (!$cityId) {
+            return false;
+        }
+
+        return $this->slots->hasAnyCounselorForType($counselTypeId)
+            && $this->slots->matchingCounselors($counselTypeId, $cityId)->isEmpty();
     }
 
     // -----------------------------------------------------------------------
@@ -204,7 +243,16 @@ class AppointmentController extends Controller
     // -----------------------------------------------------------------------
     public function getRescheduleDates(Appointment $appointment)
     {
-        return response()->json(['dates' => $this->slots->availableDates($appointment->counsel_type_id)]);
+        $cityId = $appointment->counselee->city_id;
+        $dates  = $this->slots->availableDates($appointment->counsel_type_id, $cityId);
+
+        $response = ['dates' => $dates];
+
+        if (empty($dates) && $this->cityIsTheBlocker($appointment->counsel_type_id, $cityId)) {
+            $response['message'] = 'No counselors are available in this counsellee\'s city for in-person sessions. Try a different counselling area, or look for online sessions.';
+        }
+
+        return response()->json($response);
     }
 
     // -----------------------------------------------------------------------
@@ -214,14 +262,23 @@ class AppointmentController extends Controller
     {
         $request->validate(['date' => 'required|date|after:today']);
 
+        $cityId = $appointment->counselee->city_id;
+
         $slots = $this->slots->availableSlots(
             $appointment->counsel_type_id,
             $request->date,
             $appointment->counselee_id,
-            $appointment->id
+            $appointment->id,
+            $cityId
         );
 
-        return response()->json(['slots' => $slots]);
+        $response = ['slots' => $slots];
+
+        if (empty($slots) && $this->cityIsTheBlocker($appointment->counsel_type_id, $cityId)) {
+            $response['message'] = 'No counselors are available in this counsellee\'s city for in-person sessions. Try a different date, or look for online sessions.';
+        }
+
+        return response()->json($response);
     }
 
     // -----------------------------------------------------------------------

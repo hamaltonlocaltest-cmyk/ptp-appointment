@@ -201,6 +201,58 @@
 							</div>
 						</div>
 
+						<!-- Country / State / City -->
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-globe-asia"></i></span>
+										</div>
+										<select name="country_id" id="countrySelect"
+												class="form-control @error('country_id') is-invalid @enderror" required>
+											<option value="">Country</option>
+											@foreach($countries as $country)
+											<option value="{{ $country->id }}" {{ old('country_id', $defaultCountry?->id) == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+										</div>
+										<select name="state_id" id="stateSelect"
+												class="form-control @error('state_id') is-invalid @enderror" required>
+											<option value="">State</option>
+											@foreach($states as $state)
+											<option value="{{ $state->id }}" {{ old('state_id', $defaultState?->id) == $state->id ? 'selected' : '' }}>{{ $state->name }}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-city"></i></span>
+										</div>
+										<select name="city_id" id="citySelect"
+												class="form-control @error('city_id') is-invalid @enderror" required>
+											<option value="">City</option>
+											@foreach($cities as $city)
+											<option value="{{ $city->id }}" {{ old('city_id', $defaultCity?->id) == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<!-- Password -->
 						<div class="form-group">
 							<div class="input-group">
@@ -376,5 +428,30 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<script>
+document.getElementById('countrySelect').addEventListener('change', function () {
+    const stateSelect = document.getElementById('stateSelect');
+    const citySelect  = document.getElementById('citySelect');
+    stateSelect.innerHTML = '<option value="">State</option>';
+    citySelect.innerHTML  = '<option value="">City</option>';
+    if (!this.value) return;
+    fetch(`/locations/states/${this.value}`)
+        .then(r => r.json())
+        .then(data => {
+            data.states.forEach(s => stateSelect.insertAdjacentHTML('beforeend', `<option value="${s.id}">${s.name}</option>`));
+        });
+});
+
+document.getElementById('stateSelect').addEventListener('change', function () {
+    const citySelect = document.getElementById('citySelect');
+    citySelect.innerHTML = '<option value="">City</option>';
+    if (!this.value) return;
+    fetch(`/locations/cities/${this.value}`)
+        .then(r => r.json())
+        .then(data => {
+            data.cities.forEach(c => citySelect.insertAdjacentHTML('beforeend', `<option value="${c.id}">${c.name}</option>`));
+        });
+});
+</script>
 </body>
 </html>

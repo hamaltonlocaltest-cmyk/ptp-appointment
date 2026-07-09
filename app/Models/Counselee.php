@@ -29,6 +29,9 @@ class Counselee extends Authenticatable
         'birthdate',
         'gender',
         'marital_status',
+        'country_id',
+        'state_id',
+        'city_id',
 
         // Referral
         'referral',
@@ -99,6 +102,19 @@ class Counselee extends Authenticatable
         )->withTimestamps();
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 
 }

@@ -34,15 +34,58 @@
 </div>
 
 <div class="card">
-    <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-        <span style="font-weight:600; flex:auto;">
-            <i class="fas fa-comments mr-2"></i> Counsel Type List
-        </span>
-        <a href="{{ route('admin.masters.counsel-types.create') }}"
-           class="btn btn-primary btn-sm">
-            <i class="fas fa-plus mr-1"></i> Add Counsel Type
-        </a>
-    </div>
+    <style>
+		.counsel-header{
+			background:#fff;
+			display:flex;
+			align-items:center;
+			justify-content:space-between;
+			gap:12px;
+			padding:15px 20px;
+		}
+
+		.counsel-title{
+			font-weight:600;
+			display:flex;
+			align-items:center;
+			flex:1;
+		}
+
+		.add-btn{
+			white-space:nowrap;
+		}
+		@media (max-width:576px){
+
+			.counsel-header{
+				flex-direction:column;
+				align-items:stretch;
+			}
+
+			.counsel-title{
+				justify-content:center;
+				margin-bottom:10px;
+			}
+
+			.add-btn{
+				width:100%;
+				text-align:center;
+			}
+		}
+	</style>
+	
+	<div class="card-header counsel-header">
+		<span class="counsel-title">
+			<i class="fas fa-comments mr-2"></i>
+			Counsel Type List
+		</span>
+
+		<a href="{{ route('admin.masters.counsel-types.create') }}"
+		   class="btn btn-primary btn-sm add-btn">
+			<i class="fas fa-plus mr-1"></i>
+			Add Counsel Type
+		</a>
+	</div>
+	
     <div class="card-body">
 
         
@@ -79,7 +122,7 @@
             </div>
         </form>-->
 
-        <div class="table-responsive">
+        <div class="">
             <table id="counselTypesTable" class="table table-hover">
                 <thead>
                     <tr>
@@ -214,6 +257,7 @@
 $(document).ready(function () {
     $('#counselTypesTable').DataTable({
         responsive: true,
+		autoWidth:false,
         pageLength: 10,
         lengthMenu: [5, 10, 25, 50, 100],
         language: {

@@ -10,25 +10,25 @@
 
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#4a148c,#6a1b9a);">
+        <div class="stat-card bg-counselee">
             <h3>{{ $counts['total'] }}</h3><p>Total Feedback</p>
             <i class="fas fa-comment-dots stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#f9a825,#fbc02d);">
+        <div class="stat-card bg-pending">
             <h3>{{ $counts['average'] }}<small style="font-size:16px;">/5</small></h3><p>Average Rating</p>
             <i class="fas fa-star stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1b5e20,#2e7d32);">
+        <div class="stat-card bg-active">
             <h3>{{ $counts['five'] }}</h3><p>5-Star Reviews</p>
             <i class="fas fa-thumbs-up stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#b71c1c,#c62828);">
+        <div class="stat-card bg-inactive">
             <h3>{{ $counts['low'] }}</h3><p>Low Ratings (&le;2)</p>
             <i class="fas fa-thumbs-down stat-icon"></i>
         </div>
@@ -43,7 +43,7 @@
     </div>
     <div class="card-body">
 
-        <div class="table-responsive">
+        <div class="">
             <table id="feedbackTable" class="table table-hover">
                 <thead>
                     <tr>
@@ -99,6 +99,7 @@
 $(document).ready(function () {
     $('#feedbackTable').DataTable({
         responsive: true,
+		autoWidth:false,
         pageLength: 10,
         lengthMenu: [5, 10, 25, 50, 100],
         order: [[5, 'desc']],

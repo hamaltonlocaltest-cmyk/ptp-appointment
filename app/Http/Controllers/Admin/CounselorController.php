@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\CounselorRegistered;
+use App\Models\City;
 use App\Models\Counselor;
 use App\Models\CounselorAvailability;
 use App\Models\CounselType;
+use App\Models\Country;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +23,7 @@ class CounselorController extends Controller
     // -----------------------------------------------------------------------
     public function index(Request $request)
     {
-        $query = Counselor::latest();
+        $query = Counselor::where('status', '!=', 'deleted')->latest();
 
         if ($request->filled('search')) {
             $s = $request->search;
@@ -40,7 +43,7 @@ class CounselorController extends Controller
         $counselors = $query->get();
 
         $counts = [
-            'total'    => Counselor::count(),
+            'total'    => Counselor::where('status', '!=', 'deleted')->count(),
             'active'   => Counselor::where('status', 'active')->count(),
             'inactive' => Counselor::where('status', 'inactive')->count(),
             'pending'  => Counselor::where('status', 'pending')->count(),
@@ -55,7 +58,35 @@ class CounselorController extends Controller
     public function create()
     {
         $counselTypes = CounselType::active()->ordered()->get();
-        return view('admin.counselors.create', compact('counselTypes'));
+        [$countries, $states, $cities, $defaultCountry, $defaultState, $defaultCity] = $this->defaultLocationData();
+
+        return view('admin.counselors.create', compact(
+            'counselTypes', 'countries', 'states', 'cities',
+            'defaultCountry', 'defaultState', 'defaultCity'
+        ));
+    }
+
+    // Loads dropdown data + India/Telangana/Hyderabad defaults, shared by create().
+    private function defaultLocationData(): array
+    {
+        $countries = Country::active()->orderBy('name')->get(['id', 'name']);
+
+        $defaultCountry = Country::where('code', 'IN')->first();
+        $defaultState   = $defaultCountry
+            ? State::where('country_id', $defaultCountry->id)->where('name', 'Telangana')->first()
+            : null;
+        $defaultCity    = $defaultState
+            ? City::where('state_id', $defaultState->id)->where('name', 'Hyderabad')->first()
+            : null;
+
+        $states = $defaultCountry
+            ? State::where('country_id', $defaultCountry->id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+        $cities = $defaultState
+            ? City::where('state_id', $defaultState->id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+
+        return [$countries, $states, $cities, $defaultCountry, $defaultState, $defaultCity];
     }
 
     // -----------------------------------------------------------------------
@@ -75,6 +106,9 @@ class CounselorController extends Controller
                 'email'            => $request->email,
                 'phone'            => $request->phone,
                 'address'          => $request->address,
+                'country_id'       => $request->country_id,
+                'state_id'         => $request->state_id,
+                'city_id'          => $request->city_id,
                 'specialization'   => $request->specialization,
                 'experience_years' => $request->experience_years,
                 'mode'             => $request->mode,
@@ -122,7 +156,16 @@ class CounselorController extends Controller
     {
         $counselor->load('counselTypes', 'availabilities');
         $counselTypes = CounselType::active()->ordered()->get();
-        return view('admin.counselors.edit', compact('counselor', 'counselTypes'));
+
+        $countries = Country::active()->orderBy('name')->get(['id', 'name']);
+        $states = $counselor->country_id
+            ? State::where('country_id', $counselor->country_id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+        $cities = $counselor->state_id
+            ? City::where('state_id', $counselor->state_id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+
+        return view('admin.counselors.edit', compact('counselor', 'counselTypes', 'countries', 'states', 'cities'));
     }
 
     // -----------------------------------------------------------------------
@@ -136,6 +179,7 @@ class CounselorController extends Controller
         try {
             $data = $request->only([
                 'first_name', 'last_name', 'email', 'phone', 'address',
+                'country_id', 'state_id', 'city_id',
                 'specialization', 'experience_years', 'mode', 'languages',
                 'training_level', 'status',
             ]);
@@ -177,7 +221,7 @@ class CounselorController extends Controller
     public function destroy(Counselor $counselor)
     {
         $name = $counselor->full_name;
-        $counselor->delete();
+        $counselor->update(['status' => 'deleted']);
 
         return redirect()->route('admin.counselors.index')
             ->with('success', "Counselor {$name} deleted successfully.");
@@ -194,6 +238,9 @@ class CounselorController extends Controller
             'email'            => 'required|email|unique:counselors,email' . ($counselorId ? ",{$counselorId}" : ''),
             'phone'            => 'required|digits:10',
             'address'          => 'required|string|max:500',
+            'country_id'       => 'required|integer|exists:countries,id',
+            'state_id'         => 'required|integer|exists:states,id',
+            'city_id'          => 'required|integer|exists:cities,id',
             'specialization'   => 'required|string|max:150',
             'experience_years' => 'required|integer|min:0|max:60',
             'mode'             => 'required|in:Online,In person,Both',

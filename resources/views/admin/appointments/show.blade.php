@@ -141,7 +141,12 @@
                         {{ strtoupper(substr($appointment->counselee->first_name,0,1)) }}
                     </div>
                     <div>
-                        <div style="font-weight:600; color:#1a1a2e;">{{ $appointment->counselee->full_name }}</div>
+                        <div style="font-weight:600; color:#1a1a2e;">
+                            {{ $appointment->counselee->full_name }}
+                            @if($appointment->counselee->status === 'deleted')
+                            <span class="badge-inactive ml-1" style="font-size:10px;">Deleted</span>
+                            @endif
+                        </div>
                         <div style="font-size:12px; color:#9e9e9e;">{{ $appointment->counselee->email }}</div>
                     </div>
                 </div>
@@ -167,7 +172,12 @@
                         {{ strtoupper(substr($appointment->counselor->first_name,0,1)) }}
                     </div>
                     <div>
-                        <div style="font-weight:600; color:#1a1a2e;">{{ $appointment->counselor->full_name }}</div>
+                        <div style="font-weight:600; color:#1a1a2e;">
+                            {{ $appointment->counselor->full_name }}
+                            @if($appointment->counselor->status === 'deleted')
+                            <span class="badge-inactive ml-1" style="font-size:10px;">Deleted</span>
+                            @endif
+                        </div>
                         <div style="font-size:12px; color:#9e9e9e;">{{ $appointment->counselor->email }}</div>
                     </div>
                 </div>

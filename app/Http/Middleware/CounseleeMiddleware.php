@@ -13,6 +13,16 @@ class CounseleeMiddleware
         if (!Auth::guard('counselee')->check()) {
             return redirect()->route('counselee.login');
         }
+
+        if (Auth::guard('counselee')->user()->status === 'deleted') {
+            Auth::guard('counselee')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('counselee.login')
+                ->withErrors(['email' => 'This account has been deleted. Please contact the administrator.']);
+        }
+
         return $next($request);
     }
 }

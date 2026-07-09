@@ -210,6 +210,7 @@
 $(document).ready(function () {
     $('#counselorsTable').DataTable({
         responsive: true,
+		autoWidth:false,
         pageLength: 10,
         lengthMenu: [5, 10, 25, 50, 100],
         order: [[0, 'asc']],

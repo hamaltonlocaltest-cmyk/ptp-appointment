@@ -7,10 +7,9 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- DataTables -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.11/css/dataTables.bootstrap4.min.css">	
-	<!-- Responsive -->
-	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.1/css/responsive.bootstrap4.min.css">
+    
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css">
     
     <style>
         :root { --primary:#1f8582; --primary-light:#1f8582; --primary-dark:#0d1642; }
@@ -328,6 +327,15 @@
 
 .stat-card.bg-inactive h3, .stat-card.bg-inactive p{color:#dc2426}
 
+
+.stat-card.bg-closed {
+  background: #d7d7d7;
+  border: 1px solid #d7d7d7;
+  border-left: 2px solid #444;
+}
+
+.stat-card.bg-closed h3, .stat-card.bg-closed p{color:#444}
+
 .stat-card.bg-active {
   background: #eaf5ed;
   border: 1px solid #abd8b4;
@@ -354,6 +362,10 @@
 
 .stat-card.bg-pending p {
   color: #ea5b00;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{padding: 0 !important; border: 0 solid #e0e4ec !important;}
+div.dataTables_wrapper div.dataTables_length select {width: 54px;  display: inline-block;
 }
 
     </style>
@@ -665,14 +677,14 @@
 <!--<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>-->
 <!-- jQuery (Already included in AdminLTE) -->
 
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.13.11/js/jquery.dataTables.min.js"></script>
 
-<!-- Bootstrap 4 -->
-<script src="https://cdn.datatables.net/1.13.11/js/dataTables.bootstrap4.min.js"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Responsive -->
-<script src="https://cdn.datatables.net/responsive/2.5.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
 
 <script src="https://cdn.datatables.net/responsive/2.5.1/js/responsive.bootstrap4.min.js"></script>
 @stack('scripts')

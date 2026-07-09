@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\CounselorRegistered;
+use App\Models\City;
 use App\Models\Counselor;
+use App\Models\Country;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +32,16 @@ class CounselorAuthController extends Controller
         ]);
 
         if (Auth::guard('counselor')->attempt($request->only('email', 'password'))) {
+            if (Auth::guard('counselor')->user()->status === 'deleted') {
+                Auth::guard('counselor')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->withErrors([
+                    'email' => 'This account has been deleted. Please contact the administrator.',
+                ])->withInput($request->only('email'));
+            }
+
             $request->session()->regenerate();
             return redirect()->route('counselor.dashboard');
         }
@@ -43,7 +56,35 @@ class CounselorAuthController extends Controller
         if (Auth::guard('counselor')->check()) {
             return redirect()->route('counselor.dashboard');
         }
-        return view('auth.counselor.register');
+
+        [$countries, $states, $cities, $defaultCountry, $defaultState, $defaultCity] = $this->defaultLocationData();
+
+        return view('auth.counselor.register', compact(
+            'countries', 'states', 'cities', 'defaultCountry', 'defaultState', 'defaultCity'
+        ));
+    }
+
+    // Loads dropdown data + India/Telangana/Hyderabad defaults, shared by the register view.
+    private function defaultLocationData(): array
+    {
+        $countries = Country::active()->orderBy('name')->get(['id', 'name']);
+
+        $defaultCountry = Country::where('code', 'IN')->first();
+        $defaultState   = $defaultCountry
+            ? State::where('country_id', $defaultCountry->id)->where('name', 'Telangana')->first()
+            : null;
+        $defaultCity    = $defaultState
+            ? City::where('state_id', $defaultState->id)->where('name', 'Hyderabad')->first()
+            : null;
+
+        $states = $defaultCountry
+            ? State::where('country_id', $defaultCountry->id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+        $cities = $defaultState
+            ? City::where('state_id', $defaultState->id)->active()->orderBy('name')->get(['id', 'name'])
+            : collect();
+
+        return [$countries, $states, $cities, $defaultCountry, $defaultState, $defaultCity];
     }
 
     public function register(Request $request)
@@ -55,6 +96,9 @@ class CounselorAuthController extends Controller
             'phone'          => 'required|string|max:20',
             'specialization' => 'required|string|max:150',
             'password'       => 'required|min:8|confirmed',
+            'country_id'     => 'required|integer|exists:countries,id',
+            'state_id'       => 'required|integer|exists:states,id',
+            'city_id'        => 'required|integer|exists:cities,id',
         ]);
 
         $plainPassword = $request->password;
@@ -65,6 +109,9 @@ class CounselorAuthController extends Controller
             'email'          => $request->email,
             'phone'          => $request->phone,
             'specialization' => $request->specialization,
+            'country_id'     => $request->country_id,
+            'state_id'       => $request->state_id,
+            'city_id'        => $request->city_id,
             'password'       => Hash::make($plainPassword),
             'status'         => 'pending',
         ]);
