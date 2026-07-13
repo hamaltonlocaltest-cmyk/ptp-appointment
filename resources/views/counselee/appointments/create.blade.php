@@ -6,10 +6,10 @@
 @endsection
 
 @section('content')
-<div class="container py-4">
+<div class="py-4">
 
  
-    <div class="d-flex align-items-center mb-4">
+    <div class="d-flex align-items-center mb-4 border-bottom pb-3 mb-5">
         <div>
             <h4 class="mb-0" style="color:#1a1a2e; font-weight:700;">Book an Appointment</h4>
             <p class="text-muted mb-0" style="font-size:13px;">
@@ -97,23 +97,23 @@
         font-size:13px; font-weight:600; color:#555; background:#fff; transition:.2s; text-align:center;
         width:100%; font:inherit;
     }
-    .slot-btn:hover, .slot-btn:focus-visible { border-color:#4a148c; color:#4a148c; outline:none; }
-    .slot-btn.selected { border-color:#4a148c; background:#4a148c; color:#fff; }
+    .slot-btn:hover, .slot-btn:focus-visible { border-color:#0f5b5c; color:#0f5b5c; outline:none; }
+    .slot-btn.selected { border-color:#0f5b5c; background:#0f5b5c; color:#fff; }
 
     .counselor-badge {
-        display:inline-flex; align-items:center; gap:8px; background:#f3e9ff;
-        border:1px solid #d4a8f0; color:#4a148c; border-radius:8px; padding:10px 16px;
+        display:inline-flex; align-items:center; gap:8px; background:#e9fffb;
+        border:1px solid #a8f0e0; color:#0f5b5c; border-radius:8px; padding:10px 16px;
         font-size:13px; font-weight:600;
     }
     .section-card { border-radius:12px; border:1px solid #e0e4ec; margin-bottom:20px; }
     .section-card .section-header {
         padding:14px 20px; background:#f8f9fc; border-bottom:1px solid #e0e4ec;
-        border-radius:12px 12px 0 0; font-weight:700; color:#1a237e; font-size:14px;
+        border-radius:12px 12px 0 0; font-weight:700; font-size:14px;
         display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;
     }
     .section-card .section-body { padding:20px; }
     .back-link {
-        background:none; border:none; color:#888; font-size:12px; font-weight:600; cursor:pointer;
+        background:none; border:none; color:#222; font-size:12px; font-weight:600; cursor:pointer;
         padding:2px 0;
     }
     .back-link:hover { color:#D30404; }
@@ -135,12 +135,12 @@
     }
 
     .slot-group-title {
-        font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#9e9e9e;
+        font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#0f5b5c;
         display:flex; align-items:center; gap:8px; margin:16px 0 10px; width:100%;
     }
     .slot-group-title:first-child { margin-top:0; }
     .slot-group-title::after { content:''; flex:1; height:1px; background:#eee; }
-    .slot-group-title i { color:#c7c7d1; }
+    .slot-group-title i { color:#a4d9da; }
 
     .fetch-error-box { text-align:center; padding:24px 0; }
     .retry-btn {
@@ -149,7 +149,7 @@
     }
     .retry-btn:hover { background:#D30404; color:#fff; }
 
-    .result-count { font-size:11px; color:#aaa; font-weight:600; margin-bottom:12px; display:block; }
+    .result-count { font-size:13px; color:#444; font-weight:600; margin-bottom:12px; display:block; }
 
     .summary-row.jumpable { cursor:pointer; border-radius:8px; margin:0 -8px; padding:12px 8px; }
     .summary-row.jumpable:hover { background:#f8f9fc; }
@@ -160,14 +160,14 @@
     .summary-row { display:flex; align-items:flex-start; gap:10px; padding:12px 0; border-bottom:1px dashed #eee; }
     .summary-row:last-child { border-bottom:none; }
     .summary-row .summary-icon {
-        width:28px; height:28px; border-radius:7px; background:#f3e9ff; color:#4a148c;
+        width:28px; height:28px; border-radius:7px; background:#d9fff7; color:#0f5b5c;
         display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; margin-top:1px;
     }
     .summary-row .summary-text { min-width:0; }
-    .summary-row .summary-label { font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:#aaa; font-weight:700; }
+    .summary-row .summary-label { font-size:12px; text-transform:uppercase; letter-spacing:.5px; color:#222; font-weight:600; }
     .summary-row .summary-value { font-size:13px; font-weight:700; color:#333; word-break:break-word; }
-    .summary-row .summary-value.muted { color:#ccc; font-weight:600; }
-    .summary-hint { font-size:11px; color:#aaa; text-align:center; padding:10px 18px 16px; }
+    .summary-row .summary-value.muted { color:#878787; font-weight:600; }
+    .summary-hint { font-size:11px; color:#444; text-align:center; padding:10px 18px 16px; }
     </style>
 
     <form id="bookingForm" action="{{ route('counselee.appointments.preview') }}" method="POST">
@@ -277,12 +277,12 @@
                 </div>
 
                 <div class="mt-4 d-flex justify-content-between">
-                    <button type="button" class="btn btn-light" onclick="goToStep(3)"
-                            style="border-radius:7px; border:1px solid #e0e4ec; padding:10px 22px;">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep(3)"
+                            style="border-radius:7px;  padding:10px 22px;">
                         <i class="fas fa-arrow-left mr-1"></i> Back
                     </button>
-                    <button type="submit" class="btn"
-                            style="background:#D30404; color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
+                    <button type="submit" class="btn btn-primary"
+                            style="color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
                         <i class="fas fa-calendar-check mr-2"></i> Confirm Booking
                     </button>
                 </div>

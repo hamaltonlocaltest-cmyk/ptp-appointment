@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid py-2">
 <div class="row justify-content-center">
-<div class="col-lg-9">
+<div class="col-lg-12">
 
     @if(session('success'))
     <div class="alert alert-success d-flex align-items-center">
@@ -33,7 +33,7 @@
         <div class="card-body p-4">
             <div class="d-flex align-items-center justify-content-between flex-wrap" style="gap:10px;">
                 <div class="d-flex align-items-center" style="gap:14px;">
-                    <div class="avatar-circle" style="width:52px; height:52px; font-size:20px; background:#1b5e20;">
+                    <div class="avatar-circle" style="width:52px; height:52px; font-size:20px; background:#0f5b5c;">
                         {{ $appointment->counselee ? strtoupper(substr($appointment->counselee->first_name, 0, 1)) : '?' }}
                     </div>
                     <div>
@@ -57,7 +57,7 @@
            
             <div class="card mb-3">
                 <div class="card-header" style="background:#fff;">
-                    <span style="font-weight:600;"><i class="fas fa-info-circle mr-2" style="color:#1b5e20;"></i> Session Details</span>
+                    <span style="font-weight:600;"><i class="fas fa-info-circle mr-2" style="color:#0f5b5c;"></i> Session Details</span>
                 </div>
                 <div class="card-body p-4">
                     <div class="row">
@@ -104,7 +104,7 @@
                                   style="border-radius:8px; border:1.5px solid #e0e4ec; font-size:13px; padding:10px 14px;"
                                   placeholder="Private notes for your own records — not visible to the counselee...">{{ old('counselor_notes', $appointment->counselor_notes) }}</textarea>
                         <div class="text-right mt-2">
-                            <button type="submit" class="btn btn-sm" style="background:#1b5e20; color:#fff; border-radius:20px; padding:6px 20px; font-weight:600;">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save mr-1"></i> Save Notes
                             </button>
                         </div>

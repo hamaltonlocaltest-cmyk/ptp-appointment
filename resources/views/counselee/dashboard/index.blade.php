@@ -26,17 +26,16 @@
 .quick-action-btn .qa-sub { font-size:12px; color:#9e9e9e; margin-top:2px; }
 .status-badge { padding:3px 12px; border-radius:20px; font-size:11px; font-weight:700; }
 .status-pending   { background:#fff3cd; color:#856404; }
-.status-confirmed { background:#d4edda; color:#155724; }
-.status-cancelled { background:#f8d7da; color:#721c24; }
-.status-completed { background:#d1ecf1; color:#0c5460; }
+.status-confirmed { background:#d4edda; border-color:#d4edda; color:#155724; }
+.status-cancelled { background:#f8d7da; border-color:#f8d7da; color:#721c24; }
+.status-completed { background:#d1ecf1; border-color:#d1ecf1; color:#0c5460; }
 </style>
 
 
-<div class="card" style="background: linear-gradient(135deg, #4a148c, #6a1b9a); color:#fff; border-radius:12px;">
+<div class="card">
     <div class="card-body p-4">
         <div class="d-flex align-items-center flex-wrap" style="gap:16px;">
-            <div class="avatar-circle"
-                 style="background:rgba(255,255,255,0.2); width:60px; height:60px; font-size:24px; flex-shrink:0;">
+            <div class="avatar-circle" style="background:#0f5b5c; width:60px; height:60px; font-size:24px; flex-shrink:0; color:#fff;">
                 {{ strtoupper(substr($counselee->first_name, 0, 1)) }}
             </div>
             <div style="flex:1;">
@@ -70,28 +69,28 @@
 
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#4a148c,#6a1b9a);">
+        <div class="stat-card bg-admin">
             <h3>{{ $counts['total'] }}</h3>
             <p>Total Appointments</p>
             <i class="fas fa-calendar-check stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#e65100,#f57c00);">
+        <div class="stat-card bg-pending">
             <h3>{{ $counts['pending'] }}</h3>
             <p>Pending</p>
             <i class="fas fa-clock stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1565c0,#1976d2);">
+        <div class="stat-card bg-counselee">
             <h3>{{ $counts['confirmed'] }}</h3>
             <p>Confirmed</p>
             <i class="fas fa-calendar-check stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card" style="background:linear-gradient(135deg,#1b5e20,#2e7d32);">
+        <div class="stat-card bg-inactive">
             <h3>{{ $counts['completed'] }}</h3>
             <p>Completed</p>
             <i class="fas fa-check-double stat-icon"></i>
@@ -105,13 +104,13 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <span style="color:#4a148c; font-size:14px; font-weight:600;">
+                <span style="font-weight:600;">
                     <i class="fas fa-bolt mr-2"></i> Quick Actions
                 </span>
             </div>
             <div class="card-body">
                 <a href="{{ route('counselee.appointments.create') }}" class="quick-action-btn">
-                    <div class="qa-icon" style="background:#f3e5f5; color:#4a148c;">
+                    <div class="qa-icon" style="background:#ddf9f9; color:#0f5b5c;">
                         <i class="fas fa-calendar-plus"></i>
                     </div>
                     <div>
@@ -135,13 +134,13 @@
         @if($counselee->counselTypes->isNotEmpty())
         <div class="card">
             <div class="card-header">
-                <span style="color:#4a148c; font-size:14px; font-weight:600;">
+                <span style="font-weight:600;">
                     <i class="fas fa-hand-holding-heart mr-2"></i> My Counselling Areas
                 </span>
             </div>
             <div class="card-body">
                 @foreach($counselee->counselTypes as $type)
-                <span class="mb-2 d-inline-block" style="background:#f3e9ff; color:#4a148c; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600; margin-right:4px; margin-bottom:6px;">
+                <span class="mb-2 d-inline-block" style="background:#ddf9f9; color:#0f5b5c; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600; margin-right:4px; margin-bottom:6px;">
                     @if($type->icon)<i class="{{ $type->icon }} mr-1"></i>@endif {{ $type->name }}
                 </span>
                 @endforeach
@@ -154,7 +153,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
-                <span style="color:#4a148c; font-size:14px; font-weight:600;">
+                <span style="font-weight:600;">
                     <i class="fas fa-calendar-check mr-2"></i> Recent Appointments
                 </span>
                 <a href="{{ route('counselee.appointments.index') }}"

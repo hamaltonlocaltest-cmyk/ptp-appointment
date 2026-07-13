@@ -7,9 +7,9 @@
 @endsection
 
 @section('content')
-<div class="container py-4">
+<div class="py-4">
 <div class="row justify-content-center">
-<div class="col-lg-9">
+<div class="col-lg-12">
 
     @if(session('success'))
     <div class="alert alert-success d-flex align-items-center">
@@ -32,7 +32,7 @@
         <div class="card-body p-4">
             <div class="d-flex align-items-center justify-content-between flex-wrap" style="gap:10px;">
                 <div class="d-flex align-items-center" style="gap:14px;">
-                    <div style="width:52px; height:52px; border-radius:50%; background:#4a148c; display:flex; align-items:center;
+                    <div style="width:52px; height:52px; border-radius:50%; background:#0f5b5c; display:flex; align-items:center;
                          justify-content:center; color:#fff; font-size:20px; font-weight:700; flex-shrink:0;">
                         {{ $appointment->counselor ? strtoupper(substr($appointment->counselor->first_name, 0, 1)) : '?' }}
                     </div>
@@ -54,7 +54,7 @@
            
             <div class="card mb-3" style="border-radius:14px; border:none; box-shadow:0 2px 12px rgba(0,0,0,.06);">
                 <div class="card-header" style="background:#fff; border-radius:14px 14px 0 0;">
-                    <span style="font-weight:600;"><i class="fas fa-info-circle mr-2" style="color:#4a148c;"></i> Session Details</span>
+                    <span style="font-weight:600;"><i class="fas fa-info-circle mr-2" style="color:#0f5b5c;"></i> Session Details</span>
                 </div>
                 <div class="card-body p-4">
                     <div class="row">
@@ -138,11 +138,11 @@
          
             <div class="card mb-3" style="border-radius:14px; border:none; box-shadow:0 2px 12px rgba(0,0,0,.06);">
                 <div class="card-header" style="background:#fff; border-radius:14px 14px 0 0;">
-                    <span style="font-weight:600;"><i class="fas fa-user-tie mr-2" style="color:#4a148c;"></i> Your Counselor</span>
+                    <span style="font-weight:600;"><i class="fas fa-user-tie mr-2" style="color:#0f5b5c;"></i> Your Counselor</span>
                 </div>
                 <div class="card-body p-4">
                     @if($appointment->counselor)
-                    <div style="font-weight:700; color:#4a148c; font-size:15px;">
+                    <div style="font-weight:700; color:#0f5b5c; font-size:15px;">
                         {{ $appointment->counselor->full_name }}
                         @if($appointment->counselor->status === 'deleted')<span class="badge-inactive ml-1" style="font-size:9px;">Deleted</span>@endif
                     </div>
@@ -175,7 +175,7 @@
                     @elseif($appointment->status === 'completed')
                         <p style="font-size:13px; color:#666; margin-bottom:12px;">You haven't rated this session yet.</p>
                         <a href="{{ route('counselee.appointments.feedback.create', $appointment) }}"
-                           class="btn btn-block" style="background:#4a148c; color:#fff; border-radius:20px; font-size:13px; font-weight:600; padding:8px;">
+                           class="btn btn-block" style="background:#0f5b5c; color:#fff; border-radius:20px; font-size:13px; font-weight:600; padding:8px;">
                             <i class="fas fa-star mr-1"></i> Leave Feedback
                         </a>
                     @else

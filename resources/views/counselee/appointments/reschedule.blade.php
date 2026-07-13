@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="row">
-<div class="col-lg-8">
+<div class="col-lg-12">
 
  
     <div class="card mb-4" style="border-radius:12px; border:1px solid #e0e4ec;">
@@ -53,13 +53,13 @@
         font-size:13px; font-weight:600; color:#555; background:#fff; transition:.2s; text-align:center;
         width:100%; font:inherit;
     }
-    .slot-btn:hover { border-color:#4a148c; color:#4a148c; }
-    .slot-btn.selected { border-color:#4a148c; background:#4a148c; color:#fff; }
+    .slot-btn:hover { border-color:#0f5b5c; color:#0f5b5c; }
+    .slot-btn.selected { border-color:#0f5b5c; background:#0f5b5c; color:#fff; }
 
     .section-card { border-radius:12px; border:1px solid #e0e4ec; margin-bottom:20px; }
     .section-card .section-header {
         padding:14px 20px; background:#f8f9fc; border-bottom:1px solid #e0e4ec;
-        border-radius:12px 12px 0 0; font-weight:700; color:#1a237e; font-size:14px;
+        border-radius:12px 12px 0 0; font-weight:700; 
     }
     .section-card .section-body { padding:20px; }
     .skeleton-box {
@@ -104,7 +104,7 @@
                     No available slots for this date. Try another date.
                 </div>
                 <div id="counselorInfo" class="mt-3" style="display:none;">
-                    <div style="display:inline-flex; align-items:center; gap:8px; background:#f3e9ff; border:1px solid #d4a8f0; color:#4a148c; border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600;">
+                    <div style="display:inline-flex; align-items:center; gap:8px; background:#e9fffb; border:1px solid #a8f0e0; color:#0f5b5c; border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600;">
                         <i class="fas fa-user-tie"></i>
                         <span>Assigned counselor: <strong id="counselorName"></strong></span>
                     </div>
@@ -118,7 +118,7 @@
                 <textarea name="reason" rows="3" class="form-control" maxlength="500"
                           placeholder="Let us know why you're rescheduling (optional)..."></textarea>
                 <div class="mt-4 d-flex justify-content-end">
-                    <button type="submit" class="btn" style="background:#D30404; color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
+                    <button type="submit" class="btn btn-primary" style="color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
                         <i class="fas fa-calendar-check mr-2"></i> Confirm Reschedule
                     </button>
                 </div>

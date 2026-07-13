@@ -54,7 +54,7 @@
         <i class="fas fa-comment-dots fa-3x mb-3" style="color:#ddd;"></i>
         <p class="text-muted mb-2">You haven't left any feedback yet.</p>
         <a href="{{ route('counselee.appointments.index') }}" class="btn btn-sm"
-           style="background:#4a148c; color:#fff; border-radius:20px; padding:7px 20px;">
+           style="background:#0f5b5c; color:#fff; border-radius:20px; padding:7px 20px;">
             View My Appointments
         </a>
     </div>

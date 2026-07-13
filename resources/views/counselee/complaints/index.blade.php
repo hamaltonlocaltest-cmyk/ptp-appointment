@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container py-4">
+<div class="py-4">
 
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
@@ -14,7 +14,7 @@
             <p class="text-muted mb-0" style="font-size:13px;">Track complaints you've filed and their resolution status.</p>
         </div>
         <a href="{{ route('counselee.complaints.create') }}"
-           class="btn" style="background:#D30404; color:#fff; border-radius:8px; padding:9px 20px; font-weight:600; font-size:13px;">
+           class="btn btn-primary">
             <i class="fas fa-plus mr-1"></i> File a Complaint
         </a>
     </div>

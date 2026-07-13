@@ -20,12 +20,15 @@
         .sidebar-heading { font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.45); padding: 12px 20px 4px; display: block; border-top: 1px solid rgba(255,255,255,0.1);  margin-top: 10px; }
         .user-panel { padding: 12px 16px !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
         .user-panel .info a { color: #fff !important; font-size: 14px; font-weight: 600; }
-        .user-panel .info small { color: rgba(255,255,255,0.45); font-size: 11px; }
+        .user-panel .info small { color: rgba(255,255,255,0.75); font-size: 13px; }
         .nav-sidebar .nav-link { border-radius: 6px !important; margin: 2px 8px !important; padding: 9px 12px !important; color: rgba(255,255,255,0.75) !important; transition: all 0.2s !important; font-weight:600; }
         .nav-sidebar .nav-link:hover, .nav-sidebar .nav-link.active { background: rgba(255,255,255,0.5) !important; color: #fff !important; }
         .nav-sidebar .nav-link .nav-icon { color: rgba(255,255,255,0.55) !important; }
         .nav-sidebar .nav-link.active .nav-icon, .nav-sidebar .nav-link:hover .nav-icon { color: #a5d6a7 !important; }
         .nav-sidebar .nav-link.active { box-shadow: inset 3px 0 0 var(--counselor-primary); }
+		
+		.btn-outline-primary {color: #0f5b5c;border-color: #0f5b5c;}
+		.btn-outline-primary:hover {color: #fff; background-color: #0f5b5c;  border-color: #0f5b5c;}
 
         /* Navbar */
         .main-header { box-shadow: 0 1px 8px rgba(0,0,0,0.07) !important; border-bottom: 1px solid #e8eaf0 !important; height:64px; }

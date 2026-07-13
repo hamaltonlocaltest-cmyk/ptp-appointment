@@ -66,8 +66,8 @@
                        style="border-radius:7px; border:1px solid #e0e4ec; padding:10px 22px;">
                         <i class="fas fa-arrow-left mr-1"></i> Cancel
                     </a>
-                    <button type="submit" class="btn"
-                            style="background:#D30404; color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
+                    <button type="submit" class="btn btn-primary"
+                            style="color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
                         <i class="fas fa-paper-plane mr-2"></i> Submit Complaint
                     </button>
                 </div>

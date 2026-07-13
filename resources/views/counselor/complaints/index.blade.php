@@ -6,18 +6,68 @@
 @endsection
 
 @section('content')
+
+<style>
+	.complaints-header {
+    gap: 1rem;
+	border-bottom:1px solid #ddd; padding-bottom:10px; margin-bottom:20px;
+}
+
+.complaints-title {
+    color: #1a1a2e;
+    font-weight: 600;
+    margin-bottom: .25rem;
+	font-size: 20px;
+}
+
+.complaints-subtitle {
+    color: #6c757d;
+    font-size: 0.813rem;
+}
+
+.complaint-btn {
+    background: #1b5e20;
+    color: #fff;
+    border-radius: 8px;
+    padding: 9px 20px;
+    font-size: 0.813rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: .3s ease;
+}
+
+.complaint-btn:hover,
+.complaint-btn:focus {
+    background: #154a19;
+    color: #fff;
+}
+
+@media (max-width: 767.98px) {
+    .complaints-header {
+        align-items: stretch;
+    }
+
+    .complaint-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+</style>
+
 <div class="container-fluid py-2">
 
-    <div class="d-flex align-items-center justify-content-between mb-4">
-        <div>
-            <h4 class="mb-0" style="color:#1a1a2e; font-weight:700;">Complaints</h4>
-            <p class="text-muted mb-0" style="font-size:13px;">Complaints you've filed, and complaints filed about your sessions.</p>
-        </div>
-        <a href="{{ route('counselor.complaints.create') }}"
-           class="btn" style="background:#1b5e20; color:#fff; border-radius:8px; padding:9px 20px; font-weight:600; font-size:13px;">
-            <i class="fas fa-plus mr-1"></i> File a Complaint
-        </a>
-    </div>
+    <div class="complaints-header d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+		<div>
+			<h4 class="complaints-title mb-1">Complaints</h4>
+			<p class="complaints-subtitle mb-0">
+				Complaints you've filed, and complaints filed about your sessions.
+			</p>
+		</div>
+
+		<a href="{{ route('counselor.complaints.create') }}" class="btn btn-primary">
+			<i class="fas fa-plus me-1"></i> File a Complaint
+		</a>
+	</div>
 
     @if(session('success'))
     <div class="alert alert-success d-flex align-items-center">

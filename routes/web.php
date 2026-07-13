@@ -35,6 +35,12 @@ use App\Http\Controllers\Counselee\FeedbackController as CounseleeFeedbackContro
 use App\Http\Controllers\Counselee\ComplaintController as CounseleeComplaintController;
 use App\Http\Controllers\Counselee\DonationController as CounseleeDonationController;
 
+// Location master (Phase 5)
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\Admin\CountryController as AdminCountryController;
+use App\Http\Controllers\Admin\StateController as AdminStateController;
+use App\Http\Controllers\Admin\CityController as AdminCityController;
+
 /*
 |--------------------------------------------------------------------------
 | Root
@@ -44,6 +50,17 @@ use App\Http\Controllers\Counselee\DonationController as CounseleeDonationContro
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
+
+/*
+|--------------------------------------------------------------------------
+| Location cascading dropdowns — public, guard-agnostic (used by
+| registration, admin forms, and any authenticated form alike)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('locations')->name('locations.')->group(function () {
+    Route::get('states/{country}', [LocationController::class, 'states'])->name('states');
+    Route::get('cities/{state}',   [LocationController::class, 'cities'])->name('cities');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +129,36 @@ Route::prefix('counselees')->name('counselees.')->group(function () {
                 Route::put('/{counselType}',          [CounselTypeController::class, 'update'])->name('update');
                 Route::patch('/{counselType}/toggle', [CounselTypeController::class, 'toggleStatus'])->name('toggle');
                 Route::delete('/{counselType}',       [CounselTypeController::class, 'destroy'])->name('destroy');
+            });
+
+            Route::prefix('countries')->name('countries.')->group(function () {
+                Route::get('/',                     [AdminCountryController::class, 'index'])->name('index');
+                Route::get('/create',               [AdminCountryController::class, 'create'])->name('create');
+                Route::post('/',                    [AdminCountryController::class, 'store'])->name('store');
+                Route::get('/{country}/edit',       [AdminCountryController::class, 'edit'])->name('edit');
+                Route::put('/{country}',            [AdminCountryController::class, 'update'])->name('update');
+                Route::patch('/{country}/toggle',   [AdminCountryController::class, 'toggleStatus'])->name('toggle');
+                Route::delete('/{country}',         [AdminCountryController::class, 'destroy'])->name('destroy');
+            });
+
+            Route::prefix('states')->name('states.')->group(function () {
+                Route::get('/',                   [AdminStateController::class, 'index'])->name('index');
+                Route::get('/create',             [AdminStateController::class, 'create'])->name('create');
+                Route::post('/',                  [AdminStateController::class, 'store'])->name('store');
+                Route::get('/{state}/edit',       [AdminStateController::class, 'edit'])->name('edit');
+                Route::put('/{state}',            [AdminStateController::class, 'update'])->name('update');
+                Route::patch('/{state}/toggle',   [AdminStateController::class, 'toggleStatus'])->name('toggle');
+                Route::delete('/{state}',         [AdminStateController::class, 'destroy'])->name('destroy');
+            });
+
+            Route::prefix('cities')->name('cities.')->group(function () {
+                Route::get('/',                  [AdminCityController::class, 'index'])->name('index');
+                Route::get('/create',            [AdminCityController::class, 'create'])->name('create');
+                Route::post('/',                 [AdminCityController::class, 'store'])->name('store');
+                Route::get('/{city}/edit',       [AdminCityController::class, 'edit'])->name('edit');
+                Route::put('/{city}',            [AdminCityController::class, 'update'])->name('update');
+                Route::patch('/{city}/toggle',   [AdminCityController::class, 'toggleStatus'])->name('toggle');
+                Route::delete('/{city}',         [AdminCityController::class, 'destroy'])->name('destroy');
             });
         });
 

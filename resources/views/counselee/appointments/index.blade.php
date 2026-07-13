@@ -6,15 +6,15 @@
 @endsection
 
 @section('content')
-<div class="container py-4">
+<div class="py-4">
 
-    <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3 mb-5">
         <div>
             <h4 class="mb-0" style="color:#1a1a2e; font-weight:700;">My Appointments</h4>
             <p class="text-muted mb-0" style="font-size:13px;">Track your upcoming and past counselling sessions.</p>
         </div>
         <a href="{{ route('counselee.appointments.create') }}"
-           class="btn" style="background:#D30404; color:#fff; border-radius:8px; padding:9px 20px; font-weight:600; font-size:13px;">
+           class="btn btn-primary">
             <i class="fas fa-plus mr-1"></i> Book New
         </a>
     </div>
@@ -52,7 +52,7 @@
     </style>
 
    
-    <h6 style="font-weight:700; color:#1a237e; margin-bottom:14px;">
+    <h6 style="font-weight:700; margin-bottom:14px;">
         <i class="fas fa-clock mr-2"></i> Upcoming ({{ $upcoming->count() }})
     </h6>
 
@@ -68,7 +68,7 @@
             <div style="flex:1; min-width:200px;">
                 <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
                     <span style="font-weight:700; font-size:15px; color:#1a1a2e;">{{ $appt->counselType->name ?? 'Unknown Type' }}</span>
-                    <span class="status-badge status-{{ $appt->status }}">{{ ucfirst($appt->status) }}</span>
+                    <span class="ml-2 status-badge status-{{ $appt->status }}">{{ ucfirst($appt->status) }}</span>
                     @if($appt->reschedules->count())
                     <span class="reschedule-tag"><i class="fas fa-history mr-1"></i>Rescheduled</span>
                     @endif

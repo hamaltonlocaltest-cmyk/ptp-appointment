@@ -7,12 +7,12 @@
 @endsection
 
 @section('content')
-<div class="container py-4">
+<div class="py-4">
 <div class="row justify-content-center">
 <div class="col-lg-7">
 
     <div class="text-center mb-4">
-        <div style="font-size:48px; color:#4a148c; margin-bottom:12px;">
+        <div style="font-size:48px; color:#0f5b5c; margin-bottom:12px;">
             <i class="fas fa-comment-dots"></i>
         </div>
         <h4 style="font-weight:700; color:#1a1a2e;">How was your session?</h4>
@@ -29,13 +29,13 @@
         <div class="card-body p-4">
 
             <div class="d-flex align-items-center mb-4 p-3"
-                 style="background:#f3e9ff; border-radius:10px; border:1px solid #d4a8f0;">
-                <div class="mr-3" style="width:48px; height:48px; border-radius:50%; background:#4a148c;
+                 style="background:#e9fffb; border-radius:10px; border:1px solid #a8f0e0;">
+                <div class="mr-3" style="width:48px; height:48px; border-radius:50%; background:#0f5b5c;
                      display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; font-weight:700; flex-shrink:0;">
                     {{ strtoupper(substr($appointment->counselor->first_name, 0, 1)) }}
                 </div>
                 <div>
-                    <div style="font-weight:700; color:#4a148c; font-size:15px;">{{ $appointment->counselor->full_name }}</div>
+                    <div style="font-weight:700; color:#0f5b5c; font-size:15px;">{{ $appointment->counselor->full_name }}</div>
                     <div style="font-size:12px; color:#7b1fa2;">
                         {{ $appointment->counselType->name }} &middot; {{ $appointment->appointment_date->format('M j, Y') }}
                     </div>
@@ -74,7 +74,7 @@
                         <i class="fas fa-arrow-left mr-1"></i> Back
                     </a>
                     <button type="submit" class="btn" id="submitFeedbackBtn" disabled
-                            style="background:#4a148c; color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px; opacity:.5;">
+                            style="background:#0f5b5c; color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px; opacity:.5;">
                         <i class="fas fa-paper-plane mr-2"></i> Submit Feedback
                     </button>
                 </div>
