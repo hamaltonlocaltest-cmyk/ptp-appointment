@@ -77,9 +77,9 @@ class FeedbackController extends Controller
             abort(403);
         }
 
-        if ($appointment->status !== 'completed') {
+        if (!$appointment->feedback_eligible) {
             return redirect()->route('counselee.appointments.index')
-                ->withErrors(['error' => 'Feedback can only be left for completed sessions.']);
+                ->withErrors(['error' => 'Feedback becomes available once the session\'s scheduled time has passed.']);
         }
 
         if ($appointment->feedback) {

@@ -64,6 +64,11 @@ class Counselor extends Authenticatable
         return $this->hasMany(CounselorAvailability::class);
     }
 
+    public function leaves()
+    {
+        return $this->hasMany(CounselorLeave::class);
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class);

@@ -16,7 +16,7 @@
 
         /* Sidebar */
         .main-sidebar { background: #0f5b5c;}
-        .brand-link { background: #fff; border-bottom: 1px solid rgba(255,255,255,0.1) !important; padding: 14px 16px !important; height: 64px;}
+        .brand-link { background: rgba(0,0,0,0.2) !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; padding: 12px 16px !important; height:64px; display:flex; align-items:center; justify-content:center }
         .sidebar-heading { font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.45); padding: 12px 20px 4px; display: block; border-top: 1px solid rgba(255,255,255,0.1);  margin-top: 10px; }
         .user-panel { padding: 12px 16px !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
         .user-panel .info a { color: #fff !important; font-size: 14px; font-weight: 600; }
@@ -367,7 +367,10 @@
 
     <aside class="main-sidebar elevation-0">
 		<a href="{{ route('counselor.dashboard') }}" class="brand-link">
-            <img src="{{ asset('images/persontoperson-logo.png') }}" class="img-fluid" alt="Person to Person Appointment">
+            <!--<img src="{{ asset('images/persontoperson-logo.png') }}" class="img-fluid" alt="Person to Person Appointment">-->
+			<span class="brand-text font-weight-light" style="color:#fff; font-size:16px; font-weight:700;">
+                <b>P2P</b> Counselor
+            </span>
         </a>
         <div class="sidebar">
             <div class="user-panel d-flex align-items-center">
@@ -400,6 +403,13 @@
                            class="nav-link {{ request()->routeIs('counselor.appointments.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-check"></i>
                             <p>My Appointments</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('counselor.leaves.index') }}"
+                           class="nav-link {{ request()->routeIs('counselor.leaves.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calendar-minus"></i>
+                            <p>My Leaves</p>
                         </a>
                     </li>
 

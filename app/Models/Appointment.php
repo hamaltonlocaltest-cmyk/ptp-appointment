@@ -93,10 +93,27 @@ class Appointment extends Model
     }
 
     // True once the session's scheduled end time has actually passed (not just
-    // the calendar date) and it's still confirmed — i.e. safe to mark completed.
+    // the calendar date) and it hasn't already been completed/cancelled — i.e.
+    // safe to mark completed. Accepts 'pending' as well as 'confirmed' so a
+    // booking that never got explicitly confirmed doesn't get stuck forever.
     public function getIsCompletableAttribute(): bool
     {
-        if ($this->status !== 'confirmed') {
+        if (!in_array($this->status, ['pending', 'confirmed'])) {
+            return false;
+        }
+
+        $endsAt = Carbon::parse($this->appointment_date->toDateString() . ' ' . $this->end_time);
+
+        return $endsAt->lte(now());
+    }
+
+    // True once the session's scheduled end time has passed, regardless of
+    // whether the counselor has explicitly marked it completed — feedback
+    // shouldn't be blocked on that manual step. Cancelled sessions never
+    // happened, so they're excluded.
+    public function getFeedbackEligibleAttribute(): bool
+    {
+        if ($this->status === 'cancelled') {
             return false;
         }
 
@@ -125,10 +142,10 @@ class Appointment extends Model
         })->orderByDesc('appointment_date')->orderByDesc('start_time');
     }
 
-    // Confirmed appointments whose scheduled end time has passed — eligible to be marked completed
+    // Pending/confirmed appointments whose scheduled end time has passed — eligible to be marked completed
     public function scopeCompletable($query)
     {
-        return $query->where('status', 'confirmed')
+        return $query->whereIn('status', ['pending', 'confirmed'])
                      ->whereRaw("TIMESTAMP(appointment_date, end_time) <= ?", [now()]);
     }
 }

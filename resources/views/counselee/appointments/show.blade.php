@@ -172,14 +172,16 @@
                         @if($appointment->feedback->comments)
                         <div class="mt-2" style="font-size:13px; color:#555; font-style:italic;">"{{ $appointment->feedback->comments }}"</div>
                         @endif
-                    @elseif($appointment->status === 'completed')
+                    @elseif($appointment->feedback_eligible)
                         <p style="font-size:13px; color:#666; margin-bottom:12px;">You haven't rated this session yet.</p>
                         <a href="{{ route('counselee.appointments.feedback.create', $appointment) }}"
                            class="btn btn-block" style="background:#0f5b5c; color:#fff; border-radius:20px; font-size:13px; font-weight:600; padding:8px;">
                             <i class="fas fa-star mr-1"></i> Leave Feedback
                         </a>
+                    @elseif($appointment->status === 'cancelled')
+                        <p style="font-size:12.5px; color:#9e9e9e; margin-bottom:0;">This session was cancelled, so no feedback is needed.</p>
                     @else
-                        <p style="font-size:12.5px; color:#9e9e9e; margin-bottom:0;">Feedback becomes available once this session is marked completed.</p>
+                        <p style="font-size:12.5px; color:#9e9e9e; margin-bottom:0;">Feedback becomes available once the session's scheduled time has passed.</p>
                     @endif
                 </div>
             </div>

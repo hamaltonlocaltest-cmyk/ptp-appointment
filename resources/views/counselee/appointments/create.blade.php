@@ -168,6 +168,12 @@
     .summary-row .summary-value { font-size:13px; font-weight:700; color:#333; word-break:break-word; }
     .summary-row .summary-value.muted { color:#878787; font-weight:600; }
     .summary-hint { font-size:11px; color:#444; text-align:center; padding:10px 18px 16px; }
+	
+	@media only screen and (max-width:576px){
+		.slot-btn{padding: 10px 9px;font-size: 14px;}
+		.date-btn{min-width: 72px; }
+		.date-grid{gap: 4px;}
+	}
     </style>
 
     <form id="bookingForm" action="{{ route('counselee.appointments.preview') }}" method="POST">
@@ -278,11 +284,11 @@
 
                 <div class="mt-4 d-flex justify-content-between">
                     <button type="button" class="btn btn-secondary" onclick="goToStep(3)"
-                            style="border-radius:7px;  padding:10px 22px;">
+                            style="border-radius:7px;  padding:10px 20px;">
                         <i class="fas fa-arrow-left mr-1"></i> Back
                     </button>
                     <button type="submit" class="btn btn-primary"
-                            style="color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
+                            style="color:#fff; border-radius:7px; padding:10px 20px; font-weight:700; font-size:15px;">
                         <i class="fas fa-calendar-check mr-2"></i> Confirm Booking
                     </button>
                 </div>

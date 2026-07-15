@@ -160,7 +160,16 @@ class AppointmentController extends Controller
             abort(403);
         }
 
-        return response()->json(['dates' => $this->slots->availableDates($appointment->counsel_type_id)]);
+        $cityId = $appointment->counselee->city_id;
+        $dates  = $this->slots->availableDates($appointment->counsel_type_id, $cityId);
+
+        $response = ['dates' => $dates];
+
+        if (empty($dates) && $this->cityIsTheBlocker($appointment->counsel_type_id, $cityId)) {
+            $response['message'] = 'No counselors are available in this counsellee\'s city for in-person sessions. Try a different counselling area, or look for online sessions.';
+        }
+
+        return response()->json($response);
     }
 
     // -----------------------------------------------------------------------
@@ -176,14 +185,35 @@ class AppointmentController extends Controller
 
         $request->validate(['date' => 'required|date|after:today']);
 
+        $cityId = $appointment->counselee->city_id;
+
         $slots = $this->slots->availableSlots(
             $appointment->counsel_type_id,
             $request->date,
             $appointment->counselee_id,
-            $appointment->id
+            $appointment->id,
+            $cityId
         );
 
-        return response()->json(['slots' => $slots]);
+        $response = ['slots' => $slots];
+
+        if (empty($slots) && $this->cityIsTheBlocker($appointment->counsel_type_id, $cityId)) {
+            $response['message'] = 'No counselors are available in this counsellee\'s city for in-person sessions. Try a different date, or look for online sessions.';
+        }
+
+        return response()->json($response);
+    }
+
+    // True when counselors exist for this type in general, but none of them
+    // can be matched once we restrict to the given city.
+    private function cityIsTheBlocker(int $counselTypeId, ?int $cityId): bool
+    {
+        if (!$cityId) {
+            return false;
+        }
+
+        return $this->slots->hasAnyCounselorForType($counselTypeId)
+            && $this->slots->matchingCounselors($counselTypeId, $cityId)->isEmpty();
     }
 
     // -----------------------------------------------------------------------

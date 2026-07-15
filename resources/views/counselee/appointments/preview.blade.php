@@ -12,7 +12,7 @@
 <div class="col-lg-7">
 
     <div class="text-center mb-4">
-        <div style="font-size:48px; color:#009643; margin-bottom:12px;">
+        <div style="font-size:48px; color:#1f8582; margin-bottom:12px;">
             <i class="fas fa-calendar-check"></i>
         </div>
         <h4 style="font-weight:700; color:#1a1a2e;">Review Your Appointment</h4>
@@ -31,17 +31,17 @@
      
             <div class="d-flex align-items-center mb-4 p-3"
                  style="background:#e9fffb; border-radius:10px; border:1px solid #a8f0e0;">
-                <div class="mr-3" style="width:48px; height:48px; border-radius:50%; background:#0f5b5c;
+                <div class="mr-3" style="width:48px; height:48px; border-radius:50%; background:#1f8582;
                      display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; font-weight:700; flex-shrink:0;">
                     {{ strtoupper(substr($counselor->first_name, 0, 1)) }}
                 </div>
                 <div>
-                    <div style="font-weight:700; color:#0f5b5c; font-size:15px;">{{ $counselor->full_name }}</div>
+                    <div style="font-weight:700; color:#1f8582; font-size:15px;">{{ $counselor->full_name }}</div>
                     <div style="font-size:12px; color:#7b1fa2;">{{ $counselor->specialization }}</div>
                     <div style="font-size:12px; color:#9e9e9e;">{{ $counselor->experience_years }} yrs experience · {{ $counselor->training_level }}</div>
                 </div>
                 <div class="ml-auto text-right">
-                    <span class="badge" style="background:#0f5b5c; color:#fff; padding:5px 12px; border-radius:20px; font-size:12px;">
+                    <span class="badge" style="background:#1f8582; color:#fff; padding:5px 12px; border-radius:20px; font-size:12px;">
                         {{ $counselor->mode }}
                     </span>
                 </div>
@@ -119,11 +119,11 @@
 
         <div class="d-flex justify-content-between">
             <a href="{{ route('counselee.appointments.create') }}"
-               class="btn btn-light" style="border-radius:8px; padding:11px 24px; border:1px solid #ddd;">
+               class="btn btn-secondary" style="border-radius:8px; padding:11px 24px; font-weight: 700;">
                 <i class="fas fa-arrow-left mr-2"></i> Back
             </a>
-            <button type="submit" class="btn"
-                    style="background:#D30404; color:#fff; border-radius:8px; padding:11px 32px; font-weight:700; font-size:15px;">
+            <button type="submit" class="btn btn-primary"
+                    style="color:#fff; border-radius:8px; padding:11px 32px; font-weight:700; ">
                 <i class="fas fa-check-circle mr-2"></i> Confirm Appointment
             </button>
         </div>

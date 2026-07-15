@@ -10,7 +10,7 @@
 
 <div class="card mb-4">
     <div class="card-body p-4">
-        <div class="d-flex align-items-center flex-wrap">
+        <div class="d-flex align-items-center">
             <div class="avatar-circle mr-3" style="background:#0f5b5c; width:56px; height:56px; font-size:22px;">
                 {{ strtoupper(substr($counselor->first_name, 0, 1)) }}
             </div>

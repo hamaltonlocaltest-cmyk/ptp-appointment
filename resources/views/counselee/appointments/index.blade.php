@@ -8,13 +8,13 @@
 @section('content')
 <div class="py-4">
 
-    <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3 mb-5">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 border-bottom pb-3 mb-5">
         <div>
             <h4 class="mb-0" style="color:#1a1a2e; font-weight:700;">My Appointments</h4>
             <p class="text-muted mb-0" style="font-size:13px;">Track your upcoming and past counselling sessions.</p>
         </div>
         <a href="{{ route('counselee.appointments.create') }}"
-           class="btn btn-primary">
+           class="btn btn-primary mt-3 mt-sm-0">
             <i class="fas fa-plus mr-1"></i> Book New
         </a>
     </div>
@@ -147,17 +147,15 @@
                 </div>
             </div>
             <div class="d-flex align-items-center flex-wrap" style="gap:6px;">
-                @if($appt->status === 'completed')
-                    @if($appt->feedback)
+                @if($appt->feedback)
                     <span style="font-size:12px; color:#f9a825; font-weight:600;">
                         <i class="fas fa-star"></i> You rated {{ $appt->feedback->rating }}/5
                     </span>
-                    @else
+                @elseif($appt->feedback_eligible)
                     <a href="{{ route('counselee.appointments.feedback.create', $appt) }}"
                        class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:20px; font-size:12px; padding:5px 14px;">
                         <i class="fas fa-star mr-1"></i> Leave Feedback
                     </a>
-                    @endif
                 @endif
                 <a href="{{ route('counselee.appointments.show', $appt) }}" class="btn btn-sm btn-outline-secondary action-btn">
                     <i class="fas fa-eye mr-1"></i> View

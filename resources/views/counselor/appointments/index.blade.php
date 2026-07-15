@@ -359,7 +359,10 @@
     </h6>
 
     @foreach($past as $appt)
-    @php $statusColor = ['pending'=>'#FFC107','confirmed'=>'#009643','cancelled'=>'#dc3545','completed'=>'#17a2b8'][$appt->status] ?? '#ccc'; @endphp
+    @php
+        $statusColor = ['pending'=>'#FFC107','confirmed'=>'#009643','cancelled'=>'#dc3545','completed'=>'#17a2b8'][$appt->status] ?? '#ccc';
+        $completable = $appt->is_completable;
+    @endphp
     <div class="appt-card d-flex past-event-card">
     <div class="appt-left" style="background:{{ $statusColor }};"></div>
 
@@ -392,10 +395,27 @@
             </div>
         </div>
 
-        <a href="{{ route('counselor.appointments.show', $appt) }}"
-           class="btn btn-sm btn-outline-secondary action-btn">
-            <i class="fas fa-eye mr-1"></i> View
-        </a>
+        <div class="d-flex flex-wrap" style="gap:6px;">
+            @if($completable)
+            <form action="{{ route('counselor.appointments.complete',$appt) }}"
+                  method="POST"
+                  id="complete-form-{{ $appt->id }}">
+                @csrf
+                <button
+                    type="button"
+                    class="btn btn-sm btn-outline-info action-btn"
+                    onclick="openCompleteModal('{{ $appt->id }}','{{ $appt->counselType->name ?? 'Unknown Type' }}','{{ $appt->counselee->full_name ?? 'Deleted Counsellee' }}')">
+                    <i class="fas fa-check-double mr-1"></i>
+                    Mark Completed
+                </button>
+            </form>
+            @endif
+
+            <a href="{{ route('counselor.appointments.show', $appt) }}"
+               class="btn btn-sm btn-outline-secondary action-btn">
+                <i class="fas fa-eye mr-1"></i> View
+            </a>
+        </div>
 
     </div>
 </div>

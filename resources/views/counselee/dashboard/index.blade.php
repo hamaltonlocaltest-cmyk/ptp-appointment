@@ -153,7 +153,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
-                <span style="font-weight:600;">
+                <span style="font-weight:600; flex:auto">
                     <i class="fas fa-calendar-check mr-2"></i> Recent Appointments
                 </span>
                 <a href="{{ route('counselee.appointments.index') }}"
@@ -172,7 +172,7 @@
                     </a>
                 </div>
                 @else
-                <table class="table table-hover mb-0">
+                <table class="table table-hover mb-0" id="tbl-recent-table">
                     <thead>
                         <tr>
                             <th>Type</th>
@@ -236,3 +236,27 @@
 </div>
 
 @endsection
+
+
+@push('scripts')
+<script>
+$(document).ready(function () {
+
+    $('#tbl-recent-table').DataTable({
+        responsive: true,
+        autoWidth: false,
+        scrollX: false,
+        pageLength: 10,
+        ordering: false,
+        searching: false,
+        lengthChange: false,
+        info: false,
+        language: {
+            search: "",
+            searchPlaceholder: "Search..."
+        }
+    });
+
+});
+</script>
+@endpush
