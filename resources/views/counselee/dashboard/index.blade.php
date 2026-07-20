@@ -8,19 +8,15 @@
 @section('content')
 
 <style>
-.stat-card { border-radius:12px; padding:22px 20px; color:#fff; position:relative; overflow:hidden; height:100%; }
-.stat-card h3 { font-size:34px; font-weight:700; margin:0 0 4px; }
-.stat-card p { font-size:13px; margin:0; opacity:0.85; }
-.stat-card .stat-icon { position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:52px; opacity:0.12; }
 .avatar-circle { width:36px; height:36px; }
-.badge-active   { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; }
+.badge-active   { background:#eaf7f5; color:#087a7f; border:1px solid #087a7f; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; }
 .badge-inactive { background:#ffebee; color:#b71c1c; border:1px solid #ef9a9a; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; }
 .card-header { border-bottom:1px solid #f0f2f5; padding:14px 20px; background:#fff; border-radius:10px 10px 0 0; }
-.table thead th { background:#f8f9fc; color:#4a148c; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-top:none; font-weight:600; padding:10px 16px; }
+.table thead th { background:#f8f9fc; color:#087a7f; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-top:none; font-weight:600; padding:10px 16px; }
 .table td { vertical-align:middle; font-size:13px; padding:10px 16px; }
 .table-hover tbody tr:hover { background:#f8f9fc; }
 .quick-action-btn { display:flex; align-items:center; gap:12px; padding:16px 20px; border-radius:10px; border:1.5px solid #e0e4ec; background:#fff; text-decoration:none; color:#333; transition:all 0.2s; margin-bottom:12px; }
-.quick-action-btn:hover { border-color:#4a148c; background:#f3e5f5; color:#4a148c; text-decoration:none; }
+.quick-action-btn:hover { border-color:#087a7f; background:#eaf7f5; color:#087a7f; text-decoration:none; }
 .quick-action-btn .qa-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
 .quick-action-btn .qa-title { font-size:14px; font-weight:600; }
 .quick-action-btn .qa-sub { font-size:12px; color:#9e9e9e; margin-top:2px; }
@@ -157,7 +153,7 @@
                     <i class="fas fa-calendar-check mr-2"></i> Recent Appointments
                 </span>
                 <a href="{{ route('counselee.appointments.index') }}"
-                   style="font-size:12px; color:#4a148c; text-decoration:none;">
+                   style="font-size:12px; color:#087a7f; text-decoration:none;">
                     View All <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             </div>
@@ -167,7 +163,7 @@
                     <i class="fas fa-calendar-times" style="font-size:40px; color:#e0e0e0; display:block; margin-bottom:10px;"></i>
                     <p class="text-muted mb-2">No appointments yet.</p>
                     <a href="{{ route('counselee.appointments.create') }}"
-                       class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:20px; padding:7px 20px; font-size:13px;">
+                       class="btn btn-sm" style="background:#087a7f; color:#fff; border-radius:20px; padding:7px 20px; font-size:13px;">
                         Book Your First Appointment
                     </a>
                 </div>
@@ -186,7 +182,7 @@
                         <tr>
                             <td>
                                 @if($appt->counselType->icon)
-                                <i class="{{ $appt->counselType->icon }} mr-1" style="color:{{ $appt->counselType->color ?: '#4a148c' }};"></i>
+                                <i class="{{ $appt->counselType->icon }} mr-1" style="color:{{ $appt->counselType->color ?: '#087a7f' }};"></i>
                                 @endif
                                 {{ $appt->counselType->name }}
                             </td>

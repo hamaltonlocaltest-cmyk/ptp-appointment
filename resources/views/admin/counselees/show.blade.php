@@ -20,7 +20,7 @@
                 <div class="d-flex align-items-center justify-content-between flex-wrap">
                     <div class="d-flex align-items-center">
                         <div class="avatar-circle mr-3"
-                             style="width:64px; height:64px; font-size:24px; background:#{{ substr(md5($counselee->email),0,6) }};">
+                             style="width:64px; height:64px; font-size:24px;">
                             {{ strtoupper(substr($counselee->first_name,0,1)) }}
                         </div>
                         <div>

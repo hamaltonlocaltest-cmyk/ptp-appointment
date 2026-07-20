@@ -74,7 +74,7 @@
                     @endif
                 </div>
                 <div style="font-size:13px; color:#555;">
-                    <i class="fas fa-user-tie mr-1" style="color:#4a148c;"></i>
+                    <i class="fas fa-user-tie mr-1" style="color:#087a7f;"></i>
                     {{ $appt->counselor->full_name ?? 'Unassigned Counselor' }}
                     @if($appt->counselor?->status === 'deleted')<span class="badge-inactive ml-1" style="font-size:9px;">Deleted</span>@endif
                     &nbsp;·&nbsp;
@@ -113,8 +113,8 @@
     <div class="text-center py-5" style="background:#f8f9fc; border-radius:12px; border:1px dashed #ddd;">
         <i class="fas fa-calendar-alt fa-3x mb-3" style="color:#ddd;"></i>
         <p class="text-muted mb-2">No upcoming appointments.</p>
-        <a href="{{ route('counselee.appointments.create') }}" class="btn btn-sm"
-           style="background:#D30404; color:#fff; border-radius:20px; padding:7px 20px;">
+        <a href="{{ route('counselee.appointments.create') }}" class="btn btn-outline-primary btn-sm"
+           style="border-radius:20px; padding:7px 20px;">
             Book Your First Session
         </a>
     </div>
@@ -153,7 +153,7 @@
                     </span>
                 @elseif($appt->feedback_eligible)
                     <a href="{{ route('counselee.appointments.feedback.create', $appt) }}"
-                       class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:20px; font-size:12px; padding:5px 14px;">
+                       class="btn btn-sm" style="background:#087a7f; color:#fff; border-radius:20px; font-size:12px; padding:5px 14px;">
                         <i class="fas fa-star mr-1"></i> Leave Feedback
                     </a>
                 @endif

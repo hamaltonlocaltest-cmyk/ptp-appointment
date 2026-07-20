@@ -62,8 +62,8 @@
     <div class="text-center py-5" style="background:#f8f9fc; border-radius:12px; border:1px dashed #ddd;">
         <i class="fas fa-comment-slash fa-3x mb-3" style="color:#ddd;"></i>
         <p class="text-muted mb-2">You haven't filed any complaints.</p>
-        <a href="{{ route('counselee.complaints.create') }}" class="btn btn-sm"
-           style="background:#D30404; color:#fff; border-radius:20px; padding:7px 20px;">
+        <a href="{{ route('counselee.complaints.create') }}" class="btn btn-outline-primary btn-sm"
+           style="border-radius:20px; padding:7px 20px;">
             File a Complaint
         </a>
     </div>

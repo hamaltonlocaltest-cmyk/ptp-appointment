@@ -24,7 +24,7 @@
             </div>
             <div class="ml-auto">
                 @if($counselor->status === 'active')
-                    <span class="badge-active" style="background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Active</span>
+                    <span class="badge-active" style="background:#eaf7f5; color:#087a7f; border:1px solid #a5d6a7; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Active</span>
                 @else
                     <span class="badge-pending" style="background:#fff3e0; color:#e65100; border:1px solid #ffcc80; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">{{ ucfirst($counselor->status) }}</span>
                 @endif
@@ -90,7 +90,7 @@
                     <i class="fas fa-clock mr-1"></i>{{ $appt->formatted_time }}
                 </div>
             </div>
-            <span class="badge-active" style="background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">{{ ucfirst($appt->status) }}</span>
+            <span class="badge-active" style="background:#eaf7f5; color:#087a7f; border:1px solid #a5d6a7; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">{{ ucfirst($appt->status) }}</span>
         </div>
         @empty
         <div class="text-center py-5">

@@ -3,59 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body { font-family:'Segoe UI',Arial,sans-serif; background:#eef0f4; margin:0; padding:0; }
-.wrap { max-width:600px; margin:30px auto; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 6px 28px rgba(27,94,32,0.12); }
-.hdr { background:linear-gradient(135deg, #1b5e20, #2e7d32); padding:32px 30px 28px; text-align:center; }
-.hdr-icon { width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,0.18); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:22px; }
-.hdr h1 { color:#fff; margin:0; font-size:20px; font-weight:700; }
-.hdr p  { color:#c8e6c9; margin:6px 0 0; font-size:13px; }
-.body { padding:30px 30px 26px; color:#333; line-height:1.6; }
-.body h2 { color:#1b5e20; margin:0 0 6px; font-size:17px; font-weight:700; }
-.amount-box { background:#e8f5e9; border-radius:12px; padding:22px; margin:18px 0; text-align:center; }
-.amount-label { font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:#2e7d32; font-weight:700; }
-.amount-value { font-size:32px; font-weight:800; color:#1b5e20; margin-top:4px; }
-.detail-box { background:#f9f9fb; border:1px solid #ececf2; border-radius:12px; padding:18px 22px; margin:18px 0; }
-.detail-row { display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px solid #eee; font-size:13.5px; }
-.detail-row:last-child { border-bottom:none; }
-.detail-label { color:#888; font-weight:600; }
-.detail-value { color:#222; font-weight:700; text-align:right; }
-.ftr { background:#f9f9fb; text-align:center; padding:20px; font-size:11.5px; color:#a0a0a8; border-top:1px solid #eee; }
-@media (max-width:600px) { .wrap { margin:0; border-radius:0; } .hdr, .body, .ftr { padding-left:20px; padding-right:20px; } }
-</style>
+<title>Donation Receipt</title>
 </head>
-<body>
-<div class="wrap">
-    <div class="hdr">
-        <div class="hdr-icon">&#10084;</div>
-        <h1>Thank You for Your Donation</h1>
-        <p>P2P Counselling</p>
-    </div>
-    <div class="body">
-        <h2>Hello, {{ $donation->donor_display_name }}!</h2>
-        <p>Your generosity helps us keep counselling accessible for everyone who needs it. Thank you for your support.</p>
 
-        <div class="amount-box">
-            <div class="amount-label">Amount Donated</div>
-            <div class="amount-value">{{ $donation->currency }} {{ number_format((float) $donation->amount, 2) }}</div>
+<body style="margin:0;padding:30px;background:#f4f6f8;font-family:'Segoe UI',Arial,sans-serif;">
+
+	
+
+
+<div style="max-width:620px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);">
+<div style="height:20px;"></div>
+<div style="text-align:center;">
+		<img src="https://persontoperson.org/wp-content/uploads/2020/06/persontoperson-logo-300x52.png" style="max-width:auto; width:280px; ">
+	</div>
+	<div style="height:20px;"></div>
+	
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#2e8a44,#256f37);padding:35px 30px;text-align:center;">
+
+        
+
+        <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">
+            Thank You for Your Donation
+        </h1>
+
+        <p style="margin:8px 0 0;color:#d9f2df;font-size:14px;">
+            P2P Counselling
+        </p>
+
+    </div>
+
+    <!-- Body -->
+    <div style="padding:35px 30px;color:#1f2937;font-size:15px;line-height:1.7;">
+
+        <h2 style="margin:0 0 10px;font-size:20px;color:#2e8a44;">
+            Hello, {{ $donation->donor_display_name }}!
+        </h2>
+
+        <p style="margin:0 0 25px;color:#4b5563;">
+            Your generosity helps us keep counselling accessible for everyone who needs it. Thank you for your support.
+        </p>
+
+        <!-- Amount -->
+        <div style="background:#f4fbf6;border:2px solid #d8eedf;border-radius:12px;padding:25px;text-align:center;margin-bottom:25px;">
+
+            <div style="font-size:12px;font-weight:700;color:#2e8a44;letter-spacing:1px;text-transform:uppercase;">
+                Amount Donated
+            </div>
+
+            <div style="margin-top:8px;font-size:34px;font-weight:800;color:#dc2426;">
+                {{ $donation->currency }} {{ number_format((float) $donation->amount, 2) }}
+            </div>
+
         </div>
 
-        <div class="detail-box">
-            <div class="detail-row">
-                <span class="detail-label">Payment Reference</span>
-                <span class="detail-value">{{ $donation->payment_reference }}</span>
+        <!-- Details -->
+        <div style="background:#fafafa;border:1px solid #e5e7eb;border-radius:12px;padding:20px;">
+
+            <div style="padding:12px 0;border-bottom:1px solid #ececec;overflow:hidden;">
+                <span style="float:left;font-weight:600;color:#6b7280;">Payment Reference</span>
+                <span style="float:right;font-weight:700;color:#1f2937;">
+                    {{ $donation->payment_reference }}
+                </span>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Date</span>
-                <span class="detail-value">{{ $donation->updated_at->format('M j, Y g:i A') }}</span>
+
+            <div style="padding:12px 0;overflow:hidden;">
+                <span style="float:left;font-weight:600;color:#6b7280;">Date</span>
+                <span style="float:right;font-weight:700;color:#1f2937;">
+                    {{ $donation->updated_at->format('M j, Y g:i A') }}
+                </span>
             </div>
+
         </div>
 
-        <p>Warm regards,<br><strong>P2P Counselling Team</strong></p>
+        <p style="margin-top:30px;color:#1f2937;">
+            Warm regards,<br>
+            <strong style="color:#2e8a44;">P2P Counselling Team</strong>
+        </p>
+
     </div>
-    <div class="ftr">
+
+    <!-- Footer -->
+    <div style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:18px;text-align:center;font-size:12px;color:#6b7280;">
         &copy; {{ date('Y') }} Person to Person Counselling. All rights reserved.
     </div>
+
 </div>
+
 </body>
 </html>

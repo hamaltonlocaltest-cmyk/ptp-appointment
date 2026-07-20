@@ -71,12 +71,12 @@
                 </div>
 
                 <div class="mt-4 d-flex justify-content-between">
-                    <a href="{{ route('counselor.leaves.index') }}" class="btn btn-light"
-                       style="border-radius:7px; border:1px solid #e0e4ec; padding:10px 22px;">
+                    <a href="{{ route('counselor.leaves.index') }}" class="btn btn-secondary"
+                       style="border-radius:7px; padding:10px 22px; font-weight: 600;">
                         <i class="fas fa-arrow-left mr-1"></i> Cancel
                     </a>
-                    <button type="submit" class="btn"
-                            style="background:#1b5e20; color:#fff; border-radius:7px; padding:10px 30px; font-weight:700; font-size:15px;">
+                    <button type="submit" class="btn btn-primary"
+                            style=" color:#fff; border-radius:7px; padding:10px 30px; font-weight:700;">
                         <i class="fas fa-calendar-minus mr-2"></i> Add Leave
                     </button>
                 </div>

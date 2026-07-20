@@ -36,7 +36,7 @@
                 
                 <div class="d-flex align-items-center p-3 mb-4"
                      id="previewBanner"
-                     style="background:#e8eaf6; border-radius:10px; border:1.5px solid #c5cae9;">
+                     style="background:#fff; border-radius:10px; border:1.5px solid #087a7f;">
                     <div id="previewIconBox"
                          style="width:48px; height:48px; border-radius:10px; background:{{ $counselType->color }}22;
                                 display:flex; align-items:center; justify-content:center; margin-right:14px; flex-shrink:0;">

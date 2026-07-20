@@ -33,8 +33,8 @@
     .appt-date-box .month { font-size:11px; color:#9e9e9e; font-weight:600; text-transform:uppercase; }
     .status-badge { padding:3px 12px; border-radius:20px; font-size:11px; font-weight:700; }
     .status-pending   { background:#fff3cd; color:#856404; }
-    .status-confirmed { background:#d4edda; color:#155724; }
-    .status-cancelled { background:#f8d7da; color:#721c24; }
+    .status-confirmed { background:#d4edda; color:#155724;  }
+    .status-cancelled { background:#f8d7da; color:#721c24; border:1px solid #f8d7da }
     .status-completed { background:#d1ecf1; color:#0c5460; }
     .reschedule-tag { background:#ede7f6; color:#4527a0; padding:2px 9px; border-radius:12px; font-size:10px; font-weight:700; }
     .action-btn { border-radius:20px; font-size:12px; padding:5px 14px; }

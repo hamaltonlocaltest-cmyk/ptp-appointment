@@ -79,7 +79,7 @@
                     <td>
                         <div class="d-flex justify-content-center" style="gap:5px;">
                             <a href="{{ route('admin.donations.show', $d) }}"
-                               class="btn-action" title="View" style="background:#e3f2fd; color:#1565c0;">
+                               class="btn-action" title="View" style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-eye"></i>
                             </a>
                             @if($d->status === 'pending')

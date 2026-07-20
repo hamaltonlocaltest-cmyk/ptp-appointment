@@ -12,7 +12,7 @@
 
 <div class="row mb-3">
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card bg-admin">
+        <div class="stat-card bg-counselor">
             <h3>{{ $total_admins }}</h3>
             <p>Total Admins</p>
             <i class="fas fa-user-shield stat-icon"></i>
@@ -50,11 +50,11 @@
                     <i class="fas fa-bolt mr-1"></i> Quick Actions
                 </span>								<div class="qbtn-wrap">
 					<a href="{{ route('admin.counselors.create') }}" class="btn btn-sm mr-2"
-					   style="background:#e8f5e9; color:#1b5e20; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #c8e6c9;">
+					   style="background:#eaf7f5; color:#087a7f; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #087a7f;">
 						<i class="fas fa-plus mr-1"></i> Add Counselor
 					</a>
 					<a href="{{ route('admin.counselees.create') }}" class="btn btn-sm mr-2"
-					   style="background:#f3e5f5; color:#4a148c; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #e1bee7;">
+					    style="background:#eaf7f5; color:#087a7f; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #087a7f;">
 						<i class="fas fa-plus mr-1"></i> Add Counselee
 					</a>
 					<a href="{{ route('admin.counselors.index', ['status' => 'pending']) }}" class="btn btn-sm"
@@ -71,7 +71,7 @@
    
     <div class="col-md-6 mb-3">
         <div class="card h-100">
-           						<style>				.recent-header{					background:#fff;					display:flex;					align-items:center;					justify-content:space-between;					gap:10px;					padding:15px 20px;				}				.recent-title{					font-weight:600;					display:flex;					align-items:center;				}				.recent-title i{					color:#1b5e20;				}				.view-all-link{					font-size:12px;					color:#3949ab;					text-decoration:none;					white-space:nowrap;					font-weight:500;				}				.view-all-link:hover{					text-decoration:none;				}				.recent-title{flex: 0 0 60%;}				.view-all-link{flex: 0 0 40%; text-align: end;}				@media (max-width:767px){					.recent-header{						/*flex-direction:column;						align-items:flex-start;*/					}															.view-all-link{						width:100%;						text-align:right;						margin-top:5px;					}				}			</style>						<div class="card-header recent-header">				<span class="recent-title">					<i class="fas fa-user-md mr-2"></i>					Recent Counselors				</span>				<a href="{{ route('admin.counselors.index') }}" class="view-all-link">					View All <i class="fas fa-arrow-right ml-1"></i>				</a>			</div>
+           						<style>				.recent-header{					background:#fff;					display:flex;					align-items:center;					justify-content:space-between;					gap:10px;					padding:15px 20px;				}				.recent-title{					font-weight:600;					display:flex;					align-items:center;				}				.recent-title i{					color:#1b5e20;				}				.view-all-link{					font-size:12px;					color:#087a7f !important;					text-decoration:none;					white-space:nowrap;					font-weight:500;				}				.view-all-link:hover{					text-decoration:none;				}				.recent-title{flex: 0 0 60%;}				.view-all-link{flex: 0 0 40%; text-align: end;}				@media (max-width:767px){					.recent-header{						/*flex-direction:column;						align-items:flex-start;*/					}															.view-all-link{						width:100%;						text-align:right;						margin-top:5px;					}				}			</style>						<div class="card-header recent-header">				<span class="recent-title">					<i class="fas fa-user-md mr-2"></i>					Recent Counselors				</span>				<a href="{{ route('admin.counselors.index') }}" class="view-all-link">					View All <i class="fas fa-arrow-right ml-1"></i>				</a>			</div>
             <div class="card-body p-0">				<div class="table-responsive">
 					<table class="table table-hover mb-0">
                     <thead>
@@ -87,7 +87,7 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="avatar-circle mr-2"
-                                         style="background:#{{ substr(md5($c->email), 0, 6) }}; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; flex-shrink:0;">
+                                         style=" width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">
                                         {{ strtoupper(substr($c->first_name, 0, 1)) }}
                                     </div>
                                     <div>
@@ -140,7 +140,7 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="avatar-circle mr-2"
-                                         style="background:#{{ substr(md5($c->email), 0, 6) }}; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; flex-shrink:0;">
+                                         style=" width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">
                                         {{ strtoupper(substr($c->first_name, 0, 1)) }}
                                     </div>
                                     <div>

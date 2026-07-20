@@ -42,7 +42,7 @@
     <div class="col-lg-8">
         <div class="card mb-3">
             <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
-                <span style="color:#1f8582; font-weight:600; font-size:14px;">
+                <span style="color:#1f8582; font-weight:600; font-size:14px; flex:auto;">
                     <i class="fas fa-calendar-check mr-2"></i>{{ $appointment->counselType->name ?? 'Unknown Type' }}
                 </span>
                 @php $badge = ['pending'=>'badge-pending','confirmed'=>'badge-active','cancelled'=>'badge-inactive','completed'=>'badge-active'][$appointment->status] ?? 'badge-pending'; @endphp
@@ -137,7 +137,7 @@
             <div class="card-body">
                 @if($appointment->counselee)
                 <div class="d-flex align-items-center mb-2">
-                    <div class="avatar-circle mr-3" style="background:#{{ substr(md5($appointment->counselee->email),0,6) }};">
+                    <div class="avatar-circle mr-3">
                         {{ strtoupper(substr($appointment->counselee->first_name,0,1)) }}
                     </div>
                     <div>
@@ -168,7 +168,7 @@
             <div class="card-body">
                 @if($appointment->counselor)
                 <div class="d-flex align-items-center mb-2">
-                    <div class="avatar-circle mr-3" style="background:#{{ substr(md5($appointment->counselor->email),0,6) }};">
+                    <div class="avatar-circle mr-3">
                         {{ strtoupper(substr($appointment->counselor->first_name,0,1)) }}
                     </div>
                     <div>

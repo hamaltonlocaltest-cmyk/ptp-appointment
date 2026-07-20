@@ -68,8 +68,8 @@
         justify-content:center; margin-bottom:4px; transition:.2s;
     }
     .step-label { font-size:11px; color:#aaa; font-weight:600; }
-    .step-indicator.active .step-circle { background:#D30404; color:#fff; }
-    .step-indicator.active .step-label { color:#D30404; }
+    .step-indicator.active .step-circle { background:#087a7f; color:#fff; }
+    .step-indicator.active .step-label { color:#087a7f; }
     .step-indicator.done .step-circle { background:#009643; color:#fff; }
     .step-indicator.done .step-label { color:#009643; }
 
@@ -78,8 +78,8 @@
         transition:.2s; text-align:center; height:100%; display:block; width:100%;
         background:#fff; font:inherit;
     }
-    .type-card:hover, .type-card:focus-visible { border-color:#D30404; background:#fff5f5; outline:none; }
-    .type-card.selected { border-color:#D30404; background:#fff5f5; }
+    .type-card:hover, .type-card:focus-visible { border-color:#087a7f; background:#eaf7f5; outline:none; }
+    .type-card.selected { border-color:#087a7f; background:#eaf7f5; }
     .type-card .type-icon { font-size:28px; margin-bottom:8px; }
     .type-card .type-name { font-weight:700; font-size:14px; color:#333; }
 
@@ -89,8 +89,8 @@
         font-size:13px; font-weight:600; color:#555; background:#fff; transition:.2s;
         text-align:center; min-width:80px; font:inherit;
     }
-    .date-btn:hover, .date-btn:focus-visible { border-color:#D30404; color:#D30404; outline:none; }
-    .date-btn.selected { border-color:#D30404; background:#D30404; color:#fff; }
+    .date-btn:hover, .date-btn:focus-visible { border-color:#087a7f; color:#087a7f; outline:none; }
+    .date-btn.selected { border-color:#087a7f; background:#087a7f; color:#fff; }
 
     .slot-btn {
         padding:10px 16px; border:2px solid #e0e4ec; border-radius:8px; cursor:pointer;
@@ -116,7 +116,7 @@
         background:none; border:none; color:#222; font-size:12px; font-weight:600; cursor:pointer;
         padding:2px 0;
     }
-    .back-link:hover { color:#D30404; }
+    .back-link:hover { color:#087a7f; }
 
     .skeleton-box {
         background:linear-gradient(90deg, #eef0f5 25%, #f7f8fb 37%, #eef0f5 63%);
@@ -130,7 +130,7 @@
     .date-btn { position:relative; }
     .date-tag {
         position:absolute; top:-8px; left:50%; transform:translateX(-50%);
-        background:#009643; color:#fff; font-size:9px; font-weight:700; padding:1px 6px;
+        background:#087a7f; color:#fff; font-size:9px; font-weight:700; padding:1px 6px;
         border-radius:8px; white-space:nowrap; letter-spacing:.3px;
     }
 
@@ -144,10 +144,10 @@
 
     .fetch-error-box { text-align:center; padding:24px 0; }
     .retry-btn {
-        border:1.5px solid #D30404; color:#D30404; background:#fff; border-radius:20px;
+        border:1.5px solid #087a7f; color:#087a7f; background:#fff; border-radius:20px;
         font-size:12px; font-weight:700; padding:6px 18px; margin-top:10px; cursor:pointer; transition:.2s;
     }
-    .retry-btn:hover { background:#D30404; color:#fff; }
+    .retry-btn:hover { background:#087a7f; color:#fff; }
 
     .result-count { font-size:13px; color:#444; font-weight:600; margin-bottom:12px; display:block; }
 
@@ -187,7 +187,7 @@
         
         <div id="step1" class="section-card">
             <div class="section-header">
-                <span><i class="fas fa-hand-holding-heart mr-2" style="color:#D30404;"></i>Step 1 — What would you like counselling for?</span>
+                <span><i class="fas fa-hand-holding-heart mr-2" style="color:#087a7f;"></i>Step 1 — What would you like counselling for?</span>
             </div>
             <div class="section-body">
                 <div class="row">
@@ -195,7 +195,7 @@
                     <div class="col-md-4 col-6 mb-3">
                         <button type="button" class="type-card" data-id="{{ $type->id }}" data-name="{{ $type->name }}"
                                 aria-pressed="false" onclick="selectType(this)">
-                            <div class="type-icon" style="color:{{ $type->color ?: '#D30404' }}">
+                            <div class="type-icon" style="color:{{ $type->color ?: '#087a7f' }}">
                                 <i class="{{ $type->icon ?: 'fas fa-heart' }}"></i>
                             </div>
                             <div class="type-name">{{ $type->name }}</div>
@@ -209,7 +209,7 @@
        
         <div id="step2" class="section-card" style="display:none;">
             <div class="section-header">
-                <span><i class="fas fa-calendar-alt mr-2" style="color:#D30404;"></i>Step 2 — Pick a Date</span>
+                <span><i class="fas fa-calendar-alt mr-2" style="color:#087a7f;"></i>Step 2 — Pick a Date</span>
                 <span style="font-weight:400; font-size:12px; color:#999;">Next 30 available days shown</span>
             </div>
             <div class="section-body" aria-live="polite">
@@ -230,7 +230,7 @@
        
         <div id="step3" class="section-card" style="display:none;">
             <div class="section-header">
-                <span><i class="fas fa-clock mr-2" style="color:#D30404;"></i>Step 3 — Pick a Time Slot</span>
+                <span><i class="fas fa-clock mr-2" style="color:#087a7f;"></i>Step 3 — Pick a Time Slot</span>
             </div>
             <div class="section-body" aria-live="polite">
                 <button type="button" class="back-link mb-3" onclick="goToStep(2)"><i class="fas fa-arrow-left mr-1"></i>Change date</button>
@@ -258,7 +258,7 @@
        
         <div id="step4" class="section-card" style="display:none;">
             <div class="section-header">
-                <span><i class="fas fa-sticky-note mr-2" style="color:#D30404;"></i>Step 4 — Any notes for your counselor? <span class="text-muted" style="font-weight:400;">(optional)</span></span>
+                <span><i class="fas fa-sticky-note mr-2" style="color:#087a7f;"></i>Step 4 — Any notes for your counselor? <span class="text-muted" style="font-weight:400;">(optional)</span></span>
             </div>
             <div class="section-body">
                 <button type="button" class="back-link mb-3" onclick="goToStep(3)"><i class="fas fa-arrow-left mr-1"></i>Change time slot</button>

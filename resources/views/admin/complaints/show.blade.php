@@ -105,10 +105,10 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('admin.complaints.index') }}" class="btn btn-light" style="border:1px solid #e0e4ec;">
+                    <a href="{{ route('admin.complaints.index') }}" class="btn btn-secondary action-btn mb-3 mb-sm-0" style="border:1px solid #e0e4ec;">
                         <i class="fas fa-arrow-left mr-1"></i> Back
                     </a>
-                    <button type="submit" class="btn" style="background:#1a237e; color:#fff;">
+                    <button type="submit" class="btn btn-primary action-btn mb-3 mb-sm-0">
                         <i class="fas fa-save mr-1"></i> Save Update
                     </button>
                 </div>

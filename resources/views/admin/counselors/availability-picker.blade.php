@@ -19,7 +19,7 @@
     border:1px solid #d7dbe6; background:#fff; color:#444; font-size:12px; font-weight:600;
     padding:6px 12px; border-radius:20px; cursor:pointer; transition:.15s;
 }
-.avail-preset-btn:hover { background:#f3e9ff; border-color:#4a148c; color:#4a148c; }
+.avail-preset-btn:hover { background:#eff9f8; border-color:#087a7f; color:#087a7f; }
 .avail-copy-btn {
     border:1px solid #1b5e20; background:#fff; color:#1b5e20; font-size:12px; font-weight:600;
     padding:6px 12px; border-radius:20px; cursor:pointer; margin-left:auto;
@@ -46,10 +46,10 @@
     height:18px; border-bottom:1px solid #f0f1f5; border-right:1px solid #f0f1f5;
     cursor:pointer; transition:background .08s;
 }
-.avail-cell:hover { background:#ede2fb; }
+.avail-cell:hover { background:#dbfff9; }
 .avail-cell.on-hour { border-bottom:1px solid #e0e4ec; }
 .avail-cell.selected { background:#c9a6f0; }
-.avail-cell.committed { background:#4a148c; }
+.avail-cell.committed { background:#087a7f; }
 .avail-day-col:last-child .avail-cell { border-right:none; }
 
 .avail-summary { margin-top:16px; }
@@ -58,11 +58,11 @@
 .avail-day-name { width:90px; flex-shrink:0; font-size:13px; font-weight:600; color:#333; padding-top:4px; }
 .avail-pills { display:flex; flex-wrap:wrap; gap:6px; flex:1; }
 .avail-pill {
-    display:inline-flex; align-items:center; gap:6px; background:#f3e9ff; color:#4a148c;
+    display:inline-flex; align-items:center; gap:6px; background:#eff9f8; color:#087a7f;
     font-size:12px; font-weight:600; padding:4px 6px 4px 10px; border-radius:20px;
 }
 .avail-pill button {
-    background:none; border:none; color:#4a148c; cursor:pointer; font-size:13px; line-height:1; padding:2px;
+    background:none; border:none; color:#087a7f; cursor:pointer; font-size:13px; line-height:1; padding:2px;
 }
 .avail-pill button:hover { color:#dc3545; }
 .avail-empty-day { font-size:12px; color:#bbb; padding-top:5px; font-style:italic; }

@@ -26,7 +26,7 @@
 }
 
 .complaint-btn {
-    background: #1b5e20;
+    background: #1f8582;
     color: #fff;
     border-radius: 8px;
     padding: 9px 20px;
@@ -38,7 +38,7 @@
 
 .complaint-btn:hover,
 .complaint-btn:focus {
-    background: #154a19;
+    background: #1f8582;
     color: #fff;
 }
 
@@ -86,7 +86,7 @@
     .status-closed    { background:#e2e3e5; color:#41464b; }
     </style>
 
-    <h6 style="font-weight:700; color:#1b5e20; margin-bottom:14px;">
+    <h6 style="font-weight:700; margin-bottom:14px;">
         <i class="fas fa-file-signature mr-2"></i> Filed by You ({{ $filed->count() }})
     </h6>
 

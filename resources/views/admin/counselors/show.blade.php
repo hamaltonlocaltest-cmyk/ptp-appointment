@@ -28,7 +28,7 @@
     <div class="col-lg-4 mb-3">
         <div class="card">
             <div class="card-body text-center">
-                <div class="avatar-circle mx-auto mb-3" style="width:80px; height:80px; font-size:30px; background:#{{ substr(md5($counselor->email),0,6) }};">
+                <div class="avatar-circle mx-auto mb-3" style="width:80px; height:80px; font-size:30px;">
                     {{ strtoupper(substr($counselor->first_name,0,1)) }}
                 </div>
                 <h5 style="font-weight:600; color:#1a1a2e;">{{ $counselor->full_name }}</h5>

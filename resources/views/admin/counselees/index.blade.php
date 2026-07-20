@@ -7,11 +7,6 @@
 
 @section('content')
 
-<style>
-	.stat-card.bg-inactive{background: #ffe9e9; border: 1px solid #ffc2c2; border-left: 2px solid #dc2426;}
-	.stat-card.bg-inactive h3 {color: #dc2426;}
-	.stat-card.bg-inactive p{color: #dc2426;}
-</style>
 
 <div class="row mb-3">
     <div class="col-lg-4 col-6 mb-3">
@@ -66,7 +61,7 @@
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <div class="avatar-circle mr-3" style="background:#{{ substr(md5($c->email),0,6) }};">
+                            <div class="avatar-circle mr-3">
                                 {{ strtoupper(substr($c->first_name,0,1)) }}
                             </div>
                             <div>
@@ -77,7 +72,7 @@
                     </td>
                     <td style="font-size:13px;">{{ $c->telephone1 ?? $c->phone ?? '—' }}</td>
                     <td>
-                        <span style="background:#f3e5f5; color:#4a148c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:500; text-transform:capitalize;">
+                        <span style="background:#eaf7f5; color:#087a7f; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:500; text-transform:capitalize;">
                             {{ $c->gender }}
                         </span>
                     </td>
@@ -96,11 +91,11 @@
                         <div class="d-flex justify-content-center" style="gap:5px;">
                             <a href="{{ route('admin.counselees.show', $c) }}"
                                class="btn-action" title="View"
-                               style="background:#e3f2fd; color:#1565c0;">
+                               style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a href="{{ route('admin.counselees.edit', $c) }}"
-                               class="btn-action btn-edit" title="Edit">
+                               class="btn-action btn-edit" title="Edit" style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-pen"></i>
                             </a>
                             <form action="{{ route('admin.counselees.toggle', $c) }}" method="POST">

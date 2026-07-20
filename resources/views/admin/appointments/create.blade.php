@@ -65,7 +65,7 @@
     .back-link { background:none; border:none; color:#888; font-size:12px; font-weight:600; cursor:pointer; padding:2px 0; }
     .back-link:hover { color:#1f8582; }
 
-    .counselee-list { max-height:320px; overflow-y:auto; border:1px solid #e0e4ec; border-radius:8px; }
+    .counselee-list { max-height:320px; overflow-y:auto; border:1px solid #e0e4ec; border-radius:8px; background:#fff }
     .counselee-row {
         display:flex; align-items:center; gap:12px; padding:10px 14px; cursor:pointer;
         border-bottom:1px solid #f0f2f5; transition:.15s;
@@ -73,8 +73,8 @@
     .counselee-row:last-child { border-bottom:none; }
     .counselee-row:hover { background:#f8f9fc; }
     .counselee-row.selected { background:#e6f4f4; }
-    .counselee-row .cname { font-weight:600; font-size:13px; color:#1a1a2e; }
-    .counselee-row .cemail { font-size:11px; color:#9e9e9e; }
+    .counselee-row .cname { font-weight:600; font-size:14px; color:#087a7f; }
+    .counselee-row .cemail { font-size:14px; color:#333; }
 
     .type-card {
         border:2px solid #e0e4ec; border-radius:10px; padding:16px; cursor:pointer;
@@ -82,7 +82,7 @@
     }
     .type-card:hover { border-color:#1f8582; background:#f0f8f8; }
     .type-card.selected { border-color:#1f8582; background:#f0f8f8; }
-    .type-card .type-icon { font-size:28px; margin-bottom:8px; }
+    .type-card .type-icon { font-size:28px; margin-bottom:8px; color: #087a7f; }
     .type-card .type-name { font-weight:700; font-size:14px; color:#333; }
 
     .date-grid { display:flex; flex-wrap:wrap; gap:8px; }
@@ -128,7 +128,7 @@
                     @foreach($counselees as $c)
                     <div class="counselee-row" data-id="{{ $c->id }}" data-name="{{ $c->full_name }}" data-email="{{ $c->email }}"
                          data-search="{{ strtolower($c->full_name . ' ' . $c->email) }}" onclick="selectCounselee(this)">
-                        <div class="avatar-circle" style="width:32px; height:32px; font-size:12px; background:#{{ substr(md5($c->email),0,6) }};">
+                        <div class="avatar-circle" style="width:32px; height:32px; font-size:12px; ">
                             {{ strtoupper(substr($c->first_name,0,1)) }}
                         </div>
                         <div>
@@ -151,7 +151,7 @@
                     @foreach($counselTypes as $type)
                     <div class="col-md-4 col-6 mb-3">
                         <button type="button" class="type-card" data-id="{{ $type->id }}" data-name="{{ $type->name }}" onclick="selectType(this)">
-                            <div class="type-icon" style="color:{{ $type->color ?: '#1f8582' }}">
+                            <div class="type-icon" >
                                 <i class="{{ $type->icon ?: 'fas fa-heart' }}"></i>
                             </div>
                             <div class="type-name">{{ $type->name }}</div>

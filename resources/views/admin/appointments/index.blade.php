@@ -18,11 +18,11 @@
     <div class="col-lg-3 col-6 mb-3">
         <div class="stat-card bg-active">
             <h3>{{ $counts['confirmed'] }}</h3><p>Confirmed</p>
-            <i class="fas fa-check-circle stat-icon"></i>
+            <i class="fas fa-check stat-icon"></i>
         </div>
     </div>
     <div class="col-lg-3 col-6 mb-3">
-        <div class="stat-card bg-counselor">
+        <div class="stat-card bg-completed">
             <h3>{{ $counts['completed'] }}</h3><p>Completed</p>
             <i class="fas fa-check-double stat-icon"></i>
         </div>
@@ -30,7 +30,7 @@
     <div class="col-lg-3 col-6 mb-3">
         <div class="stat-card bg-inactive">
             <h3>{{ $counts['cancelled'] }}</h3><p>Cancelled</p>
-            <i class="fas fa-times-circle stat-icon"></i>
+            <i class="fas fa-times stat-icon"></i>
         </div>
     </div>
 </div>
@@ -125,7 +125,7 @@
                         <span style="color:#9e9e9e; font-size:12px;">{{ $a->formatted_time }}</span>
                     </td>
                     <td>
-                        <span style="background:#e8eaf6; color:#1a237e; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:500;">
+                        <span style="background:#eaf7f5; color:#087a7f; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:500;">
                             <i class="fas fa-{{ $a->mode === 'Online' ? 'video' : 'map-marker-alt' }} mr-1"></i>{{ $a->mode }}
                         </span>
                     </td>
@@ -135,11 +135,11 @@
                     </td>
                     <td>
                         <div class="d-flex justify-content-center" style="gap:5px;">
-                            <a href="{{ route('admin.appointments.show', $a) }}" class="btn-action" title="View" style="background:#e3f2fd; color:#1565c0;">
+                            <a href="{{ route('admin.appointments.show', $a) }}" class="btn-action" title="View" style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-eye"></i>
                             </a>
                             @if(in_array($a->status, ['pending','confirmed']))
-                            <a href="{{ route('admin.appointments.reschedule.edit', $a) }}" class="btn-action" title="Reschedule" style="background:#ede7f6; color:#4527a0;">
+                            <a href="{{ route('admin.appointments.reschedule.edit', $a) }}" class="btn-action" title="Reschedule" style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-calendar-alt"></i>
                             </a>
                             <form action="{{ route('admin.appointments.cancel', $a) }}" method="POST" id="cancel-form-{{ $a->id }}">

@@ -98,18 +98,18 @@
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <div class="avatar-circle mr-3" style="background:#{{ substr(md5($c->email),0,6) }};">
+                            <div class="avatar-circle mr-3">
                                 {{ strtoupper(substr($c->first_name,0,1)) }}
                             </div>
                             <div>
-                                <div style="font-weight:600; color:#1a1a2e;">{{ $c->full_name }}</div>
+                                <div style="font-weight:600; color:#1a2e2d;">{{ $c->full_name }}</div>
                                 <div style="font-size:12px; color:#9e9e9e;">{{ $c->email }}</div>
                             </div>
                         </div>
                     </td>
                     <td style="font-size:13px;">{{ $c->phone }}</td>
                     <td>
-                        <span style="background:#e8eaf6; color:#1a237e; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:500;">
+                        <span style="background:#eaf7f5; color:#087a7f; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:500;">
                             {{ $c->specialization }}
                         </span>
                     </td>
@@ -128,12 +128,12 @@
                              
                              <a href="{{ route('admin.counselors.show', $c) }}"
                                class="btn-action" title="View"
-                               style="background:#e3f2fd; color:#1565c0;">
+                               style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-eye"></i>
                             </a>
                            
                             <a href="{{ route('admin.counselors.edit', $c) }}"
-                               class="btn-action btn-edit" title="Edit">
+                               class="btn-action btn-edit" title="Edit" style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-pen"></i>
                             </a>
                           
@@ -162,7 +162,7 @@
                         <i class="fas fa-user-md" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i>
                         <p class="text-muted mb-2">No counselors found.</p>
                         <a href="{{ route('admin.counselors.create') }}"
-                           class="btn btn-sm" style="background:#1a237e; color:#fff; border-radius:7px; padding:7px 18px;">
+                           class="btn btn-primary">
                             Add First Counselor
                         </a>
                     </td>

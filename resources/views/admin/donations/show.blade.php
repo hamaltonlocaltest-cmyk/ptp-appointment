@@ -19,7 +19,7 @@
             <div class="d-flex align-items-center justify-content-between flex-wrap">
                 <div>
                     <div style="font-size:12px; color:#9e9e9e;">Amount</div>
-                    <h3 style="color:#1b5e20; font-weight:800; margin:0;">{{ $donation->currency }} {{ number_format((float) $donation->amount, 2) }}</h3>
+                    <h3 style="color:#087a7f; font-weight:800; margin:0;">{{ $donation->currency }} {{ number_format((float) $donation->amount, 2) }}</h3>
                 </div>
                 @if($donation->status === 'completed')
                     <span class="badge-active" style="font-size:13px; padding:6px 16px;">Completed</span>

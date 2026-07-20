@@ -72,7 +72,7 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             <a href="{{ route('admin.feedback.show', $f) }}"
-                               class="btn-action" title="View" style="background:#e3f2fd; color:#1565c0;">
+                               class="btn-action" title="View" style="background:#eaf7f5; color:#087a7f;">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </div>

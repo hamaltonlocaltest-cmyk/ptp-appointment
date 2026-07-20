@@ -41,6 +41,13 @@ use App\Http\Controllers\Admin\CountryController as AdminCountryController;
 use App\Http\Controllers\Admin\StateController as AdminStateController;
 use App\Http\Controllers\Admin\CityController as AdminCityController;
 
+// Counselor Leave module
+use App\Http\Controllers\Counselor\LeaveController as CounselorLeaveController;
+use App\Http\Controllers\Admin\CounselorLeaveController as AdminCounselorLeaveController;
+
+// Reports (admin/super admin only)
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Root
@@ -182,6 +189,40 @@ Route::prefix('counselees')->name('counselees.')->group(function () {
             Route::post('/{donation}/complete',   [AdminDonationController::class, 'markCompleted'])->name('complete');
         });
 
+        // Counselor Leaves — admin applying/managing leave on behalf of any counselor
+        Route::prefix('counselor-leaves')->name('counselor-leaves.')->group(function () {
+            Route::get('/',                     [AdminCounselorLeaveController::class, 'index'])->name('index');
+            Route::get('/create',               [AdminCounselorLeaveController::class, 'create'])->name('create');
+            Route::post('/',                    [AdminCounselorLeaveController::class, 'store'])->name('store');
+            Route::delete('/{counselorLeave}',  [AdminCounselorLeaveController::class, 'destroy'])->name('destroy');
+        });
+
+        // Reports
+        Route::prefix('reports')->name('reports.')->group(function () {
+            Route::get('/', [AdminReportController::class, 'index'])->name('index');
+
+            $reports = [
+                'appointments-summary'  => 'appointmentsSummary',
+                'overdue-appointments'  => 'overdueAppointments',
+                'cancellations'         => 'cancellations',
+                'counselor-performance' => 'counselorPerformance',
+                'counselor-utilization' => 'counselorUtilization',
+                'feedback-ratings'      => 'feedbackRatings',
+                'complaints'            => 'complaints',
+                'counselling-demand'    => 'counsellingDemand',
+                'city-coverage-gap'     => 'cityCoverageGap',
+                'registrations'         => 'registrations',
+                'donations'             => 'donations',
+                'leave-calendar'        => 'leaveCalendar',
+            ];
+
+            foreach ($reports as $slug => $method) {
+                Route::get($slug,                [AdminReportController::class, $method])->name($slug);
+                Route::get($slug . '/data',      [AdminReportController::class, $method . 'Data'])->name($slug . '.data');
+                Route::get($slug . '/export',    [AdminReportController::class, $method . 'Export'])->name($slug . '.export');
+            }
+        });
+
     });
 });
 
@@ -227,6 +268,14 @@ Route::prefix('counselor')->name('counselor.')->group(function () {
             Route::get('/',       [CounselorComplaintController::class, 'index'])->name('index');
             Route::get('/create', [CounselorComplaintController::class, 'create'])->name('create');
             Route::post('/',      [CounselorComplaintController::class, 'store'])->name('store');
+        });
+
+        // Leaves — mark dates unavailable for booking
+        Route::prefix('leaves')->name('leaves.')->group(function () {
+            Route::get('/',        [CounselorLeaveController::class, 'index'])->name('index');
+            Route::get('/create',  [CounselorLeaveController::class, 'create'])->name('create');
+            Route::post('/',       [CounselorLeaveController::class, 'store'])->name('store');
+            Route::delete('/{leave}', [CounselorLeaveController::class, 'destroy'])->name('destroy');
         });
     });
 });
