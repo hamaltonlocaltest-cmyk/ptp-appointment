@@ -123,10 +123,50 @@
                         <div class="qa-sub">View all your appointments</div>
                     </div>
                 </a>
+                <a href="{{ route('counselee.complaints.create') }}" class="quick-action-btn">
+                    <div class="qa-icon" style="background:#fdeceb; color:#b71c1c;">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div>
+                        <div class="qa-title">File a Complaint</div>
+                        <div class="qa-sub">Raise a concern with us</div>
+                    </div>
+                </a>
+                <a href="{{ route('counselee.donations.create') }}" class="quick-action-btn">
+                    <div class="qa-icon" style="background:#fff3e0; color:#e65100;">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div>
+                        <div class="qa-title">Donate</div>
+                        <div class="qa-sub">Support our counselling programs</div>
+                    </div>
+                </a>
             </div>
         </div>
 
-       
+
+        @if($openComplaints->isNotEmpty())
+        <div class="card">
+            <div class="card-header">
+                <span style="font-weight:600;">
+                    <i class="fas fa-flag mr-2"></i> My Complaints
+                </span>
+            </div>
+            <div class="card-body">
+                @foreach($openComplaints as $comp)
+                <div class="mb-2" style="font-size:13px;">
+                    <div style="font-weight:600;">{{ \Illuminate\Support\Str::limit($comp->subject ?? 'Complaint', 40) }}</div>
+                    <span class="status-badge status-pending">{{ ucfirst(str_replace('_', ' ', $comp->status)) }}</span>
+                </div>
+                @endforeach
+                <a href="{{ route('counselee.complaints.index') }}" style="font-size:12px; color:#087a7f; text-decoration:none;">
+                    View All <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+        @endif
+
+
         @if($counselee->counselTypes->isNotEmpty())
         <div class="card">
             <div class="card-header">
@@ -224,6 +264,32 @@
                     </div>
                     <span class="status-badge status-{{ $nextAppointment->status }}">{{ ucfirst($nextAppointment->status) }}</span>
                 </div>
+            </div>
+        </div>
+        @endif
+
+        @if($feedbackNeeded->isNotEmpty())
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <span style="font-weight:600; flex:auto">
+                    <i class="fas fa-star mr-2"></i> Feedback Needed
+                </span>
+            </div>
+            <div class="card-body p-0">
+                @foreach($feedbackNeeded as $fn)
+                <div class="d-flex align-items-center flex-wrap px-4 py-3" style="border-bottom:1px solid #f0f2f5;">
+                    <div style="flex:1; min-width:200px;">
+                        <div style="font-weight:600; font-size:13px;">{{ $fn->counselType->name }}</div>
+                        <div style="font-size:11px; color:#9e9e9e;">
+                            with {{ $fn->counselor->full_name }} &nbsp;&middot;&nbsp; {{ $fn->appointment_date->format('M d, Y') }}
+                        </div>
+                    </div>
+                    <a href="{{ route('counselee.appointments.feedback.create', $fn) }}" class="btn btn-sm"
+                       style="background:#087a7f; color:#fff; border-radius:20px; padding:5px 16px; font-size:12px; font-weight:600;">
+                        Leave Feedback
+                    </a>
+                </div>
+                @endforeach
             </div>
         </div>
         @endif

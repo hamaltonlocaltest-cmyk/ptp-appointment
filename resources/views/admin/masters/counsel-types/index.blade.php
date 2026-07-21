@@ -138,7 +138,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @forelse($counselTypes as $i => $type)
+                @foreach($counselTypes as $i => $type)
                 <tr>
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
@@ -196,18 +196,7 @@
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="9" class="text-center py-5">
-                        <i class="fas fa-comments" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i>
-                        <p class="text-muted mb-2">No counsel types found.</p>
-                        <a href="{{ route('admin.masters.counsel-types.create') }}"
-                           class="btn btn-sm" style="background:#1a237e; color:#fff; border-radius:7px; padding:7px 18px;">
-                            Add First Counsel Type
-                        </a>
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -264,6 +253,7 @@ $(document).ready(function () {
             search: '',
             searchPlaceholder: 'Search counsel types...',
             info: 'Showing _START_ to _END_ of _TOTAL_ types',
+            emptyTable: '<i class="fas fa-comments" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i><p class="text-muted mb-2">No counsel types found.</p><a href="{{ route('admin.masters.counsel-types.create') }}" class="btn btn-sm" style="background:#1a237e; color:#fff; border-radius:7px; padding:7px 18px;">Add First Counsel Type</a>',
             paginate: {
                 first: '<i class="fas fa-angle-double-left"></i>',
                 last:  '<i class="fas fa-angle-double-right"></i>',

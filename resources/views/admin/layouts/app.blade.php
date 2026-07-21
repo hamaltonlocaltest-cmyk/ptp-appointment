@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css">
     
     <style>
-        :root { --primary:#1f8582; --primary-light:#1f8582; --primary-dark:#0d1642; }
+         :root { --primary:#1f8582; --primary-light:#1f8582; --primary-dark:#0d1642; }
 		.gap-1 > * {
     margin-right: .25rem;
 }
@@ -398,6 +398,9 @@
 div.dataTables_wrapper div.dataTables_length select {width: 54px;  display: inline-block;
 }
 
+.report-cta{color: #087a7f !important;}
+#exportCsvBtn.btn{background:#087a7f !important}
+
     </style>
     @stack('styles')
 </head>
@@ -525,10 +528,17 @@ div.dataTables_wrapper div.dataTables_length select {width: 54px;  display: inli
                     <p>Pending Approval</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.counselor-leaves.index') }}"
+                   class="nav-link {{ request()->routeIs('admin.counselor-leaves.*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-calendar-minus"></i>
+                    <p>Counselor Leaves</p>
+                </a>
+            </li>
         </ul>
     </li>
 
-    
+
     <li class="nav-item {{ request()->routeIs('admin.counselees.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->routeIs('admin.counselees.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
@@ -624,11 +634,104 @@ div.dataTables_wrapper div.dataTables_length select {width: 54px;  display: inli
     
     <span class="sidebar-heading">System</span>
 
-    <li class="nav-item">
-        <a href="#" class="nav-link">
+    <li class="nav-item {{ request()->routeIs('admin.reports.*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-chart-bar"></i>
-            <p>Reports</p>
+            <p>Reports <i class="right fas fa-angle-left"></i></p>
         </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.index') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.index') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-th-large"></i>
+                    <p>All Reports</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.appointments-summary') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.appointments-summary') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-calendar-check"></i>
+                    <p>Appointments Summary</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.overdue-appointments') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.overdue-appointments') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-hourglass-half"></i>
+                    <p>Overdue Appointments</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.cancellations') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.cancellations') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-calendar-times"></i>
+                    <p>Cancellations</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.counselor-performance') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.counselor-performance') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user-tie"></i>
+                    <p>Counselor Performance</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.counselor-utilization') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.counselor-utilization') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-business-time"></i>
+                    <p>Counselor Utilization</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.feedback-ratings') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.feedback-ratings') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-star"></i>
+                    <p>Feedback &amp; Ratings</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.complaints') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.complaints') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-exclamation-circle"></i>
+                    <p>Complaints</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.counselling-demand') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.counselling-demand') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <p>Counselling Area Demand</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.city-coverage-gap') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.city-coverage-gap') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-map-marked-alt"></i>
+                    <p>City Coverage Gap</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.registrations') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.registrations') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user-plus"></i>
+                    <p>Registration &amp; Growth</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.donations') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.donations') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-hand-holding-heart"></i>
+                    <p>Donations</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.reports.leave-calendar') }}"
+                   class="nav-link {{ request()->routeIs('admin.reports.leave-calendar') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-calendar-minus"></i>
+                    <p>Counselor Leave Calendar</p>
+                </a>
+            </li>
+        </ul>
     </li>
 
     <li class="nav-item">

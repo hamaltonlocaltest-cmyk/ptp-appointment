@@ -102,7 +102,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @forelse($appointments as $i => $a)
+                @foreach($appointments as $i => $a)
                 <tr>
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
@@ -153,15 +153,7 @@
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="8" class="text-center py-5">
-                        <i class="fas fa-calendar-check" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i>
-                        <p class="text-muted mb-2">No appointments found.</p>
-                        <a href="{{ route('admin.appointments.create') }}" class="btn btn-sm btn-primary">Book First Appointment</a>
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -219,6 +211,7 @@ $(document).ready(function () {
         language: {
             lengthMenu: 'Show _MENU_ entries',
             info: 'Showing _START_ to _END_ of _TOTAL_ appointments',
+            emptyTable: '<i class="fas fa-calendar-check" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i><p class="text-muted mb-2">No appointments found.</p><a href="{{ route('admin.appointments.create') }}" class="btn btn-sm btn-primary">Book First Appointment</a>',
             paginate: {
                 first: '<i class="fas fa-angle-double-left"></i>',
                 last:  '<i class="fas fa-angle-double-right"></i>',

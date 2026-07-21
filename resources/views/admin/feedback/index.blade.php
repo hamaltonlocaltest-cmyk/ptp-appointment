@@ -57,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @forelse($feedbacks as $i => $f)
+                @foreach($feedbacks as $i => $f)
                 <tr>
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td style="font-weight:600;">{{ $f->counselee->full_name }}</td>
@@ -78,14 +78,7 @@
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="7" class="text-center py-5">
-                        <i class="fas fa-comment-dots" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i>
-                        <p class="text-muted mb-0">No feedback submitted yet.</p>
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -107,6 +100,7 @@ $(document).ready(function () {
             search: '',
             searchPlaceholder: 'Search feedback...',
             info: 'Showing _START_ to _END_ of _TOTAL_ feedback entries',
+            emptyTable: '<i class="fas fa-comment-dots" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i><p class="text-muted mb-0">No feedback submitted yet.</p>',
             paginate: {
                 first: '<i class="fas fa-angle-double-left"></i>',
                 last:  '<i class="fas fa-angle-double-right"></i>',

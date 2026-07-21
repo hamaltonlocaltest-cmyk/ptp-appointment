@@ -41,6 +41,21 @@ class CounselType extends Model
         });
     }
 
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    public function counselors()
+    {
+        return $this->belongsToMany(
+            Counselor::class,
+            'counselor_counsel_type',
+            'counsel_type_id',
+            'counselor_id'
+        )->withTimestamps();
+    }
+
     // Scope for active only
     public function scopeActive($query)
     {

@@ -40,6 +40,37 @@
         </div>
     </div>
 </div>
+
+<div class="row mb-3">
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="stat-card bg-active">
+            <h3>{{ $today_appointments }}</h3>
+            <p>Today's Appointments</p>
+            <i class="fas fa-calendar-day stat-icon"></i>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="stat-card bg-admin">
+            <h3>{{ $month_appointments }}</h3>
+            <p>This Month's Appointments</p>
+            <i class="fas fa-calendar-alt stat-icon"></i>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="stat-card bg-completed">
+            <h3>{{ $completion_rate }}%</h3>
+            <p>Completion Rate (Month)</p>
+            <i class="fas fa-chart-line stat-icon"></i>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 mb-3">
+        <div class="stat-card bg-closed">
+            <h3>₹{{ number_format($month_donations, 2) }}</h3>
+            <p>This Month's Donations</p>
+            <i class="fas fa-hand-holding-heart stat-icon"></i>
+        </div>
+    </div>
+</div>
 <style>	.quick-action-header{    display:flex;    align-items:center;    justify-content:space-between;    gap:15px;    flex-wrap:wrap;}.quick-action-title{    font-weight:600;    font-size:16px;}.qbtn-wrap{    display:flex;    flex-wrap:wrap;    gap:10px;    justify-content:flex-end;}.qa-btn{    border-radius:20px;    padding:6px 16px;    font-size:12px;    font-weight:600;    white-space:nowrap;}.qa-green{    background:#e8f5e9;    color:#1b5e20;    border:1px solid #c8e6c9;}.qa-purple{    background:#f3e5f5;    color:#4a148c;    border:1px solid #e1bee7;}.qa-orange{    background:#fff3e0;    color:#e65100;    border:1px solid #ffe0b2;}@media (max-width: 767.98px){    .quick-action-header{        flex-direction:column;        align-items:flex-start;    }    .qbtn-wrap{        width:100%;        justify-content:flex-start;    }    .qa-btn{        flex:1 1 calc(50% - 10px);        text-align:center;        min-width:140px;    }}</style>
 
 <div class="row mb-3">
@@ -60,7 +91,72 @@
 					<a href="{{ route('admin.counselors.index', ['status' => 'pending']) }}" class="btn btn-sm"
 					   style="background:#fff3e0; color:#e65100; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #ffe0b2;">
 						<i class="fas fa-clock mr-1"></i> View Pending Approvals
+					</a>
+					<a href="{{ route('admin.counselor-leaves.create') }}" class="btn btn-sm mr-2"
+					   style="background:#eaf7f5; color:#087a7f; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #087a7f;">
+						<i class="fas fa-calendar-plus mr-1"></i> Apply Counselor Leave
+					</a>
+					<a href="{{ route('admin.reports.index') }}" class="btn btn-sm"
+					   style="background:#f3e5f5; color:#4a148c; border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; border:1px solid #e1bee7;">
+						<i class="fas fa-chart-bar mr-1"></i> View Reports
 					</a>				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
+                <span style="font-weight:600; flex:auto"><i class="fas fa-triangle-exclamation mr-2"></i> Needs Attention</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-3 mb-md-0">
+                        <div style="font-size:12px; color:#9e9e9e; font-weight:600; text-transform:uppercase; margin-bottom:8px;">
+                            <i class="fas fa-hourglass-half mr-1"></i> Overdue Appointments
+                        </div>
+                        <a href="{{ route('admin.reports.overdue-appointments') }}" class="badge-pending" style="display:inline-block;">
+                            {{ $overdue_appointments }} pending completion
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3 mb-md-0">
+                        <div style="font-size:12px; color:#9e9e9e; font-weight:600; text-transform:uppercase; margin-bottom:8px;">
+                            <i class="fas fa-user-clock mr-1"></i> Pending Approvals
+                        </div>
+                        @forelse($pending_counselors_list as $pc)
+                            <div style="font-size:12px; margin-bottom:4px;">
+                                <a href="{{ route('admin.counselors.index', ['status' => 'pending']) }}" style="color:#087a7f; text-decoration:none;">{{ $pc->full_name }}</a>
+                            </div>
+                        @empty
+                            <div style="font-size:12px; color:#bbb;">None</div>
+                        @endforelse
+                    </div>
+                    <div class="col-md-3 col-6 mb-3 mb-md-0">
+                        <div style="font-size:12px; color:#9e9e9e; font-weight:600; text-transform:uppercase; margin-bottom:8px;">
+                            <i class="fas fa-user-slash mr-1"></i> On Leave Today
+                        </div>
+                        @forelse($counselors_on_leave_today as $lc)
+                            <div style="font-size:12px; margin-bottom:4px;">{{ $lc->full_name }}</div>
+                        @empty
+                            <div style="font-size:12px; color:#bbb;">None</div>
+                        @endforelse
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div style="font-size:12px; color:#9e9e9e; font-weight:600; text-transform:uppercase; margin-bottom:8px;">
+                            <i class="fas fa-exclamation-circle mr-1"></i> Unresolved Complaints
+                        </div>
+                        @forelse($unresolved_complaints as $comp)
+                            <div style="font-size:12px; margin-bottom:4px;">
+                                <a href="{{ route('admin.complaints.index') }}" style="color:#087a7f; text-decoration:none;">{{ $comp->counselee->full_name ?? 'N/A' }}</a>
+                                — {{ ucfirst(str_replace('_', ' ', $comp->status)) }}
+                            </div>
+                        @empty
+                            <div style="font-size:12px; color:#bbb;">None</div>
+                        @endforelse
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -68,7 +164,7 @@
 
 
 <div class="row">
-   
+
     <div class="col-md-6 mb-3">
         <div class="card h-100">
            						<style>				.recent-header{					background:#fff;					display:flex;					align-items:center;					justify-content:space-between;					gap:10px;					padding:15px 20px;				}				.recent-title{					font-weight:600;					display:flex;					align-items:center;				}				.recent-title i{					color:#1b5e20;				}				.view-all-link{					font-size:12px;					color:#087a7f !important;					text-decoration:none;					white-space:nowrap;					font-weight:500;				}				.view-all-link:hover{					text-decoration:none;				}				.recent-title{flex: 0 0 60%;}				.view-all-link{flex: 0 0 40%; text-align: end;}				@media (max-width:767px){					.recent-header{						/*flex-direction:column;						align-items:flex-start;*/					}															.view-all-link{						width:100%;						text-align:right;						margin-top:5px;					}				}			</style>						<div class="card-header recent-header">				<span class="recent-title">					<i class="fas fa-user-md mr-2"></i>					Recent Counselors				</span>				<a href="{{ route('admin.counselors.index') }}" class="view-all-link">					View All <i class="fas fa-arrow-right ml-1"></i>				</a>			</div>
@@ -168,6 +264,63 @@
                         @endforelse
                     </tbody>
                 </table>								</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="card">
+            <div class="card-header recent-header">
+                <span class="recent-title">
+                    <i class="fas fa-calendar-check mr-2"></i>
+                    Recent Appointments
+                </span>
+                <a href="{{ route('admin.appointments.index') }}" class="view-all-link">
+                    View All <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Counselee</th>
+                                <th>Counselor</th>
+                                <th>Type</th>
+                                <th>Date &amp; Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($recent_appointments as $a)
+                            <tr>
+                                <td style="font-size:12px;">{{ $a->counselee->full_name ?? 'N/A' }}</td>
+                                <td style="font-size:12px;">{{ $a->counselor->full_name ?? 'N/A' }}</td>
+                                <td style="font-size:12px;">{{ $a->counselType->name ?? 'N/A' }}</td>
+                                <td style="font-size:12px;">{{ $a->appointment_date->format('M d, Y') }} {{ $a->formatted_time }}</td>
+                                <td>
+                                    @if($a->status === 'completed')
+                                        <span class="badge-active">Completed</span>
+                                    @elseif($a->status === 'cancelled')
+                                        <span class="badge-inactive">Cancelled</span>
+                                    @else
+                                        <span class="badge-pending">{{ ucfirst($a->status) }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    <i class="fas fa-calendar-check" style="font-size:28px; color:#ddd; display:block; margin-bottom:8px;"></i>
+                                    No appointments yet.
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

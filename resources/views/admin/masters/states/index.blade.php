@@ -1,0 +1,117 @@
+@extends('admin.layouts.app')
+@section('title', 'States')
+@section('page-title', 'States')
+@section('breadcrumb')
+    <li class="breadcrumb-item">Masters</li>
+    <li class="breadcrumb-item active">States</li>
+@endsection
+
+@section('content')
+
+<div class="row mb-3">
+    <div class="col-lg-4 col-6 mb-3">
+        <div class="stat-card" style="background:linear-gradient(135deg,#1a237e,#3949ab);">
+            <h3>{{ $counts['total'] }}</h3><p>Total States</p>
+            <i class="fas fa-map stat-icon"></i>
+        </div>
+    </div>
+    <div class="col-lg-4 col-6 mb-3">
+        <div class="stat-card" style="background:linear-gradient(135deg,#1b5e20,#2e7d32);">
+            <h3>{{ $counts['active'] }}</h3><p>Active</p>
+            <i class="fas fa-check-circle stat-icon"></i>
+        </div>
+    </div>
+    <div class="col-lg-4 col-6 mb-3">
+        <div class="stat-card" style="background:linear-gradient(135deg,#b71c1c,#c62828);">
+            <h3>{{ $counts['inactive'] }}</h3><p>Inactive</p>
+            <i class="fas fa-times-circle stat-icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between" style="background:#fff;">
+        <span style="font-weight:600; flex:auto"><i class="fas fa-map mr-2"></i> State List</span>
+        <a href="{{ route('admin.masters.states.create') }}"
+           class="btn btn-sm" style="background:#1a237e; color:#fff; border-radius:7px; padding:7px 18px; font-size:13px; font-weight:600;">
+            <i class="fas fa-plus mr-1"></i> Add State
+        </a>
+    </div>
+    <div class="card-body">
+
+        <form method="GET" class="mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <select name="country_id" class="form-control" onchange="this.form.submit()">
+                        <option value="">All Countries</option>
+                        @foreach($countries as $c)
+                        <option value="{{ $c->id }}" {{ request('country_id') == $c->id ? 'selected' : '' }}>{{ $c->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table id="statesTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th width="40">#</th>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Code</th>
+                        <th>Status</th>
+                        <th class="text-center" width="110">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($states as $i => $s)
+                <tr>
+                    <td style="color:#aaa;">{{ $i + 1 }}</td>
+                    <td style="font-weight:600;">{{ $s->name }}</td>
+                    <td>{{ $s->country->name }}</td>
+                    <td>{{ $s->code ?: '—' }}</td>
+                    <td>
+                        @if($s->status === 'active')
+                            <span class="badge-active">Active</span>
+                        @else
+                            <span class="badge-inactive">Inactive</span>
+                        @endif
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center" style="gap:5px;">
+                            <a href="{{ route('admin.masters.states.edit', $s) }}" class="btn-action btn-edit" title="Edit">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <form action="{{ route('admin.masters.states.toggle', $s) }}" method="POST">
+                                @csrf @method('PATCH')
+                                <button type="submit"
+                                    class="btn-action {{ $s->status==='active' ? 'btn-toggle-active' : 'btn-toggle-inactive' }}"
+                                    title="{{ $s->status==='active' ? 'Set Inactive' : 'Set Active' }}">
+                                    <i class="fas {{ $s->status==='active' ? 'fa-toggle-on' : 'fa-toggle-off' }}"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+$(document).ready(function () {
+    $('#statesTable').DataTable({
+        responsive: true,
+        pageLength: 25,
+        lengthMenu: [25, 50, 100],
+        language: { search: '', searchPlaceholder: 'Search states...', info: 'Showing _START_ to _END_ of _TOTAL_ states', emptyTable: '<p class="text-muted mb-0 text-center py-5">No states found.</p>' },
+        columnDefs: [{ orderable: false, targets: [-1] }]
+    });
+});
+</script>
+@endpush

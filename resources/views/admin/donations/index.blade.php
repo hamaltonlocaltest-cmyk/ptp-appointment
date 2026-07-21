@@ -57,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @forelse($donations as $i => $d)
+                @foreach($donations as $i => $d)
                 <tr>
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
@@ -94,14 +94,7 @@
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="7" class="text-center py-5">
-                        <i class="fas fa-hand-holding-heart" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i>
-                        <p class="text-muted mb-0">No donations received yet.</p>
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -159,6 +152,7 @@ $(document).ready(function () {
             search: '',
             searchPlaceholder: 'Search donations...',
             info: 'Showing _START_ to _END_ of _TOTAL_ donations',
+            emptyTable: '<i class="fas fa-hand-holding-heart" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i><p class="text-muted mb-0">No donations received yet.</p>',
             paginate: {
                 first: '<i class="fas fa-angle-double-left"></i>',
                 last:  '<i class="fas fa-angle-double-right"></i>',

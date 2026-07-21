@@ -57,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @forelse($complaints as $i => $c)
+                @foreach($complaints as $i => $c)
                 <tr>
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
@@ -88,14 +88,7 @@
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="7" class="text-center py-5">
-                        <i class="fas fa-check-circle" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i>
-                        <p class="text-muted mb-0">No complaints filed.</p>
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -117,6 +110,7 @@ $(document).ready(function () {
             search: '',
             searchPlaceholder: 'Search complaints...',
             info: 'Showing _START_ to _END_ of _TOTAL_ complaints',
+            emptyTable: '<i class="fas fa-check-circle" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i><p class="text-muted mb-0">No complaints filed.</p>',
             paginate: {
                 first: '<i class="fas fa-angle-double-left"></i>',
                 last:  '<i class="fas fa-angle-double-right"></i>',

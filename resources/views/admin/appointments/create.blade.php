@@ -97,8 +97,8 @@
         padding:10px 16px; border:2px solid #e0e4ec; border-radius:8px; cursor:pointer;
         font-size:13px; font-weight:600; color:#555; background:#fff; text-align:center; width:100%;
     }
-    .slot-btn:hover { border-color:#4a148c; color:#4a148c; }
-    .slot-btn.selected { border-color:#4a148c; background:#4a148c; color:#fff; }
+    .slot-btn:hover { border-color:#1f8582; color:#1f8582; }
+    .slot-btn.selected { border-color:#1f8582; background:#1f8582; color:#fff; }
 
     .skeleton-box {
         background:linear-gradient(90deg, #eef0f5 25%, #f7f8fb 37%, #eef0f5 63%);

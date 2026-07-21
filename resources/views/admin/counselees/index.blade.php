@@ -56,7 +56,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @forelse($counselees as $i => $c)
+                @foreach($counselees as $i => $c)
                 <tr>
                     <td style="color:#aaa;">{{ $i + 1 }}</td>
                     <td>
@@ -116,18 +116,7 @@
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="8" class="text-center py-5">
-                        <i class="fas fa-users" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i>
-                        <p class="text-muted mb-2">No counselees found.</p>
-                        <a href="{{ route('admin.counselees.create') }}"
-                           class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:7px; padding:7px 18px;">
-                            Add First Counselee
-                        </a>
-                    </td>
-                </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -177,6 +166,7 @@ $(document).ready(function () {
             search: '',
             searchPlaceholder: 'Search counselees...',
             info: 'Showing _START_ to _END_ of _TOTAL_ counselees',
+            emptyTable: '<i class="fas fa-users" style="font-size:46px; color:#e0e0e0; display:block; margin-bottom:12px;"></i><p class="text-muted mb-2">No counselees found.</p><a href="{{ route('admin.counselees.create') }}" class="btn btn-sm" style="background:#4a148c; color:#fff; border-radius:7px; padding:7px 18px;">Add First Counselee</a>',
             paginate: {
                 first: '<i class="fas fa-angle-double-left"></i>',
                 last:  '<i class="fas fa-angle-double-right"></i>',
